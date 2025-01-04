@@ -24,6 +24,25 @@ InfoFieldEnter::~InfoFieldEnter()
 
 void InfoFieldEnter::setup_ui(void)
 {
+ QPalette bgPalette = this->palette();
+ bgPalette.setColor(QPalette::Base, bgPalette.color(QPalette::Background));
+
+ // Элементы для отображения id записи
+ recordIdLabel=new QLabel(this);
+ recordIdLabel->setText(tr("Id"));
+ recordId=new QLineEdit(this);
+ recordId->setMinimumWidth(500);
+ recordId->setReadOnly(true);
+ recordId->setPalette(bgPalette);
+
+ // Элементы для отображения названия каталога
+ dirNameLabel=new QLabel(this);
+ dirNameLabel->setText(tr("Directory name"));
+ dirName=new QLineEdit(this);
+ dirName->setMinimumWidth(500);
+ dirName->setReadOnly(true);
+ dirName->setPalette(bgPalette);
+
  // Элементы для запроса названия записи
  recordNameLabel=new QLabel(this);
  recordNameLabel->setText(tr("Title"));
@@ -100,6 +119,12 @@ void InfoFieldEnter::assembly(void)
  infoFieldLayout->addWidget(recordTagsLabel,++y,0);
  infoFieldLayout->addWidget(recordTags,y,1);
 
+ infoFieldLayout->addWidget(recordIdLabel,++y,0);
+ infoFieldLayout->addWidget(recordId,y,1);
+
+ infoFieldLayout->addWidget(dirNameLabel,++y,0);
+ infoFieldLayout->addWidget(dirName,y,1);
+
  // Устанавливается видимость или невидимость полей author, url, tags...
  expandInfoOnDisplay( mytetraConfig.get_addnewrecord_expand_info() );
 
@@ -133,6 +158,12 @@ void InfoFieldEnter::expandInfoOnDisplay(QString expand)
 
  recordTagsLabel->setVisible(i);
  recordTags->setVisible(i);
+
+ recordIdLabel->setVisible(i);
+ recordId->setVisible(i);
+
+ dirNameLabel->setVisible(i);
+ dirName->setVisible(i);
 }
 
 
@@ -171,7 +202,9 @@ bool InfoFieldEnter::checkFieldName(QString name)
  if(name=="name" ||
     name=="author" ||
     name=="url" ||
-    name=="tags")
+    name=="tags" ||
+    name=="id" ||
+    name=="dir")
   return true;
  else
   return false;
@@ -198,6 +231,8 @@ void InfoFieldEnter::setField(QString name,QString value)
 {
  if(checkFieldName(name))
   {
+   if(name=="id")  recordId->setText(value);
+   if(name=="dir")  dirName->setText(value);
    if(name=="name")  recordName->setText(value);
    if(name=="author")recordAuthor->setText(value);
    if(name=="url")   recordUrl->setText(value);

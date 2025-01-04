@@ -36,6 +36,14 @@ public slots:
 
 private:
 
+  // Id записи
+  QLabel    *recordIdLabel;
+  QLineEdit *recordId;
+
+  // Название каталога
+  QLabel    *dirNameLabel;
+  QLineEdit *dirName;
+
   // Ввод названия записи
   QLabel    *recordNameLabel;
   QLineEdit *recordName;
