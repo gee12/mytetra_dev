@@ -86,6 +86,8 @@ void InfoFieldEnter::setup_ui(void)
    expandInfo->setIcon(QIcon(":/resource/pic/triangl_up.svg"));
    // expandInfo->setIcon(this->style()->standardIcon(QStyle::SP_ArrowUp));
   }
+
+  updateReadOnlyFieldsVisibility();
 }
 
 
@@ -159,11 +161,12 @@ void InfoFieldEnter::expandInfoOnDisplay(QString expand)
  recordTagsLabel->setVisible(i);
  recordTags->setVisible(i);
 
- recordIdLabel->setVisible(i);
- recordId->setVisible(i);
+ bool isDisplayReadOnlyFields = i && !isDisplayOnlyEditableFields;
+ recordIdLabel->setVisible(isDisplayReadOnlyFields);
+ recordId->setVisible(isDisplayReadOnlyFields);
 
- dirNameLabel->setVisible(i);
- dirName->setVisible(i);
+ dirNameLabel->setVisible(isDisplayReadOnlyFields);
+ dirName->setVisible(isDisplayReadOnlyFields);
 }
 
 
@@ -255,4 +258,23 @@ void InfoFieldEnter::setReadOnly(bool state)
 bool InfoFieldEnter::isReadOnly()
 {
   return recordName->isReadOnly();
+}
+
+
+void InfoFieldEnter::setDisplayOnlyEditableFields(bool value)
+{
+  isDisplayOnlyEditableFields = value;
+
+  updateReadOnlyFieldsVisibility();
+}
+
+void InfoFieldEnter::updateReadOnlyFieldsVisibility()
+{
+  bool isVisible = !isDisplayOnlyEditableFields;
+
+  recordIdLabel->setVisible(isVisible);
+  recordId->setVisible(isVisible);
+
+  dirNameLabel->setVisible(isVisible);
+  dirName->setVisible(isVisible);
 }
