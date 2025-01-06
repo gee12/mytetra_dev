@@ -15,7 +15,7 @@ public:
 
  QList<QAction *> getActionsList(void);
 
- void setImageProperties(bool flag); // Активирование добавочного пункта меню "Свойства картинки")
+ void setImageProperties(bool flag); // Активирование добавочного пункта меню "Свойства изображения")
  void setEditMathExpression(bool flag); // Активирование добавочного пункта меню "Редактирование формулы")
  void setGotoReference(bool flag); // Активирование добавочного пункта меню "Перейти по ссылке")
  void setPasteAsPlainText(bool flag);

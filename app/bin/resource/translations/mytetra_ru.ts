@@ -1372,7 +1372,7 @@ enable «Decrypt to a temporary file» option in Settings.</source>
     <message>
         <location filename="../../../src/libraries/wyedit/EditorContextMenu.cpp" line="71"/>
         <source>Edit image properties</source>
-        <translation>Свойства картинки</translation>
+        <translation>Свойства изображения</translation>
     </message>
     <message>
         <location filename="../../../src/libraries/wyedit/EditorContextMenu.cpp" line="75"/>
