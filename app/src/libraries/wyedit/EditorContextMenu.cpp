@@ -41,6 +41,7 @@ void EditorContextMenu::setupActions(void)
  actionPasteAsPlainText=new QAction(this);
  actionSelectAll=new QAction(this);
 
+ actionOpenImageProperties=new QAction(this);
  actionEditImageProperties=new QAction(this);
  actionEditMathExpression=new QAction(this);
  actionGotoReference=new QAction(this);
@@ -61,6 +62,9 @@ void EditorContextMenu::setupShortcuts(void)
     shortcutManager.initAction("editor-paste", actionPaste );
     shortcutManager.initAction("editor-pasteAsPlainText", actionPasteAsPlainText );
     shortcutManager.initAction("editor-selectAll", actionSelectAll );
+
+    // "Умное" действие Открыть изображение
+    actionOpenImageProperties->setText(tr("Open image"));
 
     // "Умное" действие Вставить изображение / Редактировать свойства изображения
     shortcutManager.initAction("editor-insertImageFromFile", actionEditImageProperties );
@@ -146,6 +150,9 @@ void EditorContextMenu::setImageProperties(bool flag)
 {
     qDebug() << "In EditorContextMenu::setImageProperties() " << flag;
 
+    actionOpenImageProperties->setVisible(flag);
+    actionOpenImageProperties->setEnabled(flag);
+
     actionEditImageProperties->setVisible(flag);
     actionEditImageProperties->setEnabled(flag);
 }
@@ -204,6 +211,7 @@ void EditorContextMenu::setupSignals(void)
     connect(actionPasteAsPlainText,&QAction::triggered, this, &EditorContextMenu::onActionPasteAsPlainText);
     connect(actionSelectAll,       &QAction::triggered, this, &EditorContextMenu::onActionSelectAll);
 
+    connect(actionOpenImageProperties,&QAction::triggered, this, &EditorContextMenu::onActionContextMenuOpenImageProperties);
     connect(actionEditImageProperties,&QAction::triggered, this, &EditorContextMenu::onActionContextMenuEditImageProperties);
     connect(actionEditMathExpression, &QAction::triggered, this, &EditorContextMenu::onActionContextMenuEditMathExpression);
     connect(actionGotoReference,      &QAction::triggered, this, &EditorContextMenu::onActionContextMenuGotoReference);
@@ -236,6 +244,7 @@ void EditorContextMenu::setupMenu(void)
     this->addSeparator();
 
     this->addAction(actionSelectAll);
+    this->addAction(actionOpenImageProperties);
     this->addAction(actionEditImageProperties);
     this->addAction(actionEditMathExpression);
     this->addAction(actionGotoReference);
@@ -295,6 +304,14 @@ void EditorContextMenu::onActionSelectAll()
     update();
     if(actionSelectAll->isEnabled()) {
         emit selectAll();
+    }
+}
+
+void EditorContextMenu::onActionContextMenuOpenImageProperties()
+{
+    update();
+    if(actionOpenImageProperties->isEnabled()) {
+        emit contextMenuOpenImageProperties();
     }
 }
 
