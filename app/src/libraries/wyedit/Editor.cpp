@@ -427,8 +427,8 @@ void Editor::setupSignals(void)
   connect(editorContextMenu, &EditorContextMenu::selectAll,
           this,              &Editor::onSelectAll,
           Qt::DirectConnection);
-  connect(editorContextMenu, &EditorContextMenu::contextMenuOpenImageProperties,
-          imageFormatter,    &ImageFormatter::onContextMenuOpenImageProperties,
+  connect(editorContextMenu, &EditorContextMenu::contextMenuOpenImage,
+          imageFormatter,    &ImageFormatter::onContextMenuOpenImage,
           Qt::DirectConnection);
   connect(editorContextMenu, &EditorContextMenu::contextMenuEditImageProperties,
           imageFormatter,    &ImageFormatter::onContextMenuEditImageProperties,
@@ -589,6 +589,9 @@ void Editor::setupToolsSignals(void)
 
 
     // Прочие кнопки
+    connect(editorToolBarAssistant->openImage, &QAction::triggered,
+            imageFormatter,                    &ImageFormatter::openImage);
+
     connect(editorToolBarAssistant->insertImageFromFile, &QAction::triggered,
             imageFormatter,                              &ImageFormatter::onInsertImageFromFileClicked);
 

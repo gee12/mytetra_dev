@@ -291,7 +291,7 @@ void ImageFormatter::onInsertImageFromFileClicked(void)
 
 
 // Вызов открытия изображения
-void ImageFormatter::onContextMenuOpenImageProperties()
+void ImageFormatter::onContextMenuOpenImage()
 {
   // Для картинки с формулой свойства изображения редактироваться не должны
   if(editor->cursorPositionDetector->isMathExpressionSelect() ||

@@ -32,7 +32,7 @@ signals:
 public slots:
 
   void onInsertImageFromFileClicked(void);
-  void onContextMenuOpenImageProperties();
+  void onContextMenuOpenImage();
   void onContextMenuEditImageProperties(void);
 
   void onDownloadImages(const QString html);
