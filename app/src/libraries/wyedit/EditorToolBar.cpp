@@ -617,7 +617,8 @@ void EditorToolBar::insertButtonToToolsLine(QString toolName, QToolBar &line)
         QAction *toolAsAction=qobject_cast<QAction *>(this->findChild<QObject *>(name));
 
         if(!toolAsWidget && !toolAsAction) {
-            criticalError("WyEdit: Can not find editor tool with name '"+toolName+"'. Please check editor *.ini file");
+            warning("WyEdit: Can not find editor tool with name '"+toolName+"'. Please check editor *.ini file. \n\nTool will be disabled.");
+            return;
         }
 
         // Если данный инструмент не содержится в списке заблокированных
