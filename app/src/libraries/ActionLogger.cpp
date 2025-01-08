@@ -53,6 +53,7 @@ ActionLogger::ActionLogger(QObject *pobj)
   actionStructure["syncroProcessError"] = (QStringList() << "errCode" );
   actionStructure["syncroError"];
 
+  actionStructure["warning"] =(QStringList() << "message" );
   actionStructure["criticalError"] =(QStringList() << "errorMessage" );
 
   // По-умолчанию логирование запрещено
@@ -338,6 +339,9 @@ QString ActionLogger::getFullDescription(QMap<QString, QString> iData)
 
   else if( iData["a"] == "syncroError")
     line=tr("Synchronization error");
+
+  else if( iData["a"] == "warning")
+    line=tr("Warning: %1").arg( iData["message"] );
 
   else if( iData["a"] == "criticalError")
     line=tr("Critical error: %1").arg( iData["errorMessage"] );
