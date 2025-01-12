@@ -242,38 +242,51 @@ Please enable action logging in Tools -&gt; Preferences -&gt; Misc</source>
         <translation>Настройки MyTetra</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="32"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="42"/>
         <source>Main</source>
         <translation>Основные</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="33"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="44"/>
+        <source>Appearance</source>
+        <translation>Оформление</translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="46"/>
         <source>Crypt</source>
         <translation>Шифрование</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="34"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="48"/>
         <source>Synchro</source>
         <translation>Синхронизация</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="35"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="50"/>
         <source>Note area</source>
         <translation>Список записей</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="36"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="52"/>
         <source>Attaches</source>
         <translation>Прикрепляемые файлы</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="37"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="54"/>
         <source>Keyboard</source>
         <translation>Клавиатура</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="38"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="56"/>
+        <source>History</source>
+        <translation>История</translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="58"/>
         <source>Misc</source>
+        <translation>Разное</translation>
+    </message>
+</context>
 <context>
     <name>AppConfigPage_Appearance</name>
     <message>

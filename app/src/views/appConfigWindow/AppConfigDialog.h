@@ -1,6 +1,7 @@
 #ifndef APPCONFIGDIALOG_H
 #define APPCONFIGDIALOG_H
 
+#include <QObject>
 #include <QString>
 #include <QWidget>
 
@@ -10,8 +11,9 @@
 class ConfigDialog;
 class QListWidgetItem;
 
-class AppConfigDialog
+class AppConfigDialog : QObject
 {
+    Q_OBJECT
 
 public:
     explicit AppConfigDialog(const QString &firstPageName, QWidget *parent);

@@ -1,5 +1,4 @@
 #include <QStackedWidget>
-#include <QObject>
 #include <QDialog>
 #include <QDebug>
 
@@ -28,7 +27,7 @@ AppConfigDialog::AppConfigDialog(const QString &firstPageName, QWidget *parent)
     // в диалоговом окне и на панели задач
     configDialog=new ConfigDialog( parent );
     configDialog->setAttribute(Qt::WA_DeleteOnClose);
-    configDialog->setWindowTitle(QObject::tr("MyTetra settings"));
+    configDialog->setWindowTitle(tr("MyTetra settings"));
 
     if(mytetraConfig.getInterfaceMode()=="mobile")
     {
@@ -40,23 +39,23 @@ AppConfigDialog::AppConfigDialog(const QString &firstPageName, QWidget *parent)
     // Наполнение диалога виджетами
     // В качестве родителя надо указывать parent а не configDialog (разобраться почему)
     pageMain       =configDialog->addWidget(new AppConfigPage_Main( parent ),
-                                            QObject::tr("Main"));
+                                            tr("Main"));
     pageAppearance=configDialog->addWidget(new AppConfigPage_Appearance( parent ),
-                                            QObject::tr("Appearance"));
+                                            tr("Appearance"));
     pageCrypt      =configDialog->addWidget(new AppConfigPage_Crypt( parent ),
-                                            QObject::tr("Crypt"));
+                                            tr("Crypt"));
     pageSynchro    =configDialog->addWidget(new AppConfigPage_Synchro( parent ),
-                                            QObject::tr("Synchro"));
+                                            tr("Synchro"));
     pageRecordTable=configDialog->addWidget(new AppConfigPage_RecordTable( parent ),
-                                            QObject::tr("Note area"));
+                                            tr("Note area"));
     pageAttach     =configDialog->addWidget(new AppConfigPage_Attach( parent ),
-                                            QObject::tr("Attaches"));
+                                            tr("Attaches"));
     pageKeyboard   =configDialog->addWidget(new AppConfigPage_Keyboard( parent ),
-                                            QObject::tr("Keyboard"));
+                                            tr("Keyboard"));
     pageHistory    =configDialog->addWidget(new AppConfigPage_History( parent ),
-                                            QObject::tr("History"));
+                                            tr("History"));
     pageMisc       =configDialog->addWidget(new AppConfigPage_Misc( parent ),
-                                            QObject::tr("Misc"));
+                                            tr("Misc"));
 
 
     configDialog->updateListWidth();
