@@ -599,9 +599,8 @@ Stored password will be cleared if uncheck this checkbox.</source>
         <translation>Выводить отладочные сообщения в консоль</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="45"/>
         <source>Run MyTetra in a minimized window</source>
-        <translation>Запускать MyTetra в свернутом окне</translation>
+        <translation type="vanished">Запускать MyTetra в свернутом окне</translation>
     </message>
     <message>
         <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="50"/>
@@ -623,9 +622,8 @@ Stored password will be cleared if uncheck this checkbox.</source>
         <translation>Редактировать конфиг-файл</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="84"/>
         <source>History of visited notes</source>
-        <translation>История просмотренных записей</translation>
+        <translation type="vanished">История просмотренных записей</translation>
     </message>
     <message>
         <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="95"/>
@@ -637,14 +635,12 @@ Stored password will be cleared if uncheck this checkbox.</source>
         <translation type="vanished">Опасные действия (Будьте внимательны!)</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="60"/>
         <source>Remember cursor position at history navigation</source>
-        <translation>Вспоминать позицию курсора при навигации по истории</translation>
+        <translation type="vanished">Вспоминать позицию курсора при навигации по истории</translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="64"/>
         <source>Try remember cursor position at ordinary selection</source>
-        <translation>Пытаться вспомнить позицию курсора при обычном выборе записи</translation>
+        <translation type="vanished">Пытаться вспомнить позицию курсора при обычном выборе записи</translation>
     </message>
 </context>
 <context>
