@@ -373,15 +373,15 @@ void EditorToolbarSettingsScreen::onInfoClick()
     message += tr("The command is inserted <b>above the cursor</b> in the command list of the text editor toolbar.");
     message += "<br/>";
     message += "<br/>";
-    message += "<b>Shortcuts:</b>";
+    message += tr("<b>Shortcuts:</b>");
     message += "<br/>";
-    message += "- Move the selected command from the All Available Commands Model <b>to</b> the Commands Used Toolbar: <b>Alt+Right</b>.";
+    message += tr("- Move the selected command from the All Available Commands Model <b>to</b> the Commands Used Toolbar: <b>Alt+Right</b>.");
     message += "<br/>";
-    message += "- Move the selected command from the Commands Used Toolbar <b>to</b> the All Available Commands Model: <b>Alt+Left</b>.";
+    message += tr("- Move the selected command from the Commands Used Toolbar <b>to</b> the All Available Commands Model: <b>Alt+Left</b>.");
     message += "<br/>";
-    message += "- Commands used toolbar: Move <b>up</b> the selected command: <b>Alt+Up</b>.";
+    message += tr("- Commands used toolbar: Move <b>up</b> the selected command: <b>Alt+Up</b>.");
     message += "<br/>";
-    message += "- Commands used toolbar: Move <b>down</b> the selected command: <b>Alt+Down</b>.";
+    message += tr("- Commands used toolbar: Move <b>down</b> the selected command: <b>Alt+Down</b>.");
 
     QMessageBox *msgBox = new QMessageBox(QMessageBox::Icon::Information, tr("Information"), message, QMessageBox::Ok, this);
     msgBox->exec();
