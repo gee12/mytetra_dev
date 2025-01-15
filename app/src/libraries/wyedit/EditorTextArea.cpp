@@ -113,10 +113,37 @@ bool EditorTextArea::eventFilter(QObject *o, QEvent *e)
 void EditorTextArea::keyPressEvent(QKeyEvent *event)
 {
   // Если нажата клавиша Ctrl
-  if( event->key() == Qt::Key_Control )
+  if( event->key() == Qt::Key_Control ) {
     switchReferenceClickMode(true);
-
-  QTextEdit::keyPressEvent(event);
+    QTextEdit::keyPressEvent(event);
+  }
+  // Если нажата комбинация Shift+Tab
+  else if (event->key() == Qt::Key_Backtab)
+  {
+    QTextCursor cursor = textCursor();
+    // Сохраняем текущую позицию курсора
+    int pos = cursor.position();
+    int anchor = cursor.anchor();
+    // Сбрасывает текущую позицию
+    cursor.clearSelection();
+    // Выделяем первый символ в строке
+    cursor.movePosition(QTextCursor::StartOfLine);
+    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+    QString selectedText = cursor.selectedText();
+    // Проверяем, если выделенный символ - это табуляция
+    if (selectedText.startsWith('\t')) {
+        // Если табуляция, то удаляем выделенный символ и возвращаем курсор обратно (но уже на 1 символ левее)
+        cursor.removeSelectedText();
+        cursor.setPosition(anchor-1);
+        cursor.setPosition(pos-1, QTextCursor::KeepAnchor);
+    } else {
+        // Это не табуляция, возвращаем курсор обратно
+        cursor.setPosition(anchor);
+        cursor.setPosition(pos, QTextCursor::KeepAnchor);
+    }
+  } else {
+    QTextEdit::keyPressEvent(event);
+  }
 }
 
 
