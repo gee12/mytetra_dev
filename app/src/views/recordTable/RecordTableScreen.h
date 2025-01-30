@@ -41,6 +41,7 @@ public:
  QAction *actionAddNewBefore;
  QAction *actionAddNewAfter;
  QAction *actionEditField;
+ QAction *actionFavorite;
  QAction *actionBlock;
  QAction *actionDelete;
  QAction *actionCut;

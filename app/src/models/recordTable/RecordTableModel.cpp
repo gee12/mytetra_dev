@@ -7,10 +7,12 @@
 #include "models/tree/TreeModel.h"
 #include "models/appConfig/AppConfig.h"
 #include "views/mainWindow/MainWindow.h"
+#include "libraries/GlobalParameters.h"
 #include "libraries/FixedParameters.h"
 #include "libraries/helpers/DebugHelper.h"
 
 
+extern GlobalParameters globalParameters;
 extern AppConfig mytetraConfig;
 
 
@@ -60,7 +62,21 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
             // Некоторые данные при отрисовке в таблице преобразуются в "экранные" представления
             // Преобразование возможно только для отображаемой в таблице информации
 
-            if( role==Qt::DisplayRole && fieldName=="ctime")
+            if( role==Qt::DisplayRole && fieldName=="name")
+            {
+                bool isFavorite = table->getField("favor", index.row())=="1";
+                bool isNotDecrypted = table->getField("crypt", index.row())=="1"
+                                      && globalParameters.getCryptKey().length()==0;
+                if (isFavorite && isNotDecrypted) {
+                    // Если запись избранная и зашифрована, но не расшифрована, то выводим "Закрыто"
+                    return tr("Close");
+                } else {
+                    // Иначе выводим имя записи
+                    return field;
+                }
+            }
+
+            else if( role==Qt::DisplayRole && fieldName=="ctime")
             {
                 // Преобразование временного штампа в дату и время
                 QDateTime fieldDateTime=QDateTime::fromString(field, "yyyyMMddhhmmss");
@@ -86,6 +102,14 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
                     return field;
             }
 
+            else if( role==Qt::DisplayRole && fieldName=="favor") // Наличие блокировки записи
+            {
+                if (field!="1")
+                    return "";
+                else
+                    return "*";
+            }
+
             else if( role==Qt::DisplayRole && fieldName=="block") // Наличие блокировки записи
             {
                 if(field!="1")
@@ -100,6 +124,10 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
 
     if(role==RECORD_ID_ROLE)
         return table->getField("id", index.row());
+
+    if(role==RECORD_FAVORITE_ROLE) {
+        return table->getField("favor", index.row());
+    }
 
     if(role==RECORD_BLOCK_ROLE)
         return table->getField("block", index.row());
@@ -123,11 +151,26 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
         QString fieldName=showFields.value( index.column() );
         QString field=table->getField(fieldName, index.row());
 
-        // Иконка блокировки в названии записи
-        if(fieldName=="name")
+        if (fieldName=="name") {
+            // Иконка избранности в названии записи
+            //if (!showFields.contains("favor")) // Среди отображаемых столбцов нет столбца "favor" (чтобы не отрисовывалось два замочка в строке)
+            if (table->getField("favor", index.row())=="1") { // Если запись в избранных
+                bool isNotDecrypted = table->getField("crypt", index.row())=="1"
+                                      && globalParameters.getCryptKey().length()==0;
+                if (isNotDecrypted) {
+                    // Если запись не расшифрована, выводим иконку "замок"
+                    return QIcon(":/resource/pic/branch_closed.svg");
+                } else {
+                    // Иначе иконку избранности "звездочка"
+                    return QIcon(":/resource/pic/favorites_yellow.svg");
+                }
+            }
+
+            // Иконка блокировки в названии записи
             if( !showFields.contains("block") ) // Среди отображаемых столбцов нет столбца "block" (чтобы не отрисовывалось два замочка в строке)
                 if( table->getField("block", index.row())=="1" ) // Если есть блокировка
                     return QIcon(":/resource/pic/note_block.svg");
+        }
 
         // Иконка наличия аттачей в специально предназначенном для этого столбце
         if(fieldName=="hasAttach" && field=="1")

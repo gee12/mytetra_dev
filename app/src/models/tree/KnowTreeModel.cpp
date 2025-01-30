@@ -89,6 +89,17 @@ void KnowTreeModel::init(QDomDocument *domModel)
     delete rootItem;
   rootItem = new TreeItem(rootData);
 
+  // Ветка с избранными записями
+  QMap<QString, QString> favoritesData;
+  favoritesData["id"]=FixedParameters::favoritesItemId;
+  favoritesData["name"]=tr("Favorites");
+  favoritesData["icon"]=":/resource/pic/favorites_yellow.svg";
+
+  rootItem->insertChildren(0,1,1);
+  favoritesNode=rootItem->child(0);
+  favoritesNode->setAllFieldDirect(favoritesData);
+  favoritesNode->recordtableInit(QDomElement(), favoritesNode);
+
   // Динамическое создание дерева из Item объектов на основе DOM модели
   setupModelData(domModel, rootItem);
 
@@ -119,9 +130,13 @@ bool KnowTreeModel::checkFormat(QDomElement elementFormat)
     if(updateSubVersionFrom1To2()==false) // Смена формата с 1.1 на 1.2
       return false;
 
-  // На будущее, для перехода с подверии 2 на подверсию 3, эти строки надо добавлять к существующим (а не заменять)
-  // if(baseSubVersion<=2)
-  //  if(updateSubVersionFrom2To3()==false)
+  if(baseSubVersion<=2)
+    if(updateSubVersionFrom2To3()==false)
+       return false;
+
+  // На будущее, для перехода с подверии 3 на подверсию 4, эти строки надо добавлять к существующим (а не заменять)
+  // if(baseSubVersion<=3)
+  //  if(updateSubVersionFrom3To4()==false)
   //   return false;
 
   return true;
@@ -131,6 +146,14 @@ bool KnowTreeModel::checkFormat(QDomElement elementFormat)
 bool KnowTreeModel::updateSubVersionFrom1To2(void)
 {
   // Формат 1.2 только расширяет формат 1.1 (т. е. только добавляет данные, но не исключает никакие устаревшие)
+  // Поэтому ни в каких преобразующих действиях нет необходимости
+  return true;
+}
+
+
+bool KnowTreeModel::updateSubVersionFrom2To3(void)
+{
+  // Формат 1.3 только расширяет формат 1.2 (т. е. только добавляет данные, но не исключает никакие устаревшие)
   // Поэтому ни в каких преобразующих действиях нет необходимости
   return true;
 }
@@ -166,7 +189,7 @@ void KnowTreeModel::parseNodeElement(QDomElement domElement, TreeItem *iParent)
 
   // У данного Dom-элемента ищется таблица конечных записей
   // и данные заполняются в Item-таблицу конечных записей
-  parent->recordtableInit(domElement);
+  parent->recordtableInit(domElement, favoritesNode);
 
   // Пробегаются все DOM элементы текущего уровня
   // и рекурсивно вызывается обработка подуровней
@@ -640,10 +663,15 @@ void KnowTreeModel::parseTreeToStreamWriter( QXmlStreamWriter *xmlWriter, TreeIt
   // Обработка каждой подчиненной ветки
   for(int i=0; i<currItem->childCount(); i++)
    {
+    TreeItem *child=currItem->child(i);
+    // Пропускаем ветку с избранными записями
+    if (child->getField("id")==FixedParameters::favoritesItemId) {
+     continue;
+    }
     xmlWriter->writeStartElement("node");
 
     // Получение всех полей для данной ветки
-    QMap<QString, QString> fields=currItem->child(i)->getAllFieldsDirect();
+    QMap<QString, QString> fields=child->getAllFieldsDirect();
 
     // Перебираются поля элемента ветки
     QMapIterator<QString, QString> fields_iterator(fields);
@@ -808,7 +836,7 @@ void KnowTreeModel::addNewBranch(TreeItem *parent, QMap<QString, QString> branch
   }
 
   // Инициализируется таблица конечных записей
-  newBranch->recordtableGetTableData()->init(newBranch, QDomElement());
+  newBranch->recordtableGetTableData()->init(newBranch, QDomElement(), favoritesNode);
 
   // Определяется, является ли родительская ветка зашифрованной
   if(parent->getField("crypt")=="1")
@@ -816,6 +844,30 @@ void KnowTreeModel::addNewBranch(TreeItem *parent, QMap<QString, QString> branch
     // Новая ветка превращается в зашифрованную
     newBranch->switchToEncrypt();
   }
+}
+
+
+// Получение ветки "Избранное"
+TreeItem *KnowTreeModel::getFavoritesItem()
+{
+  return favoritesNode;
+}
+
+
+// Добавление записи в ветку "Избранное"
+void KnowTreeModel::addRecordToFavorites(Record *record)
+{
+  favoritesNode->recordtableGetTableData()->insertRecordToFavorites(
+      GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
+      0,
+      record);
+}
+
+
+// Удаление записи из ветки "Избранное"
+void KnowTreeModel::deleteRecordFromFavorites(QString recordId)
+{
+  favoritesNode->recordtableGetTableData()->deleteRecordFromFavorites(recordId);
 }
 
 
@@ -1148,7 +1200,13 @@ void KnowTreeModel::deleteItemsByModelIndexList(QModelIndexList &selectItems)
     {
         // Собирается список удаляемых записей, чтобы закрыть открепляемые окна
         // у записей, которые были удалены
-        deleteResordsId.unite( *(this->getRecordsIdList(this->getItem(selectItems.at(i))).data()) );
+        QSet<QString> recordsIdList = *(this->getRecordsIdList(this->getItem(selectItems.at(i))).data());
+        deleteResordsId.unite(recordsIdList);
+
+        // Убираем избранные записи удаляемых веток из ветки "Избранное"
+        for (QString id : recordsIdList) {
+            deleteRecordFromFavorites(id);
+        }
 
         this->deleteOneBranch(selectItems.at(i));
     }
@@ -1400,6 +1458,11 @@ TreeItem *KnowTreeModel::getItemByIdRecurse(TreeItem *item, const QString &id, i
         return findItem;
     }
 
+    // Если данная ветка - "Избранное", то пропускаем ее
+    if (item->getField("id")==FixedParameters::favoritesItemId) {
+        return findItem;
+    }
+
     if(item->getId()==id)
     {
         findItem=item;
@@ -1449,6 +1512,11 @@ QStringList KnowTreeModel::getRecordPathRecurse(TreeItem *item,
 
     if(findPath.size()!=0)
     {
+        return findPath;
+    }
+
+    // Если данная ветка - "Избранное", то пропускаем ее
+    if (item->getField("id")==FixedParameters::favoritesItemId) {
         return findPath;
     }
 

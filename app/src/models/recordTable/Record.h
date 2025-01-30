@@ -13,6 +13,7 @@
 
 #include "models/attachTable/Attach.h"
 #include "models/attachTable/AttachTableData.h"
+#include "models/tree/TreeItem.h"
 
 // Класс одной записи в таблице записей
 
@@ -33,7 +34,7 @@ public:
   Record(const Record &obj);
   virtual ~Record();
 
-  void setupDataFromDom(QDomElement iDomElement);
+  void setupDataFromDom(QDomElement iDomElement, TreeItem *favoriteNode);
   QDomElement exportDataToDom(QDomDocument *doc) const;
   void exportDataToStreamWriter(QXmlStreamWriter *xmlWriter) const;
 

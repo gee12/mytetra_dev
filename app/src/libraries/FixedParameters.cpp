@@ -6,8 +6,8 @@
 
 
 // Поля для записей
-const QStringList FixedParameters::recordFieldAvailableList=       {"id", "name", "author", "url", "tags", "ctime", "dir", "file", "crypt", "block", "hasAttach", "attachCount"};
-const QStringList FixedParameters::recordNaturalFieldAvailableList={"id", "name", "author", "url", "tags", "ctime", "dir", "file", "crypt", "block"};
+const QStringList FixedParameters::recordFieldAvailableList=       {"id", "name", "author", "url", "tags", "ctime", "dir", "file", "crypt", "block", "favor", "hasAttach", "attachCount"};
+const QStringList FixedParameters::recordNaturalFieldAvailableList={"id", "name", "author", "url", "tags", "ctime", "dir", "file", "crypt", "block", "favor"};
 const QStringList FixedParameters::recordCalculableFieldAvailableList={"hasAttach", "attachCount"};
 const QStringList FixedParameters::recordFieldCryptedList={"name", "author", "url", "tags"};
 
@@ -26,6 +26,9 @@ const QString FixedParameters::mathExpDescriptionType="mathExpression";
 const int FixedParameters::mathExpVersion=1; // Текущая максимальная версия формата хранения формулы
 const int FixedParameters::mathExpVersionNumberLen=4; // Сколько символов занимает номер версии (только цифры)
 const int FixedParameters::mathExpHeaderLen=29; // Сколько символов занимает весь заголовок (префикс, номер версии, три двоеточия)
+
+// ID ветки "Избранное"
+const QString FixedParameters::favoritesItemId="favorites";
 
 
 FixedParameters::FixedParameters(QObject *parent) : QObject(parent)
@@ -85,6 +88,7 @@ QMap<QString, QString> FixedParameters::recordFieldDescription(QStringList list)
   names["hasAttach"]=tr("Has attachs");
   names["attachCount"]=tr("Attachs count");
   names["block"]=tr("Block");
+  names["favor"]=tr("Is favorite");
 
 
   // Удаляются строчки, которых нет в переданном списке

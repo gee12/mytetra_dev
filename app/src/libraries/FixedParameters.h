@@ -41,6 +41,8 @@ public:
   static const int mathExpVersionNumberLen; // Сколько символов занимает номер версии (только цифры)
   static const int mathExpHeaderLen; // Сколько символов занимает весь заголовок (префикс, номер версии, три двоеточия)
 
+  static const QString favoritesItemId; // ID ветки "Избранное"
+
   static bool isRecordFieldAvailable(QString name);
   static bool isRecordFieldNatural(QString name);
   static bool isRecordFieldCalculable(QString name);

@@ -23,6 +23,7 @@
 #include "libraries/helpers/ObjectHelper.h"
 #include "libraries/helpers/GestureHelper.h"
 #include "libraries/helpers/CssHelper.h"
+#include "libraries/crypt/Password.h"
 
 
 extern GlobalParameters globalParameters;
@@ -281,6 +282,7 @@ void RecordTableView::assemblyContextMenu(void)
   contextMenu->addAction(parentPointer->actionAddNewAfter);
   contextMenu->addSeparator();
   contextMenu->addAction(parentPointer->actionEditField);
+  contextMenu->addAction(parentPointer->actionFavorite);
   contextMenu->addAction(parentPointer->actionBlock);
   contextMenu->addAction(parentPointer->actionDelete);
   contextMenu->addSeparator();
@@ -303,9 +305,40 @@ void RecordTableView::onCustomContextMenuRequested(const QPoint &mousePos)
 
   RecordTableScreen *parentPointer=qobject_cast<RecordTableScreen *>(parent());
 
-  // Установка надписи блокировки/разблокировки записи
   QModelIndex selectItem=currentIndex();
 
+  // Если находимся в ветке "Избранное", то отображаем особое контекстное меню
+  bool isCurrentFavoritesItem = find_object<TreeScreen>("treeScreen")->isCurrentFavoritesItem();
+
+  // Если находимся в ветке "Избранное" и запись зашифрована, но не расшифрована,
+  // то контекстное меню не отображаем
+  if (isCurrentFavoritesItem && !controller->isRecordNotEncryptedOrDecrypted(selectItem)) {
+
+        Password password;
+        if (password.retrievePassword() == false)
+            return;
+  }
+
+  // Установка надписи и иконки для команды добавления/удаления записи из избранного
+  if(!selectItem.isValid())
+    parentPointer->actionFavorite->setVisible(false);
+  else
+  {
+    parentPointer->actionFavorite->setVisible(true);
+    ShortcutManager::stringRepresentation mode=ShortcutManager::stringRepresentation::brackets;
+    QAction *actionFavorite = parentPointer->actionFavorite;
+    bool isFavoriteNote = selectItem.data(RECORD_FAVORITE_ROLE).toString()=="1";
+
+    if (isFavoriteNote || isCurrentFavoritesItem) {
+      actionFavorite->setText(tr("Remove from favorites")+" "+shortcutManager.getKeySequenceAsText("note-favorite", mode));
+      actionFavorite->setIcon(QIcon(":/resource/pic/favorites_gray.svg"));
+    } else {
+      actionFavorite->setText(tr("Add to favorites")+" "+shortcutManager.getKeySequenceAsText("note-favorite", mode));
+      actionFavorite->setIcon(QIcon(":/resource/pic/favorites_yellow.svg"));
+    }
+  }
+
+  // Установка надписи блокировки/разблокировки записи
   if(!selectItem.isValid())
     parentPointer->actionBlock->setText(tr("Block/Unblock note"));
   else
@@ -349,6 +382,16 @@ void RecordTableView::editFieldContext(void)
  // QModelIndexList selectItems=selectionModel()->selectedIndexes();
  // QModelIndex index=selectItems.at(0);
  QModelIndex index=currentIndex();
+
+ // Если находимся в ветке "Избранное" и запись зашифрована, но не расшифрована,
+ // то диалог редактирования полей записи не отображаем
+ bool isCurrentFavoritesItem = find_object<TreeScreen>("treeScreen")->isCurrentFavoritesItem();
+ if (isCurrentFavoritesItem && !controller->isRecordNotEncryptedOrDecrypted(index)) {
+
+    Password password;
+    if (password.retrievePassword() == false)
+      return;
+ }
 
  controller->editFieldContext(index);
 

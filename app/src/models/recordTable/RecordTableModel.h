@@ -7,11 +7,12 @@
 #include <QObject>
 #include <QtXml>
 
-#define TABLE_DATA_ROLE   Qt::UserRole+10
-#define ONE_RECORD_ROLE   Qt::UserRole+11
-#define RECORD_ID_ROLE    Qt::UserRole+12
-#define RECORD_BLOCK_ROLE Qt::UserRole+13
-#define SORT_ROLE         Qt::UserRole+14
+#define TABLE_DATA_ROLE      Qt::UserRole+10
+#define ONE_RECORD_ROLE      Qt::UserRole+11
+#define RECORD_ID_ROLE       Qt::UserRole+12
+#define RECORD_FAVORITE_ROLE Qt::UserRole+13
+#define RECORD_BLOCK_ROLE    Qt::UserRole+14
+#define SORT_ROLE            Qt::UserRole+15
 
 class Record;
 class RecordTableData;
