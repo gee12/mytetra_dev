@@ -1033,6 +1033,10 @@ int KnowTreeModel::getAllRecordCount(void)
 // Возвращает количество записей в ветке и всех подветках
 int KnowTreeModel::getRecordCountForItem(TreeItem *item)
 {
+  // Если данная ветка - "Избранное", то возвращаем кол-во избранных записей
+  if (item->getField("id") == FixedParameters::favoritesItemId)
+    return item->recordtableGetRowCount();
+
   // Обнуление счетчика
   getAllRecordCountRecurse(rootItem, 0);
 
@@ -1049,6 +1053,10 @@ int KnowTreeModel::getAllRecordCountRecurse(TreeItem *item, int mode)
     n=0;
     return 0;
   }
+
+  // Если данная ветка - "Избранное", то пропускаем ее
+  if (item->getField("id") == FixedParameters::favoritesItemId)
+    return 0;
 
   n=n+item->recordtableGetRowCount();
 
