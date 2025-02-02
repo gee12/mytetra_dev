@@ -718,6 +718,33 @@ void RecordTableController::onFavoriteContext(void)
 }
 
 
+// Открытие исходной ветки у избранной записи
+void RecordTableController::onOpenInSourceNodeClick(void)
+{
+    // Получение индекса выделенного элемента
+    QModelIndexList selectItems = view->selectionModel()->selectedIndexes();
+    QModelIndex index = selectItems.at(0);
+
+    // Номер строки в базе
+    QModelIndex sourceIndex = convertProxyIndexToSourceIndex(index);
+    int pos = sourceIndex.row();
+
+    // Получение id записи
+    RecordTableData *table=recordSourceModel->getTableData();
+    QString recordId = table->getField("id", pos);
+
+    // Получение пути к ветке, в которой лежит запись
+    KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+    QStringList path = dataModel->getRecordPath(recordId);
+
+    qDebug() << "Get path to record:" << path;
+
+    MainWindow *mainWIndow = find_object<MainWindow>("mainwindow");
+    mainWIndow->setTreePosition(path);
+    mainWIndow->setRecordtablePositionById(recordId);
+}
+
+
 // При выборе пункта "Блокировка записи" в контекстном меню
 void RecordTableController::onBlockContext(void)
 {

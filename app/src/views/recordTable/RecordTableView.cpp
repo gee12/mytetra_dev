@@ -283,6 +283,7 @@ void RecordTableView::assemblyContextMenu(void)
   contextMenu->addSeparator();
   contextMenu->addAction(parentPointer->actionEditField);
   contextMenu->addAction(parentPointer->actionFavorite);
+  contextMenu->addAction(parentPointer->actionOpenInSourceNode);
   contextMenu->addAction(parentPointer->actionBlock);
   contextMenu->addAction(parentPointer->actionDelete);
   contextMenu->addSeparator();
@@ -319,14 +320,18 @@ void RecordTableView::onCustomContextMenuRequested(const QPoint &mousePos)
             return;
   }
 
+  // Установка видимости команды для открытия исходной ветки избранной записи
+  // только если текущая ветка - "Избранное"
+  parentPointer->actionOpenInSourceNode->setVisible(isCurrentFavoritesItem);
+
   // Установка надписи и иконки для команды добавления/удаления записи из избранного
+  QAction *actionFavorite = parentPointer->actionFavorite;
   if(!selectItem.isValid())
-    parentPointer->actionFavorite->setVisible(false);
+    actionFavorite->setVisible(false);
   else
   {
-    parentPointer->actionFavorite->setVisible(true);
+    actionFavorite->setVisible(true);
     ShortcutManager::stringRepresentation mode=ShortcutManager::stringRepresentation::brackets;
-    QAction *actionFavorite = parentPointer->actionFavorite;
     bool isFavoriteNote = selectItem.data(RECORD_FAVORITE_ROLE).toString()=="1";
 
     if (isFavoriteNote || isCurrentFavoritesItem) {

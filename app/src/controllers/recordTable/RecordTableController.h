@@ -79,6 +79,7 @@ public slots:
 
   void onEditFieldContext(void);
   void onFavoriteContext(void);
+  void onOpenInSourceNodeClick(void);
   void onBlockContext(void);
 
   void deleteRecords(void);

@@ -1496,128 +1496,128 @@ Enter your old password and new password.
 <context>
     <name>FindScreen</name>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="72"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="73"/>
         <source>Find</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="98"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="99"/>
         <source>Any word</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="99"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="100"/>
         <source>All words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="104"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="105"/>
         <source>Whole words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="105"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="106"/>
         <source>Substring</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="110"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="111"/>
         <source>Entire base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="111"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="112"/>
         <source>Current tree item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="186"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="187"/>
         <source>Find in: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="188"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="189"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="191"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="192"/>
         <source>Author(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="194"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="195"/>
         <source>Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="197"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="198"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="200"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="201"/>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="203"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="204"/>
         <source>Name tree item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="376"/>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="447"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="377"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="448"/>
         <source>Cannot start find process</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="377"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="378"/>
         <source>Verify that you selected fields for search for starting find process.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="378"/>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="391"/>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="449"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="379"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="392"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="450"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="389"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="390"/>
         <source>Can not start find process</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="390"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="391"/>
         <source>The search request is too short. Enter at least one word.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="448"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="449"/>
         <source>Starting position for a tree searching is not set.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="464"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="465"/>
         <source>Search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="489"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="494"/>
         <source>No search results.
 Hint: encrypted items has been detected. For searching in encrypted items you have to enter the password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="493"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="498"/>
         <source>No search results.
 Hint: search produced in current tree item.
 Try to search for entire database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="524"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="533"/>
         <source>[Tree item]</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1903,17 +1903,17 @@ You need to update MyTetra.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="319"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="317"/>
         <source>The exporting file %1 is not writable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="444"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="442"/>
         <source>Import error: unable to read the XML file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="536"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="534"/>
         <source>Find record id=&quot;%1&quot; without dir attribute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1921,12 +1921,24 @@ You need to update MyTetra.</source>
 <context>
     <name>KnowTreeView</name>
     <message>
-        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="185"/>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="193"/>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="206"/>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="221"/>
         <source>Warning!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="186"/>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="194"/>
+        <source>Unable to move record from item &quot;Favorites&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="207"/>
+        <source>Unable to move record to item &quot;Favorites&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="222"/>
         <source>Unable to move the item to an encrypted item. You have to enter the password for this action.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2327,22 +2339,22 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableController</name>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="764"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="781"/>
         <source>Unblock this note?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="903"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="920"/>
         <source>Are you sure to delete this record(s)?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="904"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="921"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="905"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="922"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2356,7 +2368,7 @@ MyTetra will try to create a blank entry to fix it.</source>
     </message>
     <message>
         <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="94"/>
-        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="120"/>
+        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="118"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2402,73 +2414,83 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableScreen</name>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="96"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="76"/>
+        <source>Open in source node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="77"/>
+        <source>Open favorite record in source node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="100"/>
         <source>View settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="97"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="101"/>
         <source>Setup table view settins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="117"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="121"/>
         <source>Previous viewing note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="121"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="125"/>
         <source>Next viewing note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="125"/>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="126"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="129"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="130"/>
         <source>Back to item tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="130"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="134"/>
         <source>Toggle sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="131"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="135"/>
         <source>Enable/disable sorting by column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="135"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="139"/>
         <source>Print table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="136"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="140"/>
         <source>Print current notes table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="140"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="144"/>
         <source>Copy note reference</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="141"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="145"/>
         <source>Copy note reference to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="145"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="149"/>
         <source>Switch select/multiselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="146"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="150"/>
         <source>Switch note selection mode (Notice: if multiselect is on, drag-and-drop is disabled)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="594"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="614"/>
         <source>&lt;b&gt;Path:&lt;/b&gt; </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2476,47 +2498,47 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableView</name>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="323"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="338"/>
         <source>Remove from favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="326"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="341"/>
         <source>Add to favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="333"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="348"/>
         <source>Block/Unblock note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="338"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="353"/>
         <source>Unblock note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="340"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="355"/>
         <source>Block note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="345"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="360"/>
         <source>Set multiple selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="347"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="362"/>
         <source>Set single selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="351"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="366"/>
         <source>Enable sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="353"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="368"/>
         <source>Disable sorting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3345,226 +3367,227 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>TreeScreen</name>
     <message>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="160"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="161"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="162"/>
         <source>Find in base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="442"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="443"/>
         <source>Are you sure you want to disable favorites?
-The "favorite" flag will be reset for all entries.</source>
+The &quot;favorite&quot; flag will be reset for all entries.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="444"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="445"/>
         <source>Disable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="535"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="574"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="670"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="775"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="921"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="965"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1072"/>
-        <source>Unavailable action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="536"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="575"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="671"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="776"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="922"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="966"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="1073"/>
-        <source>You&apos;ve selected </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="536"/>
-        <source> items.
-Please select single item for moving.</source>
+        <source>Unavailable action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="537"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="576"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="672"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="777"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="923"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="967"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="1074"/>
+        <source>You&apos;ve selected </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="537"/>
+        <source> items.
+Please select single item for moving.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="538"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="577"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="673"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="778"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="924"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="968"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1075"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="575"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="576"/>
         <source> items.
 Please select single item for enabling insert operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="585"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="586"/>
         <source>Create new item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="586"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="695"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="587"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="696"/>
         <source>Item name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="589"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="590"/>
         <source>Create new sub item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="590"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="591"/>
         <source>Sub item name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="671"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="672"/>
         <source> items.
 Please select single item for enabling edit operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="694"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="695"/>
         <source>Edit item name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="776"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="777"/>
         <source>In your selected data found closed item. Action canceled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="809"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="810"/>
         <source>Confirmation request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="810"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="811"/>
         <source>In the selected item has been found blocked notes. Do you really want to delete one?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="831"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="832"/>
         <source>Delete item(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="832"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="833"/>
         <source>Are you sure you wish to delete item(s) &lt;b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="832"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="840"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="833"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="841"/>
         <source>&lt;/b&gt; and all sub items?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="833"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="834"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="839"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="840"/>
         <source>Cut item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="840"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="841"/>
         <source>Are you sure you wish to cut item &lt;b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="841"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="842"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="443"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="853"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="444"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="854"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="66"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="67"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="442"/>
         <source>Disable favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="922"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="923"/>
         <source>Please select a single item for copy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="966"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="967"/>
         <source>This item contains both unencrypted and encrypted data. Copy/paste operation is possible only for item that contain similar type data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1073"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1074"/>
         <source> items.
 Please select single item for enabling paste operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1218"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1219"/>
         <source>No icon selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1263"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1264"/>
         <source>The export directory %1 is not empty. Please, select an empty directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1270"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1271"/>
         <source>No export tree item selected. Please select a item.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1291"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1292"/>
         <source>Exported tree item contains encrypted data.
 Please click OK and enter the password.
 All data will be exported unencrypted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1304"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1305"/>
         <source>Done exporting into &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1306"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1307"/>
         <source>Errors occurred while exporting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1315"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1316"/>
         <source>No tree item selected for importing. Please select a item.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1329"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1330"/>
         <source>You are importing into an encrypted item.
 Please click Ok and enter the password.
 All data imported will be encrypted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1346"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1347"/>
         <source>Item importing finished.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1614"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1615"/>
         <source>Rename me</source>
         <translation type="unfinished"></translation>
     </message>

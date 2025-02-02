@@ -72,6 +72,10 @@ void RecordTableScreen::setupActions(void)
  actionFavorite = new QAction(this);
  actionFavorite->setIcon(QIcon(":/resource/pic/favorites_yellow.svg"));
 
+ // Кнопка открытия избранной записи в своей исходной ветке
+ actionOpenInSourceNode = new QAction(tr("Open in source node"), this);
+ actionOpenInSourceNode->setStatusTip(tr("Open favorite record in source node"));
+
  // Блокировка записи
  actionBlock = new QAction(this);
  actionBlock->setIcon(QIcon(":/resource/pic/note_block.svg"));
@@ -272,6 +276,9 @@ void RecordTableScreen::setupSignals(void)
 
     // Добавление записи в избранное
     connect(actionFavorite, &QAction::triggered, recordTableController, &RecordTableController::onFavoriteContext);
+
+    // Открытие исходной ветки у избранной записи
+    connect(actionOpenInSourceNode, &QAction::triggered, recordTableController, &RecordTableController::onOpenInSourceNodeClick);
 
     // Блокировка записи
     connect(actionBlock, &QAction::triggered, recordTableController, &RecordTableController::onBlockContext);
