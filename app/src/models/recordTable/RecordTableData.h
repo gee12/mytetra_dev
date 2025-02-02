@@ -69,7 +69,8 @@ public:
 
     int insertNewRecord(int mode,
                         int pos,
-                        Record record);
+                        Record record,
+                        bool isCheckAndAddToFavorites=true);
 
     // Вставка/удаление записи в/из списка избранных записей
     int insertRecordToFavorites(int mode,

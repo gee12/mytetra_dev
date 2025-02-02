@@ -390,7 +390,8 @@ void RecordTableData::exportDataToStreamWriter(QXmlStreamWriter *xmlWriter) cons
 // Объект для вставки приходит как незашифрованным, так и зашифрованным
 int RecordTableData::insertNewRecord(int mode,
                                      int pos,
-                                     Record record)
+                                     Record record,
+                                     bool isCheckAndAddToFavorites)
 {
     qDebug() << "RecordTableData::insert_new_record() : Insert new record to tree item " << treeItem->getAllFields();
 
@@ -497,7 +498,7 @@ int RecordTableData::insertNewRecord(int mode,
     walkHistory.add(record.getNaturalFieldSource("id"), 0, 0);
 
     // Если было перемещение избранной записи, то заново добавляем ее в ветку "Избранное"
-    if (!isNewOrCopied && record.getField("favor") == "1") {
+    if (isCheckAndAddToFavorites && !isNewOrCopied && record.getField("favor") == "1") {
         dataModel->addRecordToFavorites(&record);
     }
 

@@ -1124,6 +1124,10 @@ bool KnowTreeModel::isRecordIdExistsRecurse(TreeItem *item, QString findId, int 
   if(isExists)
     return true;
 
+  // Если проверяемая ветка - "Избранное", то пропускаем ее
+  if (item->getField("id") == FixedParameters::favoritesItemId)
+    return false;
+
   // Если таблица записей текущей ветки содержит искомый идентификатор
   if( item->recordtableGetTableData()->isRecordExists(findId) )
   {
