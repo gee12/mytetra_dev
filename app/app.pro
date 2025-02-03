@@ -161,6 +161,7 @@ HEADERS = src/main.h \
     src/libraries/wyedit/mvc/views/editorToolbarSettings/EditorToolbarCommandsListView.h \
     src/views/appConfigWindow/AppConfigPage_Appearance.h \
     src/views/appConfigWindow/AppConfigPage_History.h \
+    src/views/appConfigWindow/AppConfigPage_Tree.h \
     src/views/consoleEmulator/CommandRun.h \
     src/views/installDialog/InstallDialog.h \
     src/views/recordTable/RecordTableScreen.h \
@@ -318,6 +319,7 @@ SOURCES = src/main.cpp \
     src/libraries/wyedit/mvc/views/editorToolbarSettings/EditorToolbarCommandsListView.cpp \
     src/views/appConfigWindow/AppConfigPage_Appearance.cpp \
     src/views/appConfigWindow/AppConfigPage_History.cpp \
+    src/views/appConfigWindow/AppConfigPage_Tree.cpp \
     src/views/consoleEmulator/CommandRun.cpp \
     src/views/installDialog/InstallDialog.cpp \
     src/views/recordTable/RecordTableScreen.cpp \
