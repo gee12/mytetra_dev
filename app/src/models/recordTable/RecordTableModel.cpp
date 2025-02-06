@@ -64,15 +64,21 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
 
             if( role==Qt::DisplayRole && fieldName=="name")
             {
-                bool isFavorite = table->getField("favor", index.row())=="1";
-                bool isNotDecrypted = table->getField("crypt", index.row())=="1"
-                                      && globalParameters.getCryptKey().length()==0;
-                if (isFavorite && isNotDecrypted) {
-                    // Если запись избранная и зашифрована, но не расшифрована, то выводим "Закрыто"
-                    return tr("Close");
+                // Если включено отображение избранных записей
+                if (mytetraConfig.get_showFavorites()) {
+                  bool isFavorite = table->getField("favor", index.row())=="1";
+                  bool isNotDecrypted = table->getField("crypt", index.row())=="1"
+                                        && globalParameters.getCryptKey().length()==0;
+                  if (isFavorite && isNotDecrypted) {
+                      // Если запись избранная и зашифрована, но не расшифрована, то выводим "Закрыто"
+                      return tr("Close");
+                  } else {
+                      // Иначе выводим имя записи
+                      return field;
+                  }
                 } else {
-                    // Иначе выводим имя записи
-                    return field;
+                  // Иначе выводим имя записи
+                  return field;
                 }
             }
 
@@ -153,8 +159,7 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
 
         if (fieldName=="name") {
             // Иконка избранности в названии записи
-            //if (!showFields.contains("favor")) // Среди отображаемых столбцов нет столбца "favor" (чтобы не отрисовывалось два замочка в строке)
-            if (table->getField("favor", index.row())=="1") { // Если запись в избранных
+            if (mytetraConfig.get_showFavorites() && table->getField("favor", index.row())=="1") { // Если запись в избранных
                 bool isNotDecrypted = table->getField("crypt", index.row())=="1"
                                       && globalParameters.getCryptKey().length()==0;
                 if (isNotDecrypted) {

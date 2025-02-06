@@ -25,6 +25,7 @@ protected:
   void setupSignals(void);
   void assembly(void);
 
+  QCheckBox *showFavorites;           // Используется ли список избранных записей
   QCheckBox *cutBranchConfirm;        // Требуется ли показывать предупреждение при вырезании ветки
 };
 

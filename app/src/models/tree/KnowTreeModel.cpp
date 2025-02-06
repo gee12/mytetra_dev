@@ -89,16 +89,18 @@ void KnowTreeModel::init(QDomDocument *domModel)
     delete rootItem;
   rootItem = new TreeItem(rootData);
 
-  // Ветка с избранными записями
-  QMap<QString, QString> favoritesData;
-  favoritesData["id"]=FixedParameters::favoritesItemId;
-  favoritesData["name"]=tr("Favorites");
-  favoritesData["icon"]=":/resource/pic/favorites_yellow.svg";
+  // Создание ветки "Избранное", если включено отображение избранного
+  if (mytetraConfig.get_showFavorites()) {
+    QMap<QString, QString> favoritesData;
+    favoritesData["id"]=FixedParameters::favoritesItemId;
+    favoritesData["name"]=tr("Favorites");
+    favoritesData["icon"]=":/resource/pic/favorites_yellow.svg";
 
-  rootItem->insertChildren(0,1,1);
-  favoritesNode=rootItem->child(0);
-  favoritesNode->setAllFieldDirect(favoritesData);
-  favoritesNode->recordtableInit(QDomElement(), favoritesNode);
+    rootItem->insertChildren(0,1,1);
+    favoritesNode=rootItem->child(0);
+    favoritesNode->setAllFieldDirect(favoritesData);
+    favoritesNode->recordtableInit(QDomElement(), favoritesNode);
+  }
 
   // Динамическое создание дерева из Item объектов на основе DOM модели
   setupModelData(domModel, rootItem);
@@ -857,17 +859,21 @@ TreeItem *KnowTreeModel::getFavoritesItem()
 // Добавление записи в ветку "Избранное"
 void KnowTreeModel::addRecordToFavorites(Record *record)
 {
-  favoritesNode->recordtableGetTableData()->insertRecordToFavorites(
-      GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
-      0,
-      record);
+  if (mytetraConfig.get_showFavorites()) {
+    favoritesNode->recordtableGetTableData()->insertRecordToFavorites(
+        GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
+        0,
+        record);
+  }
 }
 
 
 // Удаление записи из ветки "Избранное"
 void KnowTreeModel::deleteRecordFromFavorites(QString recordId)
 {
-  favoritesNode->recordtableGetTableData()->deleteRecordFromFavorites(recordId);
+  if (mytetraConfig.get_showFavorites()) {
+    favoritesNode->recordtableGetTableData()->deleteRecordFromFavorites(recordId);
+  }
 }
 
 

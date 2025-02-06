@@ -103,9 +103,11 @@ void RecordTableController::clickToRecord(const QModelIndex &index)
   // Ссылка на таблицу конечных данных
   RecordTableData *table=recordSourceModel->getTableData();
 
-  // Проверка, что запись зашифрована и не расшифрована
-  if (table->getField("crypt", pos)=="1"
-      && globalParameters.getCryptKey().length()==0) {
+  // Если включено отображение избранных записей, то
+  // проверяем, что запись зашифрована и не расшифрована
+  if (mytetraConfig.get_showFavorites()
+          && table->getField("crypt", pos)=="1"
+          && globalParameters.getCryptKey().length()==0) {
 
     // Если запись зашифрована, но не расшифрована,
     // то очищаем поля области редактировния, т.к. там все еще отображаются данные предыдущей записи
@@ -664,6 +666,10 @@ void RecordTableController::onEditFieldContext(void)
 // При выборе пункта "Добавить в избранное" или "Убрать из избранного" в контекстном меню
 void RecordTableController::onFavoriteContext(void)
 {
+    // Если выключено отображение избранных записей, то выходим
+    if (!mytetraConfig.get_showFavorites())
+        return;
+
     // Получение индекса выделенного элемента
     QModelIndexList selectItems = view->selectionModel()->selectedIndexes();
     QModelIndex index = selectItems.at(0);
@@ -796,20 +802,23 @@ void RecordTableController::onBlockContext(void)
   QString recordId = table->getField("id", pos);
   QString newValue = (isNotBlocked) ? "1" : "";
 
-  // Если находимся в ветке "Избранное", то блокируем/разблокируем "оригинальную" запись
-  if (treeScreen->isCurrentFavoritesItem()) {
-    // Ищем "оригинальную" запись в бд и устанавливаем значение
-    Record *record=dataModel->getRecord(recordId);
-    record->setField("block", newValue);
+  // Если включено отображение избранных записей
+  if (mytetraConfig.get_showFavorites()) {
+    // Если находимся в ветке "Избранное", то блокируем/разблокируем "оригинальную" запись
+    if (treeScreen->isCurrentFavoritesItem()) {
+      // Ищем "оригинальную" запись в бд и устанавливаем значение
+      Record *record=dataModel->getRecord(recordId);
+      record->setField("block", newValue);
 
-    find_object<TreeScreen>("treeScreen")->saveKnowTree();
-  }
-  // Иначе, если находимся не в ветке "Избранное", но запись избранная,
-  // то блокируем/разблокируем также и запись-близнец в ветке "Избранное"
-  else if (table->getField("favor", pos) == "1") {
-    TreeItem *favoriteNode = dataModel->getFavoritesItem();
-    Record *record = favoriteNode->recordtableGetTableData()->getRecordById(recordId);
-    record->setField("block", newValue);
+      find_object<TreeScreen>("treeScreen")->saveKnowTree();
+    }
+    // Иначе, если находимся не в ветке "Избранное", но запись избранная,
+    // то блокируем/разблокируем также и запись-близнец в ветке "Избранное"
+    else if (table->getField("favor", pos) == "1") {
+      TreeItem *favoriteNode = dataModel->getFavoritesItem();
+      Record *record = favoriteNode->recordtableGetTableData()->getRecordById(recordId);
+      record->setField("block", newValue);
+    }
   }
 
   // По записи происходит виртуальный клик, чтобы интерфейс принял новое состояние блокировки записи
@@ -883,20 +892,23 @@ void RecordTableController::editField(int pos,
   KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
   QString recordId = table->getField("id", pos);
 
-  // Если находимся в ветке "Избранное", то обновляем поля и у "оригинальной" записи
-  if (treeScreen->isCurrentFavoritesItem()) {
-    QStringList path = dataModel->getRecordPath(recordId);
-    RecordTableData *originalRecordTable = dataModel->getItem(path)->recordtableGetTableData();
-    int originalRecordPos = originalRecordTable->getPosById(recordId);
-    originalRecordTable->editRecordFields(originalRecordPos, editData);
-  }
-  // Иначе, если находимся не в ветке "Избранное", но запись избранная,
-  // то обновляем поля также и у записи-близнеца в ветке "Избранное"
-  else if (table->getField("favor", pos) == "1") {
-    TreeItem *favoriteNode = dataModel->getFavoritesItem();
-    RecordTableData *favoriteRecordTable = favoriteNode->recordtableGetTableData();
-    int recordPosInFavorites = favoriteRecordTable->getPosById(recordId);
-    favoriteRecordTable->editRecordFields(recordPosInFavorites, editData);
+  // Если включено отображение избранных записей
+  if (mytetraConfig.get_showFavorites()) {
+    // Если находимся в ветке "Избранное", то обновляем поля и у "оригинальной" записи
+    if (treeScreen->isCurrentFavoritesItem()) {
+      QStringList path = dataModel->getRecordPath(recordId);
+      RecordTableData *originalRecordTable = dataModel->getItem(path)->recordtableGetTableData();
+      int originalRecordPos = originalRecordTable->getPosById(recordId);
+      originalRecordTable->editRecordFields(originalRecordPos, editData);
+    }
+    // Иначе, если находимся не в ветке "Избранное", но запись избранная,
+    // то обновляем поля также и у записи-близнеца в ветке "Избранное"
+    else if (table->getField("favor", pos) == "1") {
+      TreeItem *favoriteNode = dataModel->getFavoritesItem();
+      RecordTableData *favoriteRecordTable = favoriteNode->recordtableGetTableData();
+      int recordPosInFavorites = favoriteRecordTable->getPosById(recordId);
+      favoriteRecordTable->editRecordFields(recordPosInFavorites, editData);
+    }
   }
 
   // Обновление инфополей в области редактирования записи

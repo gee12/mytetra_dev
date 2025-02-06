@@ -76,7 +76,7 @@ void Record::setupDataFromDom(QDomElement iDomElement, TreeItem *favoriteNode)
   if(!iDomElement.firstChildElement("files").isNull())
     attachTableData.setupDataFromDom( iDomElement.firstChildElement("files") ); // Заполнение таблицы приаттаченных файлов
 
-  if (getField("favor")=="1") {
+  if (favoriteNode != nullptr && getField("favor")=="1") {
     favoriteNode->recordtableGetTableData()->insertRecordToFavorites(
         GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
         0,

@@ -774,7 +774,12 @@ Stored password will be cleared if uncheck this checkbox.</source>
 <context>
     <name>AppConfigPage_Tree</name>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Tree.cpp" line="36"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Tree.cpp" line="35"/>
+        <source>Show favorite records</source>
+        <translation>Отображать список избранных записей</translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Tree.cpp" line="40"/>
         <source>Confirm item cut</source>
         <translation>Подтверждение перед вырезанием ветки</translation>
     </message>
@@ -2616,22 +2621,22 @@ You need to update MyTetra.</source>
         <translation>Неподдерживаемый формат базы данных. Пожалуйста, обновите версию MyTetra.</translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="95"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="96"/>
         <source>Favorites</source>
         <translation>Избранное</translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="317"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="319"/>
         <source>The exporting file %1 is not writable.</source>
         <translation>Невозможно открыть экспортируемый файл %1 для записи.</translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="442"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="444"/>
         <source>Import error: unable to read the XML file %1.</source>
         <translation>Невозможно открыть XML-файл %1. Импорт невозможен.</translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="534"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="536"/>
         <source>Find record id=&quot;%1&quot; without dir attribute</source>
         <translation>Найдена запись с id=&quot;%1&quot; без аттрибута директории</translation>
     </message>
@@ -3419,22 +3424,22 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableController</name>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="781"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="787"/>
         <source>Unblock this note?</source>
         <translation>Разблокировать эту запись?</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="920"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="932"/>
         <source>Are you sure to delete this record(s)?</source>
         <translation>Вы уверены, что хотите удалить эти записи?</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="921"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="933"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="922"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="934"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -3442,13 +3447,13 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableModel</name>
     <message>
-        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="72"/>
+        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="74"/>
         <source>Close</source>
         <translation>Закрыто</translation>
     </message>
     <message>
-        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="94"/>
-        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="118"/>
+        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="100"/>
+        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="124"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -3758,47 +3763,47 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableView</name>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="338"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="340"/>
         <source>Remove from favorites</source>
         <translation>Убрать из избранного</translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="341"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="343"/>
         <source>Add to favorites</source>
         <translation>Добавить в избранное</translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="348"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="350"/>
         <source>Block/Unblock note</source>
         <translation>Блокировать/Разблокировать запись</translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="353"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="355"/>
         <source>Unblock note</source>
         <translation>Разблокировать запись</translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="355"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="357"/>
         <source>Block note</source>
         <translation>Блокировать запись</translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="360"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="362"/>
         <source>Set multiple selection</source>
         <translation>Включить множественный выбор</translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="362"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="364"/>
         <source>Set single selection</source>
         <translation>Выключить множественный выбор</translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="366"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="368"/>
         <source>Enable sorting</source>
         <translation>Разрешить сортировку</translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="368"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="370"/>
         <source>Disable sorting</source>
         <translation>Запретить сортировку</translation>
     </message>
@@ -4635,32 +4640,32 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>TreeScreen</name>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="535"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="574"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="670"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="775"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="921"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="965"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1072"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="537"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="576"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="672"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="777"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="923"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="967"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1074"/>
         <source>Unavailable action</source>
         <translation>Недопустимое действие</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="536"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="575"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="671"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1073"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="538"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="577"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="673"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1075"/>
         <source>You&apos;ve selected </source>
         <translation>У вас выделены </translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="575"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="577"/>
         <source> items.
 Please select single item for enabling insert operation.</source>
         <translation>ветки. Выделите одну ветку, чтобы была доступна операция вставки ветки.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="833"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="835"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -4697,7 +4702,7 @@ Please select single item for enabling insert operation.</source>
         <translation type="vanished">Добавить ветку такого же уровня вложения после выделенной ветки</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="694"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="696"/>
         <source>Edit item name</source>
         <translation>Редактировать название ветки</translation>
     </message>
@@ -4714,7 +4719,7 @@ Please select single item for enabling insert operation.</source>
         <translation type="vanished">Удалить выделенную ветку и все её подветки</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="839"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="841"/>
         <source>Cut item</source>
         <translation>Вырезать ветку</translation>
     </message>
@@ -4777,52 +4782,45 @@ Please select single item for enabling insert operation.</source>
         <translation>Найти в базе</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="442"/>
-        <source>Are you sure you want to disable favorites?
-The &quot;favorite&quot; flag will be reset for all entries.</source>
-        <translation>Вы уверены, что хотите отключить список избранных записей?
-Флажок &quot;избранное&quot; будет сброшен у всех записей.</translation>
-    </message>
-    <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="444"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="445"/>
         <source>Disable</source>
         <translation>Отключить</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="536"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="538"/>
         <source> items.
 Please select single item for moving.</source>
         <translation>ветки.
 Для перемещения выберите, пожалуйста, одну ветку.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="776"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="778"/>
         <source>In your selected data found closed item. Action canceled.</source>
         <translation>В выбранных вами данных обнаружена закрытая ветка. Действие отменено.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="809"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="811"/>
         <source>Confirmation request</source>
         <translation>Запрос на подтверждение</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1218"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1220"/>
         <source>No icon selected.</source>
         <translation>Вы не выбрали иконку.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1263"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1265"/>
         <source>The export directory %1 is not empty. Please, select an empty directory.</source>
         <translation>Директория &lt;b&gt;%1&lt;/b&gt; не является пустой.
 Пожалуйста, выберите пустую директорию для экспорта данных.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1270"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1272"/>
         <source>No export tree item selected. Please select a item.</source>
         <translation>Не указана ветка для экспорта. Пожалуйста, выберите нужную ветку.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1291"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1293"/>
         <source>Exported tree item contains encrypted data.
 Please click OK and enter the password.
 All data will be exported unencrypted.</source>
@@ -4831,22 +4829,22 @@ All data will be exported unencrypted.</source>
 Все данные будут экспортированы в расшифрованном виде.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1304"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1306"/>
         <source>Done exporting into &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>Экспорт данных в директорию &lt;b&gt;%1&lt;/b&gt; завершен.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1306"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1308"/>
         <source>Errors occurred while exporting.</source>
         <translation>Обнаружены ошибки при экспорте данных.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1315"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1317"/>
         <source>No tree item selected for importing. Please select a item.</source>
         <translation>Не выбрана ветка для экспорта. Пожалуйста, выберите какую-нибудь ветку.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1329"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1331"/>
         <source>You are importing into an encrypted item.
 Please click Ok and enter the password.
 All data imported will be encrypted.</source>
@@ -4855,24 +4853,31 @@ All data imported will be encrypted.</source>
 Все данные будут импортированы и зашифрованы.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1346"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1348"/>
         <source>Item importing finished.</source>
         <translation>Импорт ветки завершен.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="966"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="968"/>
         <source>This item contains both unencrypted and encrypted data. Copy/paste operation is possible only for item that contain similar type data.</source>
         <translation>Данная ветка содержит как незашифрованные, так и зашифрованные данные. Команды Copy/Paste разрешены только для веток, которые содержат однотипные данные.</translation>
     </message>
     <message>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="66"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="67"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="441"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="442"/>
         <source>Disable favorites</source>
         <translation>Отключить избранное</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1073"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="443"/>
+        <source>Are you sure you want to disable favorites?
+The program will have to be restarted for changes to take effect.</source>
+        <translation>Вы уверены, что хотите отключить избранное?
+Для применения изменений программа будет закрыта.</translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1075"/>
         <source> items.
 Please select single item for enabling paste operation.</source>
         <translation>ветки.
@@ -4883,83 +4888,83 @@ Please select single item for enabling paste operation.</source>
         <translation type="obsolete">У вас выделены</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="537"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="576"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="672"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="777"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="923"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="967"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1074"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="539"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="578"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="674"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="779"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="925"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="969"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1076"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="585"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="587"/>
         <source>Create new item</source>
         <translation>Создание новой ветки</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="586"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="695"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="588"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="697"/>
         <source>Item name:</source>
         <translation>Название ветки:</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="589"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="591"/>
         <source>Create new sub item</source>
         <translation>Создание подветки</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="590"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="592"/>
         <source>Sub item name:</source>
         <translation>Имя подветки:</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="671"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="673"/>
         <source> items.
 Please select single item for enabling edit operation.</source>
         <translation>ветки. Для редактирования, выберите, пожалуйста, одну ветку.</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="810"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="812"/>
         <source>In the selected item has been found blocked notes. Do you really want to delete one?</source>
         <translation>В выбранной вами ветке обнаружены заблокированные записи.
 Тем не менее, вы желаете удалить выбранную ветку?</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="831"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="833"/>
         <source>Delete item(s)</source>
         <translation>Удаление</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="832"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="834"/>
         <source>Are you sure you wish to delete item(s) &lt;b&gt;</source>
         <translation>Вы уверены, что хотите удалить ветку (ветки) &lt;b&gt;</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="832"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="840"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="834"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="842"/>
         <source>&lt;/b&gt; and all sub items?</source>
         <translation>&lt;/b&gt; и все подветки?</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="840"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="842"/>
         <source>Are you sure you wish to cut item &lt;b&gt;</source>
         <translation>Вы уверены, что хотите вырезать ветку &lt;b&gt;</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="841"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="843"/>
         <source>Cut</source>
         <translation>Вырезать</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="443"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="853"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="444"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="855"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="922"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="924"/>
         <source>Please select a single item for copy.</source>
         <translation>Выберите, пожалуйста, одну ветку для копирования.</translation>
     </message>
@@ -4968,7 +4973,7 @@ Please select single item for enabling edit operation.</source>
         <translation type="vanished">Группы информации</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1614"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1624"/>
         <source>Rename me</source>
         <translation>Переименуй меня</translation>
     </message>

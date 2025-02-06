@@ -116,7 +116,7 @@ private:
     QDateTime lastSaveDateTime;
     QDateTime lastLoadDateTime;
 
-    TreeItem *favoritesNode;
+    TreeItem *favoritesNode = nullptr;
 
     void init(QDomDocument *domModel);
 

@@ -308,6 +308,8 @@ void RecordTableView::onCustomContextMenuRequested(const QPoint &mousePos)
 
   QModelIndex selectItem=currentIndex();
 
+  // Включено ли отображение избранных записей
+  bool isShowFavorites = mytetraConfig.get_showFavorites();
   // Если находимся в ветке "Избранное", то отображаем особое контекстное меню
   bool isCurrentFavoritesItem = find_object<TreeScreen>("treeScreen")->isCurrentFavoritesItem();
 
@@ -322,11 +324,11 @@ void RecordTableView::onCustomContextMenuRequested(const QPoint &mousePos)
 
   // Установка видимости команды для открытия исходной ветки избранной записи
   // только если текущая ветка - "Избранное"
-  parentPointer->actionOpenInSourceNode->setVisible(isCurrentFavoritesItem);
+  parentPointer->actionOpenInSourceNode->setVisible(isShowFavorites && isCurrentFavoritesItem);
 
   // Установка надписи и иконки для команды добавления/удаления записи из избранного
   QAction *actionFavorite = parentPointer->actionFavorite;
-  if(!selectItem.isValid())
+  if(!selectItem.isValid() || !isShowFavorites)
     actionFavorite->setVisible(false);
   else
   {
@@ -388,14 +390,18 @@ void RecordTableView::editFieldContext(void)
  // QModelIndex index=selectItems.at(0);
  QModelIndex index=currentIndex();
 
- // Если находимся в ветке "Избранное" и запись зашифрована, но не расшифрована,
- // то диалог редактирования полей записи не отображаем
- bool isCurrentFavoritesItem = find_object<TreeScreen>("treeScreen")->isCurrentFavoritesItem();
- if (isCurrentFavoritesItem && !controller->isRecordNotEncryptedOrDecrypted(index)) {
 
-    Password password;
-    if (password.retrievePassword() == false)
-      return;
+ // Если включено отображение избранных записей
+ if (mytetraConfig.get_showFavorites()) {
+   // Если находимся в ветке "Избранное" и запись зашифрована, но не расшифрована,
+   // то диалог редактирования полей записи не отображаем
+   bool isCurrentFavoritesItem = find_object<TreeScreen>("treeScreen")->isCurrentFavoritesItem();
+   if (isCurrentFavoritesItem && !controller->isRecordNotEncryptedOrDecrypted(index)) {
+
+      Password password;
+      if (password.retrievePassword() == false)
+        return;
+   }
  }
 
  controller->editFieldContext(index);

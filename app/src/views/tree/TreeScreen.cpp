@@ -279,8 +279,9 @@ void TreeScreen::onCustomContextMenuRequested(const QPoint &pos)
   // Получение индекса выделенной ветки
   QModelIndex index=getCurrentItemIndex();
 
-  // Отображаем отдельное контекстное меню для ветки "Избранное"
-  if (isCurrentFavoritesItem()) {
+  // Если включено отображение избранных записей, то
+  // для ветки "Избранное" отображаем отдельное контекстное меню
+  if (mytetraConfig.get_showFavorites() && isCurrentFavoritesItem()) {
 
    // Конструирование меню
    QMenu menu(this);
@@ -439,14 +440,16 @@ void TreeScreen::disableFavorites(void)
 {
   QMessageBox messageBox(this);
   messageBox.setWindowTitle(tr("Disable favorites"));
-  messageBox.setText(tr("Are you sure you want to disable favorites?\nThe \"favorite\" flag will be reset for all entries."));
+  messageBox.setText(tr("Are you sure you want to disable favorites?\nThe program will have to be restarted for changes to take effect."));
   QAbstractButton *cancelButton = messageBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
   QAbstractButton *disableButton = messageBox.addButton(tr("Disable"), QMessageBox::AcceptRole);
   Q_UNUSED(cancelButton);
 
   messageBox.exec();
   if (messageBox.clickedButton() == disableButton) {
-    //TODO: disableFavoritesInSettings();
+   // Отключаем отображение избранного и выходим из программы
+   mytetraConfig.set_showFavorites(false);
+   exit(0);
   }
 }
 
@@ -456,7 +459,7 @@ void TreeScreen::expandAllSubbranch(void)
  // Получение индексов выделенных строк
  QModelIndexList selectitems=knowTreeView->selectionModel()->selectedIndexes();
 
- for(int i = 0; i < selectitems.size(); ++i) 
+ for(int i = 0; i < selectitems.size(); ++i)
   expandOrCollapseRecurse(selectitems.at(i), true);
 }
 
@@ -1510,9 +1513,12 @@ void TreeScreen::updateSelectedBranch(void)
 
 void TreeScreen::updateFavoritesBranch()
 {
+ // Если включено отображение избранных записей
+ if (mytetraConfig.get_showFavorites()) {
   TreeItem *favoriteNode = knowTreeModel->getFavoritesItem();
   QModelIndex index = knowTreeModel->getIndexByItem(favoriteNode);
   updateBranchOnScreen(index);
+ }
 }
 
 
@@ -1595,9 +1601,14 @@ QModelIndex TreeScreen::getCurrentItemIndex(void)
 // Проверка того, что текущий элемент - это ветка "Избранное"
 bool TreeScreen::isCurrentFavoritesItem()
 {
+ // Если включено отображение избранных записей
+ if (mytetraConfig.get_showFavorites()) {
   QModelIndex index = knowTreeModel->getIndexByItem(knowTreeModel->getFavoritesItem());
   QModelIndex currentIndex = knowTreeView->selectionModel()->currentIndex();
   return currentIndex == index;
+ } else {
+  return false;
+ }
 }
 
 
