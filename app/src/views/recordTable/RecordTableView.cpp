@@ -334,9 +334,11 @@ void RecordTableView::onCustomContextMenuRequested(const QPoint &mousePos)
   {
     actionFavorite->setVisible(true);
     ShortcutManager::stringRepresentation mode=ShortcutManager::stringRepresentation::brackets;
-    bool isFavoriteNote = selectItem.data(RECORD_FAVORITE_ROLE).toString()=="1";
+    bool isNumber;
+    int value = selectItem.data(RECORD_FAVORITE_ROLE).toInt(&isNumber);
+    bool isFavoriteRecord = isNumber && value > 0;
 
-    if (isFavoriteNote || isCurrentFavoritesItem) {
+    if (isFavoriteRecord || isCurrentFavoritesItem) {
       actionFavorite->setText(tr("Remove from favorites")+" "+shortcutManager.getKeySequenceAsText("note-favorite", mode));
       actionFavorite->setIcon(QIcon(":/resource/pic/favorites_gray.svg"));
     } else {

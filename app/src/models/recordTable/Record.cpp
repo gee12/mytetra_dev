@@ -47,7 +47,7 @@ Record::~Record()
 
 
 // На вход этой функции подается элемент <record>
-void Record::setupDataFromDom(QDomElement iDomElement, TreeItem *favoriteNode)
+void Record::setupDataFromDom(QDomElement iDomElement)
 {
   // Получение списка всех атрибутов текущего элемента
   QDomNamedNodeMap attList;
@@ -75,13 +75,6 @@ void Record::setupDataFromDom(QDomElement iDomElement, TreeItem *favoriteNode)
   // Проверка, есть ли у переданного DOM-элемента таблица файлов для заполнения
   if(!iDomElement.firstChildElement("files").isNull())
     attachTableData.setupDataFromDom( iDomElement.firstChildElement("files") ); // Заполнение таблицы приаттаченных файлов
-
-  if (favoriteNode != nullptr && getField("favor")=="1") {
-    favoriteNode->recordtableGetTableData()->insertRecordToFavorites(
-        GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
-        0,
-        this);
-  }
 }
 
 
@@ -964,4 +957,22 @@ void Record::checkAndCreateTextFile() const
     // Создается пустой текст записи
     saveTextDirect( QString() );
   }
+}
+
+
+// Является ли запись избранной
+bool Record::isFavorite()
+{
+  bool isNumber;
+  int favorOrderNumber = getField("favor").toInt(&isNumber);
+  return isNumber && favorOrderNumber > 0;
+}
+
+
+// Получение значения поля "favor" - порядкового номера записи в избранном
+int Record::getFavoriteOrderNumber()
+{
+  bool isNumber;
+  int favorOrderNumber = getField("favor").toInt(&isNumber);
+  return (isNumber) ? favorOrderNumber : 0;
 }

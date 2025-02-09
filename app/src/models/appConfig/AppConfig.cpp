@@ -605,7 +605,7 @@ QStringList AppConfig::getRecordTableShowFields(void)
 {
     QStringList showList = (conf->value("recordTableShowFields", "name")).toString().split(",");
 
-    // Если отключено отображение избранных записей, то не возвращаем столбеу "favor"
+    // Если отключено отображение избранных записей, то не используем столбец "favor"
     if (!get_showFavorites()) {
         showList.removeOne("favor");
     }

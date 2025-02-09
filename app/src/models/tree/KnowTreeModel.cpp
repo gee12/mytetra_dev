@@ -35,6 +35,8 @@ KnowTreeModel::KnowTreeModel(QObject *parent) : TreeModel(parent)
 {
   xmlFileName="";
   rootItem=nullptr;
+  favoritesNode=nullptr;
+  favoriteMaxOrderNumber=0;
 
   connect(this, &KnowTreeModel::doCloseDetachedWindowByIdSet,
           EditorShowTextDispatcher::instance(), &EditorShowTextDispatcher::closeWindowByIdSet,
@@ -48,6 +50,7 @@ KnowTreeModel::KnowTreeModel(QObject *parent) : TreeModel(parent)
 KnowTreeModel::~KnowTreeModel()
 {
   delete rootItem;
+  delete favoritesNode;
 }
 
 
@@ -100,10 +103,24 @@ void KnowTreeModel::init(QDomDocument *domModel)
     favoritesNode=rootItem->child(0);
     favoritesNode->setAllFieldDirect(favoritesData);
     favoritesNode->recordtableInit(QDomElement(), favoritesNode);
+
+    favoriteMaxOrderNumber=0;
   }
 
   // Динамическое создание дерева из Item объектов на основе DOM модели
   setupModelData(domModel, rootItem);
+
+  // После создания дерева, если включено избранное
+  if (mytetraConfig.get_showFavorites()) {
+    // Находим и запоминаем максимальный порядковый номер в списке избранных записей,
+    // который пригодится при добавлении новых записей в избранное
+    RecordTableData *table = favoritesNode->recordtableGetTableData();
+    for(unsigned int i=0; i<table->size(); i++) {
+      checkAndSetFavoriteMaxOrderNumber(table->getFavoriteOrderNumber(i));
+    }
+    // Сортируем избранные записи в списке
+    table->sortByFavorField();
+  }
 
   endResetModel();
 }
@@ -856,14 +873,30 @@ TreeItem *KnowTreeModel::getFavoritesItem()
 }
 
 
+// Получение максимального порядкового номера в списке избранных записей
+int KnowTreeModel::getFavoriteMaxOrderNumber()
+{
+  return favoriteMaxOrderNumber;
+}
+
+
+// Установка максимального порядкового номера в списке избранных записей,
+// если новое значение больше старого
+void KnowTreeModel::checkAndSetFavoriteMaxOrderNumber(int value)
+{
+  if (value > favoriteMaxOrderNumber) {
+    favoriteMaxOrderNumber = value;
+  }
+}
+
+
 // Добавление записи в ветку "Избранное"
 void KnowTreeModel::addRecordToFavorites(Record *record)
 {
   if (mytetraConfig.get_showFavorites()) {
-    favoritesNode->recordtableGetTableData()->insertRecordToFavorites(
-        GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
-        0,
-        record);
+    favoritesNode->recordtableGetTableData()->insertRecordToFavorites(record);
+    // Обновляем максимальный порядковый номер для списка избранных записей
+    checkAndSetFavoriteMaxOrderNumber(record->getFavoriteOrderNumber());
   }
 }
 

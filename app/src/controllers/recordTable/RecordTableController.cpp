@@ -678,14 +678,15 @@ void RecordTableController::onFavoriteContext(void)
     QModelIndex sourceIndex = convertProxyIndexToSourceIndex(index);
     int pos = sourceIndex.row();
 
+    KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+
     // Получение значения
     RecordTableData *table=recordSourceModel->getTableData();
-    bool isAddToFavorites = table->getField("favor", pos) != "1";
-    QString value = (isAddToFavorites) ? "1" : "";
+    bool isAddToFavorites = !table->isFavorite(pos);
+    QString value = (isAddToFavorites) ? QString::number((dataModel->getFavoriteMaxOrderNumber() + 1)) : "";
     QString recordId = table->getField("id", pos);
 
     TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
-    KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
 
     // Если находимся в ветке "Избранное"
     if (treeScreen->isCurrentFavoritesItem()) {
@@ -814,7 +815,7 @@ void RecordTableController::onBlockContext(void)
     }
     // Иначе, если находимся не в ветке "Избранное", но запись избранная,
     // то блокируем/разблокируем также и запись-близнец в ветке "Избранное"
-    else if (table->getField("favor", pos) == "1") {
+    else if (table->isFavorite(pos)) {
       TreeItem *favoriteNode = dataModel->getFavoritesItem();
       Record *record = favoriteNode->recordtableGetTableData()->getRecordById(recordId);
       record->setField("block", newValue);
@@ -903,7 +904,7 @@ void RecordTableController::editField(int pos,
     }
     // Иначе, если находимся не в ветке "Избранное", но запись избранная,
     // то обновляем поля также и у записи-близнеца в ветке "Избранное"
-    else if (table->getField("favor", pos) == "1") {
+    else if (table->isFavorite(pos)) {
       TreeItem *favoriteNode = dataModel->getFavoritesItem();
       RecordTableData *favoriteRecordTable = favoriteNode->recordtableGetTableData();
       int recordPosInFavorites = favoriteRecordTable->getPosById(recordId);
@@ -1085,6 +1086,21 @@ void RecordTableController::moveUp(void)
   // Выясняется ссылка на таблицу конечных данных
   RecordTableData *table=recordSourceModel->getTableData();
 
+  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+  KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+
+  // Если находимся в ветке "Избранное"
+  if (mytetraConfig.get_showFavorites()
+      && treeScreen->isCurrentFavoritesItem()) {
+    // Ищем "оригинальные" записи в бд и меняем местами у них значение "favor"
+    Record *record1 = dataModel->getRecord(table->getField("id", pos));
+    Record *record2 = dataModel->getRecord(table->getField("id", pos-1));
+    QString value1 = record1->getField("favor");
+    QString value2 = record2->getField("favor");
+    record1->setField("favor", value2);
+    record2->setField("favor", value1);
+  }
+
   // Перемещение текущей записи вверх
   table->moveUp(pos);
 
@@ -1092,7 +1108,7 @@ void RecordTableController::moveUp(void)
   view->setSelectionToPos(pos-1);
 
   // Сохранение дерева веток
-  find_object<TreeScreen>("treeScreen")->saveKnowTree();
+  treeScreen->saveKnowTree();
 }
 
 
@@ -1107,6 +1123,21 @@ void RecordTableController::moveDn(void)
   // Выясняется ссылка на таблицу конечных данных
   RecordTableData *table=recordSourceModel->getTableData();
 
+  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+  KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+
+  // Если находимся в ветке "Избранное"
+  if (mytetraConfig.get_showFavorites()
+      && treeScreen->isCurrentFavoritesItem()) {
+    // Ищем "оригинальные" записи в бд и меняем местами у них значение "favor"
+    Record *record1 = dataModel->getRecord(table->getField("id", pos));
+    Record *record2 = dataModel->getRecord(table->getField("id", pos+1));
+    QString value1 = record1->getField("favor");
+    QString value2 = record2->getField("favor");
+    record1->setField("favor", value2);
+    record2->setField("favor", value1);
+  }
+
   // Перемещение текущей записи вниз
   table->moveDn(pos);
 
@@ -1114,7 +1145,7 @@ void RecordTableController::moveDn(void)
   view->setSelectionToPos(pos+1);
 
   // Сохранение дерева веток
-  find_object<TreeScreen>("treeScreen")->saveKnowTree();
+  treeScreen->saveKnowTree();
 }
 
 

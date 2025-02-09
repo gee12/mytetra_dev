@@ -72,10 +72,12 @@ public:
                         Record record,
                         bool isCheckAndAddToFavorites=true);
 
+    // Избранное
+    bool isFavorite(int pos);
+    int getFavoriteOrderNumber(int pos);
+    void sortByFavorField();
     // Вставка/удаление записи в/из списка избранных записей
-    int insertRecordToFavorites(int mode,
-                                int pos,
-                                Record *record);
+    void insertRecordToFavorites(Record *record);
     void deleteRecordFromFavorites(QString recordId);
     void deleteRecordFromFavorites(int pos);
 

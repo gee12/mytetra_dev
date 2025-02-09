@@ -13,7 +13,6 @@
 
 #include "models/attachTable/Attach.h"
 #include "models/attachTable/AttachTableData.h"
-#include "models/tree/TreeItem.h"
 
 // Класс одной записи в таблице записей
 
@@ -34,7 +33,7 @@ public:
   Record(const Record &obj);
   virtual ~Record();
 
-  void setupDataFromDom(QDomElement iDomElement, TreeItem *favoriteNode);
+  void setupDataFromDom(QDomElement iDomElement);
   QDomElement exportDataToDom(QDomDocument *doc) const;
   void exportDataToStreamWriter(QXmlStreamWriter *xmlWriter) const;
 
@@ -77,6 +76,9 @@ public:
   void pushFatAttributes();
 
   static void replaceInternalReferenceByTranslateTable(QString recordFileName, QMap<QString, QString> idRecordTranslate);
+
+  bool isFavorite();
+  int getFavoriteOrderNumber();
 
 protected:
 

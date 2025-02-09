@@ -66,7 +66,7 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
             {
                 // Если включено отображение избранных записей
                 if (mytetraConfig.get_showFavorites()) {
-                  bool isFavorite = table->getField("favor", index.row())=="1";
+                  bool isFavorite = table->isFavorite(index.row());
                   bool isNotDecrypted = table->getField("crypt", index.row())=="1"
                                         && globalParameters.getCryptKey().length()==0;
                   if (isFavorite && isNotDecrypted) {
@@ -108,9 +108,11 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
                     return field;
             }
 
-            else if( role==Qt::DisplayRole && fieldName=="favor") // Наличие блокировки записи
+            else if( role==Qt::DisplayRole && fieldName=="favor") // Запись в избранном
             {
-                if (field!="1")
+                bool isNumber;
+                int favorOrderNumber = field.toInt(&isNumber);
+                if (!isNumber || favorOrderNumber <= 0)
                     return "";
                 else
                     return "*";
@@ -159,7 +161,7 @@ QVariant RecordTableModel::data(const QModelIndex &index, int role) const
 
         if (fieldName=="name") {
             // Иконка избранности в названии записи
-            if (mytetraConfig.get_showFavorites() && table->getField("favor", index.row())=="1") { // Если запись в избранных
+            if (mytetraConfig.get_showFavorites() && table->isFavorite(index.row())) { // Если запись в избранных
                 bool isNotDecrypted = table->getField("crypt", index.row())=="1"
                                       && globalParameters.getCryptKey().length()==0;
                 if (isNotDecrypted) {

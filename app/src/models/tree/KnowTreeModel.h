@@ -44,6 +44,8 @@ public:
     void addNewBranch(TreeItem *parent, QMap<QString, QString> branchFields);
 
     TreeItem *getFavoritesItem();
+    int getFavoriteMaxOrderNumber();
+    void checkAndSetFavoriteMaxOrderNumber(int value);
     void addRecordToFavorites(Record *record);
     void deleteRecordFromFavorites(QString recordId);
 
@@ -117,6 +119,7 @@ private:
     QDateTime lastLoadDateTime;
 
     TreeItem *favoritesNode = nullptr;
+    int favoriteMaxOrderNumber = 0;
 
     void init(QDomDocument *domModel);
 

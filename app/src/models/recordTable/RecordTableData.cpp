@@ -18,6 +18,7 @@
 #include "libraries/crypt/CryptService.h"
 #include "libraries/helpers/DiskHelper.h"
 #include "libraries/ActionLogger.h"
+#include "libraries/FixedParameters.h"
 
 #include "libraries/wyedit/Editor.h"
 #include "libraries/helpers/ObjectHelper.h"
@@ -334,7 +335,14 @@ void RecordTableData::setupDataFromDom(QDomElement *domModel, TreeItem *favorite
 
         // Запись инициализируется данными. Она должна инициализироватся после размещения в списке tableData,
         // чтобы в подчиненных объектах прописались правильные указатели на данную запись
-        (tableData.last()).setupDataFromDom(currentRecordDom, favoriteNode);
+        Record *addedRecord = &tableData.last();
+        addedRecord->setupDataFromDom(currentRecordDom);
+
+        // Обновляем максимальную позицию для списка избранных записей
+        // Если запись избранная, тодобавляем ее в ветку "Избранное"
+        if (favoriteNode != nullptr && addedRecord->isFavorite()) {
+            favoriteNode->recordtableGetTableData()->insertRecordToFavorites(addedRecord);
+        }
 
         currentRecordDom=currentRecordDom.nextSiblingElement("record");
     } // Закрылся цикл перебора тегов <record ...>
@@ -498,7 +506,7 @@ int RecordTableData::insertNewRecord(int mode,
     walkHistory.add(record.getNaturalFieldSource("id"), 0, 0);
 
     // Если было перемещение избранной записи, то заново добавляем ее в ветку "Избранное"
-    if (isCheckAndAddToFavorites && !isNewOrCopied && record.getField("favor") == "1") {
+    if (isCheckAndAddToFavorites && !isNewOrCopied && record.isFavorite()) {
         dataModel->addRecordToFavorites(&record);
     }
 
@@ -507,32 +515,49 @@ int RecordTableData::insertNewRecord(int mode,
 }
 
 
-// Добавление записи в избранное
-// Метод принимает "легкий" объект записи
-// Объект для вставки приходит как незашифрованным, так и зашифрованным
-int RecordTableData::insertRecordToFavorites(int mode,
-                                     int pos,
-                                     Record *record)
+// Является ли запись избранной
+bool RecordTableData::isFavorite(int pos)
+{
+    bool isNumber;
+    int favorOrderNumber = getField("favor", pos).toInt(&isNumber);
+    return isNumber && favorOrderNumber > 0;
+}
+
+
+// Получение значения поля "favor" - порядкового номера записи в избранном
+int RecordTableData::getFavoriteOrderNumber(int pos)
+{
+    bool isNumber;
+    int favorOrderNumber = getField("favor", pos).toInt(&isNumber);
+    return (isNumber) ? favorOrderNumber : 0;
+}
+
+
+// Функция для сортировки списка записей исходя из поля "favor"
+static bool compareFavoriteOrderNumber(Record &record1, Record &record2)
+{
+    return record1.getFavoriteOrderNumber() < record2.getFavoriteOrderNumber();
+}
+
+
+// Сортировка списка записей по порядковым номерам
+void RecordTableData::sortByFavorField()
+{
+    std::sort(tableData.begin(), tableData.end(), compareFavoriteOrderNumber);
+}
+
+
+
+// Добавление записи в избранное.
+// Метод принимает "легкий" объект записи.
+// Объект для вставки приходит как незашифрованным, так и зашифрованным.
+void RecordTableData::insertRecordToFavorites(Record *record)
 {
     qDebug() << "RecordTableData::insert_record_to_favorites() : Insert record to favorites";
 
-    // Запись добавляется в таблицу конечных записей
-    int insertPos=-1;
-    if(mode==GlobalParameters::AddNewRecordBehavior::ADD_TO_END) // В конец списка
-    {
-        tableData << *record;
-        insertPos=tableData.size()-1;
-    }
-    else if(mode==GlobalParameters::AddNewRecordBehavior::ADD_BEFORE) // Перед указанной позицией
-    {
-        tableData.insert(pos, *record);
-        insertPos=pos;
-    }
-    else if(mode==GlobalParameters::AddNewRecordBehavior::ADD_AFTER) // После указанной позиции
-    {
-        tableData.insert(pos+1, *record);
-        insertPos=pos+1;
-    }
+    // Запись добавляется в конец таблицы конечных записей
+    tableData << *record;
+    int insertPos = tableData.size()-1;
 
     qDebug() << "RecordTableData::insert_record_to_favorites() : Record pos in favorites " << QString::number(insertPos);
 
@@ -541,9 +566,6 @@ int RecordTableData::insertRecordToFavorites(int mode,
     data["recordId"]=record->getNaturalFieldSource("id");
     data["recordName"]=record->getNaturalFieldSource("name");
     actionLogger.addAction("insertRecordToFavorites", data);
-
-    // Возвращается номера строки, на которую должна быть установлена засветка после выхода из данного метода
-    return insertPos;
 }
 
 
