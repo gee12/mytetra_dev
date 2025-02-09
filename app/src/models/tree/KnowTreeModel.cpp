@@ -901,7 +901,16 @@ void KnowTreeModel::addRecordToFavorites(Record *record)
 }
 
 
-// Удаление записи из ветки "Избранное"
+// Удаление записи из ветки "Избранное" по индексу позиции
+void KnowTreeModel::deleteRecordFromFavorites(QModelIndex &index)
+{
+  if (mytetraConfig.get_showFavorites()) {
+    favoritesNode->recordtableGetTableData()->deleteRecordFromFavorites(index.row());
+  }
+}
+
+
+// Удаление записи из ветки "Избранное" по id записи
 void KnowTreeModel::deleteRecordFromFavorites(QString recordId)
 {
   if (mytetraConfig.get_showFavorites()) {

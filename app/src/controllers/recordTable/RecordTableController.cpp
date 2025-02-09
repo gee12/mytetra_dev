@@ -712,8 +712,9 @@ void RecordTableController::onFavoriteContext(void)
     } else {
         if (treeScreen->isCurrentFavoritesItem()) {
             // Если в данный момент отображаем список избранных записей, то
-            // удаляем строку из Proxy модели, т.к. она должна уведомить вид о своем изменении
-            recordProxyModel->removeRow(index.row());
+            // удаляем оттуда строку и просим Proxy модель уведомить view об изменении
+            dataModel->deleteRecordFromFavorites(index);
+            recordProxyModel->invalidate();
         } else {
             dataModel->deleteRecordFromFavorites(recordId);
         }
@@ -1279,4 +1280,5 @@ bool RecordTableController::isAllSelectedRecordsNotEncryptedOrDecrypted()
             return false;
         }
     }
+    return true;
 }

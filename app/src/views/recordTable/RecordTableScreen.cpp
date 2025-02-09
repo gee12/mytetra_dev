@@ -368,6 +368,7 @@ void RecordTableScreen::disableAllActions(void)
  actionAddNewAfter->setEnabled(false);
  actionEditField->setEnabled(false);
  actionFavorite->setEnabled(false);
+ actionOpenInSourceNode->setEnabled(false);
  actionBlock->setEnabled(false);
  actionDelete->setEnabled(false);
 

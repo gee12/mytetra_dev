@@ -47,6 +47,7 @@ public:
     int getFavoriteMaxOrderNumber();
     void checkAndSetFavoriteMaxOrderNumber(int value);
     void addRecordToFavorites(Record *record);
+    void deleteRecordFromFavorites(QModelIndex &index);
     void deleteRecordFromFavorites(QString recordId);
 
     // Перемещение ветки вверх и вниз
