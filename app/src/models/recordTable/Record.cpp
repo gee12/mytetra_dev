@@ -114,8 +114,14 @@ void Record::exportDataToStreamWriter(QXmlStreamWriter *xmlWriter) const
     QString currentFieldName=availableFieldList.at(j);
 
     // Устанавливается значение поля как атрибут записи
-    if(isNaturalFieldExists(currentFieldName))
-      xmlWriter->writeAttribute(currentFieldName, getNaturalFieldSource(currentFieldName));
+    if(isNaturalFieldExists(currentFieldName)) {
+      QString fieldValue = getNaturalFieldSource(currentFieldName);
+      // Если это поле "favor", тогда проверяем, что значение не пусто,
+      // чтобы не "захламлять" дерево пустыми аттрибутами
+      if (currentFieldName != "favor" || !fieldValue.isEmpty()) {
+        xmlWriter->writeAttribute(currentFieldName, fieldValue);
+      }
+    }
   }
 
   // К элементу записи прикрепляется элемент таблицы приаттаченных файлов, если таковые есть
