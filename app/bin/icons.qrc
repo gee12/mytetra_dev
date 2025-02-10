@@ -1568,6 +1568,5 @@
         <file>resource/icons/WinStyle/nocolor_icons8_Windows_10_won.svg</file>
         <file>resource/icons/WinStyle/nocolor_icons8_Windows_10_word.svg</file>
         <file>resource/icons/WinStyle/nocolor_icons8_Windows_10_xls.svg</file>
-        <file>resource/pic/favorites_gray.svg</file>
     </qresource>
 </RCC>

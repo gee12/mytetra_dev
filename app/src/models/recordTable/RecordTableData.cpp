@@ -645,9 +645,6 @@ void RecordTableData::deleteRecord(int i)
     if(id.length()>0)
         walkHistory.removeHistoryData(id);
 
-    // Удаление позиции из избранного
-    //deleteRecordFromFavorites(id);
-
     // Начинается удаление записи
     // beginRemoveRows(QModelIndex(),i,i);
 

@@ -412,15 +412,13 @@ void RecordTableScreen::toolsWidgetsUpdate()
 
  // Включаются те действия которые разрешены
 
- // Если выбрана избранная ветка, то скрываем некоторые действия
  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
  bool isCurrentFavoritesItem = treeScreen->isCurrentFavoritesItem();
-
- //
  int pos = getFirstSelectionPos();
  QModelIndex index = recordTableController->convertPosToProxyIndex(pos);
+ // Если отображается ветка "Избранное", и выделена запись, которая зашифрована и не расшифрована,
+ // то все действия оставляем отключенными
  if (isCurrentFavoritesItem && !recordTableController->isRecordNotEncryptedOrDecrypted(index)) {
-
   return;
  }
 

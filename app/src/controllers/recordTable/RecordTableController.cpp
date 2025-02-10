@@ -767,10 +767,9 @@ void RecordTableController::onBlockContext(void)
   // Выясняется ссылка на таблицу конечных данных
   RecordTableData *table=recordSourceModel->getTableData();
 
-  bool isNotBlocked = table->getField("block", pos) != "1";
-
   // Если строка не заблокирована
-  if(isNotBlocked)
+  bool isNotBlocked = table->getField("block", pos) != "1";
+  if (isNotBlocked)
   {
     // Устанавливается значение в базе
     table->setField("block", "1", pos);
