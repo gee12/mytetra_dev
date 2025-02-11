@@ -414,12 +414,21 @@ void RecordTableScreen::toolsWidgetsUpdate()
 
  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
  bool isCurrentFavoritesItem = treeScreen->isCurrentFavoritesItem();
- int pos = getFirstSelectionPos();
- QModelIndex index = recordTableController->convertPosToProxyIndex(pos);
- // Если отображается ветка "Избранное", и выделена запись, которая зашифрована и не расшифрована,
- // то все действия оставляем отключенными
- if (isCurrentFavoritesItem && !recordTableController->isRecordNotEncryptedOrDecrypted(index)) {
-  return;
+ bool isShowFavorites = mytetraConfig.get_showFavorites();
+
+ // Если включено избранное и выбрана ветка "Избранное"
+ if (isShowFavorites && isCurrentFavoritesItem) {
+   int pos = getFirstSelectionPos();
+   QModelIndex index = recordTableController->convertPosToProxyIndex(pos);
+   // Если отображается ветка "Избранное", и выделена запись, которая зашифрована и не расшифрована,
+   // то все действия оставляем отключенными
+   if (!recordTableController->isRecordNotEncryptedOrDecrypted(index)) {
+    return;
+   }
+
+   // Открыть исходную ветку избранной записи можно,
+   // только если текущая ветка - "Избранное"
+   actionOpenInSourceNode->setEnabled(true);
  }
 
  // Добавление записи
