@@ -52,7 +52,7 @@ public:
 
 
     // Первичное заполнение таблицы конечных записей
-    void init(TreeItem *item, QDomElement domModel);
+    void init(TreeItem *item, QDomElement domModel, TreeItem *favoriteNode);
 
     // Удаление всех элементов таблицы конечных записей
     void deleteAllRecords(void);
@@ -69,7 +69,17 @@ public:
 
     int insertNewRecord(int mode,
                         int pos,
-                        Record record);
+                        Record record,
+                        bool isCheckAndAddToFavorites=true);
+
+    // Избранное
+    bool isFavorite(int pos);
+    int getFavoriteOrderNumber(int pos);
+    void sortByFavorField();
+    // Вставка/удаление записи в/из списка избранных записей
+    void insertRecordToFavorites(Record *record);
+    void deleteRecordFromFavorites(QString recordId);
+    void deleteRecordFromFavorites(int pos);
 
     void editRecordFields(int pos,
                           QMap<QString, QString> editFields);
@@ -105,7 +115,7 @@ public:
 private:
 
     // Функция заполнения таблицы из DOM-документа
-    void setupDataFromDom(QDomElement *domModel);
+    void setupDataFromDom(QDomElement *domModel, TreeItem *favoriteNode);
 
     // Таблица записей (в нормальном виде содержит только "легкие" объекты записей)
     QList< Record > tableData;

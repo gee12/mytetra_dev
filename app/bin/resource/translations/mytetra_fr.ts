@@ -175,52 +175,57 @@ Please enable action logging in Tools -&gt; Preferences -&gt; Misc</source>
 <context>
     <name>AppConfigDialog</name>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="30"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="31"/>
         <source>MyTetra settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="42"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="43"/>
         <source>Main</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="44"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="45"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="46"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="47"/>
         <source>Crypt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="48"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="49"/>
         <source>Synchro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="50"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="51"/>
+        <source>Tree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="53"/>
         <source>Note area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="52"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="55"/>
         <source>Attaches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="54"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="57"/>
         <source>Keyboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="56"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="59"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="58"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigDialog.cpp" line="61"/>
         <source>Misc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -504,31 +509,26 @@ Please enable action logging in Tools -&gt; Preferences -&gt; Misc</source>
     <name>AppConfigPage_Misc</name>
     <message>
         <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="37"/>
-        <source>Confirm item cut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="42"/>
         <source>Print debug messages to console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="47"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="42"/>
         <source>Enable action logging (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="52"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="47"/>
         <source>Create empty note enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="57"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="52"/>
         <source>Edit config file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="72"/>
+        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Misc.cpp" line="67"/>
         <source>Danger actions (Attention!)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -627,6 +627,19 @@ Please enable action logging in Tools -&gt; Preferences -&gt; Misc</source>
     <message>
         <location filename="../../../src/views/appConfigWindow/AppConfigPage_Synchro.cpp" line="228"/>
         <source>The first background &lt;b&gt;checking base&lt;/b&gt; starting.&lt;br/&gt;Maybe a slight delay or freezing window...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AppConfigPage_Tree</name>
+    <message>
+        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Tree.cpp" line="35"/>
+        <source>Show favorite records</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/appConfigWindow/AppConfigPage_Tree.cpp" line="40"/>
+        <source>Confirm item cut</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1496,128 +1509,128 @@ Enter your old password and new password.
 <context>
     <name>FindScreen</name>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="72"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="73"/>
         <source>Find</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="98"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="99"/>
         <source>Any word</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="99"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="100"/>
         <source>All words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="104"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="105"/>
         <source>Whole words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="105"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="106"/>
         <source>Substring</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="110"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="111"/>
         <source>Entire base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="111"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="112"/>
         <source>Current tree item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="186"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="187"/>
         <source>Find in: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="188"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="189"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="191"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="192"/>
         <source>Author(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="194"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="195"/>
         <source>Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="197"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="198"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="200"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="201"/>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="203"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="204"/>
         <source>Name tree item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="376"/>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="447"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="377"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="448"/>
         <source>Cannot start find process</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="377"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="378"/>
         <source>Verify that you selected fields for search for starting find process.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="378"/>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="391"/>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="449"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="379"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="392"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="450"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="389"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="390"/>
         <source>Can not start find process</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="390"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="391"/>
         <source>The search request is too short. Enter at least one word.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="448"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="449"/>
         <source>Starting position for a tree searching is not set.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="464"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="465"/>
         <source>Search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="489"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="494"/>
         <source>No search results.
 Hint: encrypted items has been detected. For searching in encrypted items you have to enter the password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="493"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="498"/>
         <source>No search results.
 Hint: search produced in current tree item.
 Try to search for entire database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="524"/>
+        <location filename="../../../src/views/findInBaseScreen/FindScreen.cpp" line="533"/>
         <source>[Tree item]</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1638,63 +1651,68 @@ Try to search for entire database.</source>
 <context>
     <name>FixedParameters</name>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="76"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="79"/>
         <source>ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="77"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="80"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="78"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="81"/>
         <source>Author</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="79"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="82"/>
         <source>Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="80"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="83"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="81"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="84"/>
         <source>Create time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="82"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="85"/>
         <source>Directory name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="83"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="86"/>
         <source>File name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="84"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="87"/>
         <source>Is crypt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="85"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="88"/>
         <source>Has attachs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="86"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="89"/>
         <source>Attachs count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/FixedParameters.cpp" line="87"/>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="90"/>
         <source>Block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/libraries/FixedParameters.cpp" line="91"/>
+        <source>Is favorite</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1893,17 +1911,22 @@ You need to update MyTetra.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="294"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="96"/>
+        <source>Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="319"/>
         <source>The exporting file %1 is not writable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="419"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="444"/>
         <source>Import error: unable to read the XML file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="511"/>
+        <location filename="../../../src/models/tree/KnowTreeModel.cpp" line="536"/>
         <source>Find record id=&quot;%1&quot; without dir attribute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1911,12 +1934,24 @@ You need to update MyTetra.</source>
 <context>
     <name>KnowTreeView</name>
     <message>
-        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="185"/>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="193"/>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="206"/>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="221"/>
         <source>Warning!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="186"/>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="194"/>
+        <source>Unable to move record from item &quot;Favorites&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="207"/>
+        <source>Unable to move record to item &quot;Favorites&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/KnowTreeView.cpp" line="222"/>
         <source>Unable to move the item to an encrypted item. You have to enter the password for this action.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2276,20 +2311,20 @@ MyTetra reload the database tree to keep data consistency.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/recordTable/Record.cpp" line="927"/>
+        <location filename="../../../src/models/recordTable/Record.cpp" line="934"/>
         <source>The database is not consistent.
 The directory %1 is not found.
 MyTetra will try to create a blank entry to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/recordTable/Record.cpp" line="933"/>
-        <location filename="../../../src/models/recordTable/Record.cpp" line="952"/>
+        <location filename="../../../src/models/recordTable/Record.cpp" line="940"/>
+        <location filename="../../../src/models/recordTable/Record.cpp" line="959"/>
         <source>Warning!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/models/recordTable/Record.cpp" line="946"/>
+        <location filename="../../../src/models/recordTable/Record.cpp" line="953"/>
         <source>The database is not consistent.
 The file %1 is not found.
 MyTetra will try to create a blank entry to fix it.</source>
@@ -2317,22 +2352,22 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableController</name>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="667"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="787"/>
         <source>Unblock this note?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="764"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="932"/>
         <source>Are you sure to delete this record(s)?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="765"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="933"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="766"/>
+        <location filename="../../../src/controllers/recordTable/RecordTableController.cpp" line="934"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2340,8 +2375,13 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableModel</name>
     <message>
-        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="78"/>
-        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="94"/>
+        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="74"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="100"/>
+        <location filename="../../../src/models/recordTable/RecordTableModel.cpp" line="124"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2387,73 +2427,83 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableScreen</name>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="91"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="76"/>
+        <source>Open in source node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="77"/>
+        <source>Open favorite record in source node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="100"/>
         <source>View settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="92"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="101"/>
         <source>Setup table view settins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="112"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="121"/>
         <source>Previous viewing note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="116"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="125"/>
         <source>Next viewing note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="120"/>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="121"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="129"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="130"/>
         <source>Back to item tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="125"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="134"/>
         <source>Toggle sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="126"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="135"/>
         <source>Enable/disable sorting by column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="130"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="139"/>
         <source>Print table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="131"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="140"/>
         <source>Print current notes table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="135"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="144"/>
         <source>Copy note reference</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="136"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="145"/>
         <source>Copy note reference to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="140"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="149"/>
         <source>Switch select/multiselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="141"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="150"/>
         <source>Switch note selection mode (Notice: if multiselect is on, drag-and-drop is disabled)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="570"/>
+        <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="613"/>
         <source>&lt;b&gt;Path:&lt;/b&gt; </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2461,37 +2511,47 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>RecordTableView</name>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="310"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="340"/>
+        <source>Remove from favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="343"/>
+        <source>Add to favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="350"/>
         <source>Block/Unblock note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="315"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="355"/>
         <source>Unblock note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="317"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="357"/>
         <source>Block note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="322"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="362"/>
         <source>Set multiple selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="324"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="364"/>
         <source>Set single selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="328"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="368"/>
         <source>Enable sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="330"/>
+        <location filename="../../../src/views/recordTable/RecordTableView.cpp" line="370"/>
         <source>Disable sorting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2544,631 +2604,641 @@ MyTetra will try to create a blank entry to fix it.</source>
     </message>
     <message>
         <location filename="../../../src/libraries/ShortcutManager.cpp" line="76"/>
-        <source>Block/Unblock note</source>
+        <source>Set/unset favorite note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../src/libraries/ShortcutManager.cpp" line="76"/>
-        <source>Block or unblock current selected note</source>
+        <source>Set or unset current selected note to/from favorites notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../src/libraries/ShortcutManager.cpp" line="77"/>
+        <source>Block/Unblock note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="77"/>
+        <source>Block or unblock current selected note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="78"/>
         <source>Delete note(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="78"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="79"/>
         <source>Cut notes(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="78"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="79"/>
         <source>Cut notes(s) to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="79"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="80"/>
         <source>Copy note(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="79"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="80"/>
         <source>Copy note(s) to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="80"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="81"/>
         <source>Paste note(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="80"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="81"/>
         <source>Paste note(s) from clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="81"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="82"/>
         <source>Move up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="81"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="82"/>
         <source>Move up current note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="82"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="83"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="82"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="83"/>
         <source>Move down current note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="83"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="84"/>
         <source>Previous note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="83"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="84"/>
         <source>Previous note has been viewing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="84"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="85"/>
         <source>Next note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="84"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="85"/>
         <source>Next note has been viewing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="86"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="87"/>
         <source>Expand all sub items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="87"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="88"/>
         <source>Collapse all sub items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="88"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="89"/>
         <source>Move item up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="89"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="90"/>
         <source>Move item down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="90"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="91"/>
         <source>Insert a new sub item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="90"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="91"/>
         <source>Insert a new sub item into selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="91"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="92"/>
         <source>Insert a new sibling item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="91"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="92"/>
         <source>Insert a new sibling item after selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="92"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="93"/>
         <source>Edit item name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="92"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="93"/>
         <source>Edit name of selected item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="93"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="94"/>
         <source>Delete item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="93"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="94"/>
         <source>Delete selected item and all sub items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="94"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="95"/>
         <source>Cut item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="94"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="95"/>
         <source>Cut item including sub items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="95"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="96"/>
         <source>Copy item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="95"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="96"/>
         <source>Copy item including sub items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="96"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="97"/>
         <source>Paste item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="96"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="97"/>
         <source>Paste sibling item after selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="97"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="98"/>
         <source>Paste as sub item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="97"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="98"/>
         <source>Paste item as sub item for selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="98"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="99"/>
         <source>Encrypt item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="98"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="99"/>
         <source>Encrypt item and all subitem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="99"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="100"/>
         <source>Decrypt item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="99"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="100"/>
         <source>Decrypt item and all subitem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="100"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="101"/>
         <source>Set icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="100"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="101"/>
         <source>Set item icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="102"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="103"/>
         <source>Select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="103"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="104"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="104"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="105"/>
         <source>Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="105"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="106"/>
         <source>Paste plain text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="106"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="107"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="107"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="108"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="108"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="109"/>
         <source>Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="110"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="111"/>
         <source>Bold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="111"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="112"/>
         <source>Italic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="112"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="113"/>
         <source>Underline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="113"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="114"/>
         <source>Strike out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="114"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="115"/>
         <source>Superscript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="115"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="116"/>
         <source>Subscript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="116"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="117"/>
         <source>Monospace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="117"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="118"/>
         <source>Code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="117"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="118"/>
         <source>Select a whole paragraphs to format text as code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="118"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="119"/>
         <source>Lowercase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="119"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="120"/>
         <source>Uppercase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="120"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="121"/>
         <source>Clear format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="120"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="121"/>
         <source>When selected whole paragraph both text and paragraph format is reset to default or just text format in other case</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="121"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="122"/>
         <source>Text only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="122"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="123"/>
         <source>Return type replace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="122"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="123"/>
         <source>Replace soft carriage return to standard carriage return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="123"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="124"/>
         <source>Numeric list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="124"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="125"/>
         <source>Marked list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="125"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="126"/>
         <source>Increase indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="126"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="127"/>
         <source>Decrease indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="127"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="128"/>
         <source>Align left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="128"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="129"/>
         <source>Align center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="129"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="130"/>
         <source>Align right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="130"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="131"/>
         <source>Align width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="131"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="132"/>
         <source>Text color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="132"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="133"/>
         <source>Background color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="133"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="134"/>
         <source>Select font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="134"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="135"/>
         <source>Select font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="135"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="136"/>
         <source>Find text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="135"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="136"/>
         <source>Find text in current note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="136"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="137"/>
         <source>Editor settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="137"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="138"/>
         <source>Edit reference URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="138"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="139"/>
         <source>Edit HTML code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="139"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="140"/>
         <source>Show special chars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="140"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="141"/>
         <source>Create a new table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="141"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="142"/>
         <source>Remove row(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="142"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="143"/>
         <source>Remove column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="143"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="144"/>
         <source>Add row(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="144"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="145"/>
         <source>Add column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="145"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="146"/>
         <source>Merge cells</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="146"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="147"/>
         <source>Split cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="147"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="148"/>
         <source>Table properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="148"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="149"/>
         <source>Open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="148"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="149"/>
         <source>Open selected image in external viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="149"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="150"/>
         <source>Insert/edit image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="149"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="150"/>
         <source>Insert image from file or edit selected image properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="150"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="151"/>
         <source>Insert horizontal line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="150"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="151"/>
         <source>Insert a horizontal line into the empty paragraph from cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="151"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="152"/>
         <source>Insert/edit math expression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="152"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="153"/>
         <source>Expand edit area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="153"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="154"/>
         <source>Expand tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="154"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="155"/>
         <source>Forse save note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="155"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="156"/>
         <source>Show detached window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="156"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="157"/>
         <source>Attach files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="157"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="158"/>
         <source>Go to URL or reference</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="159"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="160"/>
         <source>Copy selected rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="161"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="162"/>
         <source>Attach file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="162"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="163"/>
         <source>Attach file from URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="163"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="164"/>
         <source>Add link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="163"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="164"/>
         <source>Add link without file copying</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="164"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="165"/>
         <source>Edit file name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="165"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="166"/>
         <source>Delete file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="166"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="167"/>
         <source>Preview file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="167"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="168"/>
         <source>Save as...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="168"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="169"/>
         <source>Attach info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="169"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="170"/>
         <source>Return to editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="171"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="172"/>
         <source>Set focus to items tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="172"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="173"/>
         <source>Set focus to notes table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="173"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="174"/>
         <source>Set focus to editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="174"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="175"/>
         <source>Find in base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="175"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="176"/>
         <source>Synchronization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="175"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="176"/>
         <source>Run synchronization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="176"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="177"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="177"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="178"/>
         <source>Print</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="178"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="179"/>
         <source>Export PDF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/libraries/ShortcutManager.cpp" line="179"/>
+        <location filename="../../../src/libraries/ShortcutManager.cpp" line="180"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3310,208 +3380,227 @@ MyTetra will try to create a blank entry to fix it.</source>
 <context>
     <name>TreeScreen</name>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="154"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="155"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="160"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="161"/>
         <source>Find in base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="499"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="538"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="634"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="739"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="879"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="445"/>
+        <source>Disable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="537"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="576"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="672"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="777"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="923"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1030"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="967"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1074"/>
         <source>Unavailable action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="500"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="539"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="635"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1031"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="538"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="577"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="673"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1075"/>
         <source>You&apos;ve selected </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="500"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="538"/>
         <source> items.
 Please select single item for moving.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="501"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="540"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="636"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="741"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="881"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="539"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="578"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="674"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="779"/>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="925"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1032"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="969"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1076"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="539"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="577"/>
         <source> items.
 Please select single item for enabling insert operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="549"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="587"/>
         <source>Create new item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="550"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="659"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="588"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="697"/>
         <source>Item name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="553"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="591"/>
         <source>Create new sub item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="554"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="592"/>
         <source>Sub item name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="635"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="673"/>
         <source> items.
 Please select single item for enabling edit operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="658"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="696"/>
         <source>Edit item name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="740"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="778"/>
         <source>In your selected data found closed item. Action canceled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="773"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="811"/>
         <source>Confirmation request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="774"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="812"/>
         <source>In the selected item has been found blocked notes. Do you really want to delete one?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="795"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="833"/>
         <source>Delete item(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="796"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="834"/>
         <source>Are you sure you wish to delete item(s) &lt;b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="796"/>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="804"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="834"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="842"/>
         <source>&lt;/b&gt; and all sub items?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="797"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="835"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="803"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="841"/>
         <source>Cut item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="804"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="842"/>
         <source>Are you sure you wish to cut item &lt;b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="805"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="843"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="817"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="444"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="855"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="880"/>
-        <source>Please select a single item for copy.</source>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="66"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="67"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="442"/>
+        <source>Disable favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="443"/>
+        <source>Are you sure you want to disable favorites?
+The program will have to be restarted for changes to take effect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../src/views/tree/TreeScreen.cpp" line="924"/>
+        <source>Please select a single item for copy.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="968"/>
         <source>This item contains both unencrypted and encrypted data. Copy/paste operation is possible only for item that contain similar type data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1031"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1075"/>
         <source> items.
 Please select single item for enabling paste operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1176"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1220"/>
         <source>No icon selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1221"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1265"/>
         <source>The export directory %1 is not empty. Please, select an empty directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1228"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1272"/>
         <source>No export tree item selected. Please select a item.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1249"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1293"/>
         <source>Exported tree item contains encrypted data.
 Please click OK and enter the password.
 All data will be exported unencrypted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1262"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1306"/>
         <source>Done exporting into &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1264"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1308"/>
         <source>Errors occurred while exporting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1273"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1317"/>
         <source>No tree item selected for importing. Please select a item.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1287"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1331"/>
         <source>You are importing into an encrypted item.
 Please click Ok and enter the password.
 All data imported will be encrypted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1304"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1348"/>
         <source>Item importing finished.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1549"/>
+        <location filename="../../../src/views/tree/TreeScreen.cpp" line="1624"/>
         <source>Rename me</source>
         <translation type="unfinished"></translation>
     </message>

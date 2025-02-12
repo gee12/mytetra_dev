@@ -173,6 +173,19 @@ bool AppConfig::set_trashmaxfilecount(int count)
 }
 
 
+bool AppConfig::get_showFavorites(void)
+{
+    return conf->value("showfavorites").toBool();
+}
+
+
+bool AppConfig::set_showFavorites(bool confirm)
+{
+    conf->setValue("showfavorites", confirm);
+    return true;
+}
+
+
 bool AppConfig::get_cutbranchconfirm(void)
 {
     return conf->value("cutbranchconfirm").toBool();
@@ -590,7 +603,14 @@ void AppConfig::setUglyQssReplaceHeightForTableView(int n)
 // Перечень полей, отображаемых в таблице конечных записей
 QStringList AppConfig::getRecordTableShowFields(void)
 {
-    return (conf->value("recordTableShowFields", "name")).toString().split(",");
+    QStringList showList = (conf->value("recordTableShowFields", "name")).toString().split(",");
+
+    // Если отключено отображение избранных записей, то не используем столбец "favor"
+    if (!get_showFavorites()) {
+        showList.removeOne("favor");
+    }
+
+    return showList;
 }
 
 

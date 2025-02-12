@@ -10,6 +10,7 @@
 #include "views/recordTable/RecordTableScreen.h"
 #include "views/recordTable/RecordTablePrint.h"
 #include "views/mainWindow/MainWindow.h"
+#include "views/tree/KnowTreeView.h"
 #include "views/tree/TreeScreen.h"
 #include "views/record/RecordInfoFieldsEditor.h"
 #include "views/appConfigWindow/AppConfigDialog.h"
@@ -18,6 +19,7 @@
 #include "models/recordTable/RecordTableModel.h"
 #include "models/recordTable/RecordTableProxyModel.h"
 #include "models/appConfig/AppConfig.h"
+#include "models/tree/KnowTreeModel.h"
 #include "models/tree/TreeItem.h"
 #include "libraries/GlobalParameters.h"
 #include "libraries/FixedParameters.h"
@@ -27,6 +29,7 @@
 #include "libraries/helpers/DiskHelper.h"
 #include "libraries/helpers/ObjectHelper.h"
 #include "libraries/wyedit/EditorShowTextDispatcher.h"
+#include "libraries/crypt/Password.h"
 
 
 extern GlobalParameters globalParameters;
@@ -96,6 +99,27 @@ void RecordTableController::clickToRecord(const QModelIndex &index)
   // Позиция записи в списке
   int pos=sourceIndex.row();
   qDebug() << "RecordTableController::clickToRecord() : current item num " << pos;
+
+  // Ссылка на таблицу конечных данных
+  RecordTableData *table=recordSourceModel->getTableData();
+
+  // Если включено отображение избранных записей, то
+  // проверяем, что запись зашифрована и не расшифрована
+  if (mytetraConfig.get_showFavorites()
+          && table->getField("crypt", pos)=="1"
+          && globalParameters.getCryptKey().length()==0) {
+
+    // Если запись зашифрована, но не расшифрована,
+    // то очищаем поля области редактировния, т.к. там все еще отображаются данные предыдущей записи
+    find_object<MetaEditor>("editorScreen")->clearAll();
+
+    // и устанавливаем/запрашиваем пароль
+    Password password;
+    if (password.retrievePassword()==false) {
+       // Если пароль указан неверно, открывать запись не нужно
+      return;
+    }
+  }
 
   initMetaEditorAtClickToRecord(pos);
   initAttachTableAtClickToRecord(pos);
@@ -525,9 +549,15 @@ void RecordTableController::paste(void)
   for(int i=0;i<nList;i++)
     addNew(GlobalParameters::AddNewRecordBehavior::ADD_TO_END, clipboardRecords->getRecord(i));
 
+  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+
   // Обновление на экране ветки, на которой стоит засветка,
   // так как количество хранимых в ветке записей поменялось
-  find_object<TreeScreen>("treeScreen")->updateSelectedBranch();
+  treeScreen->updateSelectedBranch();
+
+  // Обновление на экране ветки "Избранное",
+  // так как количество избранных записей могло поменяться
+  treeScreen->updateFavoritesBranch();
 }
 
 
@@ -633,6 +663,96 @@ void RecordTableController::onEditFieldContext(void)
 }
 
 
+// При выборе пункта "Добавить в избранное" или "Убрать из избранного" в контекстном меню
+void RecordTableController::onFavoriteContext(void)
+{
+    // Если выключено отображение избранных записей, то выходим
+    if (!mytetraConfig.get_showFavorites())
+        return;
+
+    // Получение индекса выделенного элемента
+    QModelIndexList selectItems = view->selectionModel()->selectedIndexes();
+    QModelIndex index = selectItems.at(0);
+
+    // Номер строки в базе
+    QModelIndex sourceIndex = convertProxyIndexToSourceIndex(index);
+    int pos = sourceIndex.row();
+
+    KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+
+    // Получение значения
+    RecordTableData *table=recordSourceModel->getTableData();
+    bool isAddToFavorites = !table->isFavorite(pos);
+    QString value = (isAddToFavorites) ? QString::number((dataModel->getFavoriteMaxOrderNumber() + 1)) : "";
+    QString recordId = table->getField("id", pos);
+
+    TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+
+    // Если находимся в ветке "Избранное"
+    if (treeScreen->isCurrentFavoritesItem()) {
+        // Ищем "оригинальную" запись в бд и устанавливаем значение
+        Record *record = dataModel->getRecord(recordId);
+        record->setField("favor", value);
+    } else {
+        // Устанавливаем значение у "оригинальной" записи
+        table->setField("favor", value, pos);
+
+        // Обновляется строка на экране
+        int viewPos = index.row();
+        view->updateRow(viewPos);
+    }
+
+    // Сохранение дерева веток
+    treeScreen->saveKnowTree();
+
+    // Добавляем или удаляем запись из списка избранных записей
+    if (isAddToFavorites) {
+        Record *record = table->getRecord(pos);
+        dataModel->addRecordToFavorites(record);
+    } else {
+        if (treeScreen->isCurrentFavoritesItem()) {
+            // Если в данный момент отображаем список избранных записей, то
+            // удаляем оттуда строку и просим Proxy модель уведомить view об изменении
+            dataModel->deleteRecordFromFavorites(index);
+            recordProxyModel->invalidate();
+        } else {
+            dataModel->deleteRecordFromFavorites(recordId);
+        }
+    }
+
+    // Обновление на экране ветки "Избранное",
+    // т.к. количество избранных записей поменялось
+    treeScreen->updateFavoritesBranch();
+}
+
+
+// Открытие исходной ветки у избранной записи
+void RecordTableController::onOpenInSourceNodeClick(void)
+{
+    // Получение индекса выделенного элемента
+    QModelIndexList selectItems = view->selectionModel()->selectedIndexes();
+    QModelIndex index = selectItems.at(0);
+
+    // Номер строки в базе
+    QModelIndex sourceIndex = convertProxyIndexToSourceIndex(index);
+    int pos = sourceIndex.row();
+
+    // Получение id записи
+    RecordTableData *table=recordSourceModel->getTableData();
+    QString recordId = table->getField("id", pos);
+
+    // Получение пути к ветке, в которой лежит запись
+    KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+    QStringList path = dataModel->getRecordPath(recordId);
+
+    qDebug() << "Get path to record:" << path;
+
+    MainWindow *mainWIndow = find_object<MainWindow>("mainwindow");
+    mainWIndow->setTreePosition(path);
+    mainWIndow->setRecordtablePositionById(recordId);
+}
+
+
 // При выборе пункта "Блокировка записи" в контекстном меню
 void RecordTableController::onBlockContext(void)
 {
@@ -648,7 +768,8 @@ void RecordTableController::onBlockContext(void)
   RecordTableData *table=recordSourceModel->getTableData();
 
   // Если строка не заблокирована
-  if(table->getField("block", pos)!="1")
+  bool isNotBlocked = table->getField("block", pos) != "1";
+  if (isNotBlocked)
   {
     // Устанавливается значение в базе
     table->setField("block", "1", pos);
@@ -674,6 +795,30 @@ void RecordTableController::onBlockContext(void)
       table->setField("block", "", pos);
 
       find_object<TreeScreen>("treeScreen")->saveKnowTree(); // Сохранение дерева веток
+    }
+  }
+
+  TreeScreen *treeScreen=find_object<TreeScreen>("treeScreen");
+  KnowTreeModel *dataModel = static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+  QString recordId = table->getField("id", pos);
+  QString newValue = (isNotBlocked) ? "1" : "";
+
+  // Если включено отображение избранных записей
+  if (mytetraConfig.get_showFavorites()) {
+    // Если находимся в ветке "Избранное", то блокируем/разблокируем "оригинальную" запись
+    if (treeScreen->isCurrentFavoritesItem()) {
+      // Ищем "оригинальную" запись в бд и устанавливаем значение
+      Record *record=dataModel->getRecord(recordId);
+      record->setField("block", newValue);
+
+      find_object<TreeScreen>("treeScreen")->saveKnowTree();
+    }
+    // Иначе, если находимся не в ветке "Избранное", но запись избранная,
+    // то блокируем/разблокируем также и запись-близнец в ветке "Избранное"
+    else if (table->isFavorite(pos)) {
+      TreeItem *favoriteNode = dataModel->getFavoritesItem();
+      Record *record = favoriteNode->recordtableGetTableData()->getRecordById(recordId);
+      record->setField("block", newValue);
     }
   }
 
@@ -743,6 +888,30 @@ void RecordTableController::editField(int pos,
   // Обновление новых данных в таблице конечных записей
   table->editRecordFields(pos, editData);
 
+  TreeScreen *treeScreen=find_object<TreeScreen>("treeScreen");
+
+  KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+  QString recordId = table->getField("id", pos);
+
+  // Если включено отображение избранных записей
+  if (mytetraConfig.get_showFavorites()) {
+    // Если находимся в ветке "Избранное", то обновляем поля и у "оригинальной" записи
+    if (treeScreen->isCurrentFavoritesItem()) {
+      QStringList path = dataModel->getRecordPath(recordId);
+      RecordTableData *originalRecordTable = dataModel->getItem(path)->recordtableGetTableData();
+      int originalRecordPos = originalRecordTable->getPosById(recordId);
+      originalRecordTable->editRecordFields(originalRecordPos, editData);
+    }
+    // Иначе, если находимся не в ветке "Избранное", но запись избранная,
+    // то обновляем поля также и у записи-близнеца в ветке "Избранное"
+    else if (table->isFavorite(pos)) {
+      TreeItem *favoriteNode = dataModel->getFavoritesItem();
+      RecordTableData *favoriteRecordTable = favoriteNode->recordtableGetTableData();
+      int recordPosInFavorites = favoriteRecordTable->getPosById(recordId);
+      favoriteRecordTable->editRecordFields(recordPosInFavorites, editData);
+    }
+  }
+
   // Обновление инфополей в области редактирования записи
   MetaEditor *metaEditor=find_object<MetaEditor>("editorScreen");
   metaEditor->setName(name);
@@ -751,7 +920,7 @@ void RecordTableController::editField(int pos,
   metaEditor->setTags(tags);
 
   // Сохранение дерева веток
-  find_object<TreeScreen>("treeScreen")->saveKnowTree();
+  treeScreen->saveKnowTree();
 }
 
 
@@ -839,12 +1008,24 @@ void RecordTableController::deleteRecords(void)
   // Вызывается удаление отмеченных записей
   removeRowsByIdList(delIds);
 
+  KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+
+  for (int i=0; i<delIds.size(); i++)
+    // Удаляем запись из списка избранных записей
+    dataModel->deleteRecordFromFavorites(delIds[i]);
+
+  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+
   // Сохранение дерева веток
-  find_object<TreeScreen>("treeScreen")->saveKnowTree();
+  treeScreen->saveKnowTree();
 
   // Обновление на экране ветки, на которой стоит засветка,
   // так как количество хранимых в ветке записей поменялось
-  find_object<TreeScreen>("treeScreen")->updateSelectedBranch();
+  treeScreen->updateSelectedBranch();
+
+  // Обновление на экране ветки "Избранное",
+  // так как количество избранных записей могло поменяться
+  treeScreen->updateFavoritesBranch();
 
   // Установка курсора на нужную позицию
   if(selectionRowNum>=0 && selectionRowNum<recordProxyModel->rowCount())
@@ -905,6 +1086,21 @@ void RecordTableController::moveUp(void)
   // Выясняется ссылка на таблицу конечных данных
   RecordTableData *table=recordSourceModel->getTableData();
 
+  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+  KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+
+  // Если находимся в ветке "Избранное"
+  if (mytetraConfig.get_showFavorites()
+      && treeScreen->isCurrentFavoritesItem()) {
+    // Ищем "оригинальные" записи в бд и меняем местами у них значение "favor"
+    Record *record1 = dataModel->getRecord(table->getField("id", pos));
+    Record *record2 = dataModel->getRecord(table->getField("id", pos-1));
+    QString value1 = record1->getField("favor");
+    QString value2 = record2->getField("favor");
+    record1->setField("favor", value2);
+    record2->setField("favor", value1);
+  }
+
   // Перемещение текущей записи вверх
   table->moveUp(pos);
 
@@ -912,7 +1108,7 @@ void RecordTableController::moveUp(void)
   view->setSelectionToPos(pos-1);
 
   // Сохранение дерева веток
-  find_object<TreeScreen>("treeScreen")->saveKnowTree();
+  treeScreen->saveKnowTree();
 }
 
 
@@ -927,6 +1123,21 @@ void RecordTableController::moveDn(void)
   // Выясняется ссылка на таблицу конечных данных
   RecordTableData *table=recordSourceModel->getTableData();
 
+  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+  KnowTreeModel *dataModel=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model());
+
+  // Если находимся в ветке "Избранное"
+  if (mytetraConfig.get_showFavorites()
+      && treeScreen->isCurrentFavoritesItem()) {
+    // Ищем "оригинальные" записи в бд и меняем местами у них значение "favor"
+    Record *record1 = dataModel->getRecord(table->getField("id", pos));
+    Record *record2 = dataModel->getRecord(table->getField("id", pos+1));
+    QString value1 = record1->getField("favor");
+    QString value2 = record2->getField("favor");
+    record1->setField("favor", value2);
+    record2->setField("favor", value1);
+  }
+
   // Перемещение текущей записи вниз
   table->moveDn(pos);
 
@@ -934,7 +1145,7 @@ void RecordTableController::moveDn(void)
   view->setSelectionToPos(pos+1);
 
   // Сохранение дерева веток
-  find_object<TreeScreen>("treeScreen")->saveKnowTree();
+  treeScreen->saveKnowTree();
 }
 
 
@@ -1020,4 +1231,53 @@ void RecordTableController::onSwitchSelectionMode()
 void RecordTableController::setFocusToBaseWidget()
 {
     view->setFocus();
+}
+
+
+// Является ли запись не зашифрованной или уже расшифрованной
+bool RecordTableController::isRecordNotEncryptedOrDecrypted(QModelIndex index)
+{
+    // Так как, возможно, включена сортировка, индекс на экране преобразуется в обычный индекс
+    QModelIndex sourceIndex=convertProxyIndexToSourceIndex(index);
+    // Позиция записи в списке
+    int pos = sourceIndex.row();
+
+    // Если ни одна строка не выделена, то выходим
+    if (pos < 0)
+        return true;
+
+    RecordTableData *table=recordSourceModel->getTableData();
+
+    // Проверка, что запись зашифрована и не расшифрована
+    if (table->getField("crypt", pos)=="1"
+        && globalParameters.getCryptKey().length()==0) {
+        return false;
+    }
+    return true;
+}
+
+// Являеются ли все выделенные записи не зашифрованными или уже расшифрованными
+bool RecordTableController::isAllSelectedRecordsNotEncryptedOrDecrypted()
+{
+    if (globalParameters.getCryptKey().length() > 0)
+        return true;
+
+    RecordTableData *table = recordSourceModel->getTableData();
+    // Список индексов выделенных строк
+    QModelIndexList selectedRows = view->selectionModel()->selectedRows();
+
+    QModelIndexList::iterator it;
+    for(it=selectedRows.begin(); it!=selectedRows.end(); it++)
+    {
+        // Так как, возможно, включена сортировка, индекс на экране преобразуется в обычный индекс
+        QModelIndex sourceIndex=convertProxyIndexToSourceIndex(*it);
+        // Позиция записи в списке
+        int pos = sourceIndex.row();
+
+        // Проверка, что запись зашифрована и не расшифрована
+        if (table->getField("crypt", pos)=="1") {
+            return false;
+        }
+    }
+    return true;
 }

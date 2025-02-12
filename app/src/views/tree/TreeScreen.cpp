@@ -62,6 +62,12 @@ void TreeScreen::setupActions(void)
 {
  QAction *ac;
 
+ // Отключить избранное
+ ac=new QAction(tr("Disable favorites"), this);
+ ac->setStatusTip(tr("Disable favorites"));
+ connect(ac, &QAction::triggered, this, &TreeScreen::disableFavorites);
+ actionList["disableFavorites"]=ac;
+
  // Разворачивание всех подветок
  ac=new QAction(this);
  ac->setIcon(QIcon(":/resource/pic/expand_all_subbranch.svg"));
@@ -185,6 +191,8 @@ void TreeScreen::setupUI(void)
  // Наполнение панели инструментов
  toolsLine=new QToolBar(this);
 
+ insertActionAsButton(toolsLine, actionList["disableFavorites"], false);
+
  insertActionAsButton(toolsLine, actionList["insSubbranch"]);
  insertActionAsButton(toolsLine, actionList["insBranch"]);
 
@@ -268,6 +276,22 @@ void TreeScreen::onCustomContextMenuRequested(const QPoint &pos)
 {
   qDebug() << "In TreeScreen::onCustomContextMenuRequested";
 
+  // Получение индекса выделенной ветки
+  QModelIndex index=getCurrentItemIndex();
+
+  // Если включено отображение избранных записей, то
+  // для ветки "Избранное" отображаем отдельное контекстное меню
+  if (mytetraConfig.get_showFavorites() && isCurrentFavoritesItem()) {
+
+   // Конструирование меню
+   QMenu menu(this);
+   menu.addAction(actionList["disableFavorites"]);
+
+   // Включение отображения меню на экране
+   menu.exec(knowTreeView->viewport()->mapToGlobal(pos));
+   return;
+  }
+
   // Конструирование меню
   QMenu menu(this);
   menu.addAction(actionList["insSubbranch"]);
@@ -289,9 +313,6 @@ void TreeScreen::onCustomContextMenuRequested(const QPoint &pos)
   menu.addSeparator();
   menu.addAction(actionList["encryptBranch"]);
   menu.addAction(actionList["decryptBranch"]);
-
-  // Получение индекса выделенной ветки
-  QModelIndex index=getCurrentItemIndex();
 
   // Выясняется, зашифрована ли ветка или нет
   QString cryptFlag=knowTreeModel->getItem(index)->getField("crypt");
@@ -414,13 +435,31 @@ void TreeScreen::assembly(void)
  lt->setContentsMargins(0,2,0,0);
 }
 
+// Выбор пункта меню "Отключить избранное"
+void TreeScreen::disableFavorites(void)
+{
+  QMessageBox messageBox(this);
+  messageBox.setWindowTitle(tr("Disable favorites"));
+  messageBox.setText(tr("Are you sure you want to disable favorites?\nThe program will have to be restarted for changes to take effect."));
+  QAbstractButton *cancelButton = messageBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
+  QAbstractButton *disableButton = messageBox.addButton(tr("Disable"), QMessageBox::AcceptRole);
+  Q_UNUSED(cancelButton);
+
+  messageBox.exec();
+  if (messageBox.clickedButton() == disableButton) {
+   // Отключаем отображение избранного и выходим из программы
+   mytetraConfig.set_showFavorites(false);
+   exit(0);
+  }
+}
+
 
 void TreeScreen::expandAllSubbranch(void)
 {
  // Получение индексов выделенных строк
  QModelIndexList selectitems=knowTreeView->selectionModel()->selectedIndexes();
 
- for(int i = 0; i < selectitems.size(); ++i) 
+ for(int i = 0; i < selectitems.size(); ++i)
   expandOrCollapseRecurse(selectitems.at(i), true);
 }
 
@@ -835,8 +874,14 @@ void TreeScreen::delBranch(QString mode)
 
    qDebug() << "Delete finish";
 
+   TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+
    // Сохранение дерева веток
-   find_object<TreeScreen>("treeScreen")->saveKnowTree();
+   treeScreen->saveKnowTree();
+
+   // Обновление на экране ветки "Избранное",
+   // так как количество избранных записей могло поменяться
+   treeScreen->updateFavoritesBranch();
 
    qDebug() << "Save new tree finish";
   }
@@ -1372,15 +1417,21 @@ void TreeScreen::onKnowtreeClicked(const QModelIndex &index)
 
     // Получаем указатель на текущую выбранную ветку дерева
     TreeItem *item = knowTreeModel->getItem(index);
+    bool isFavoritesItem = item->getField("id") == FixedParameters::favoritesItemId;
 
     // Все инструменты по работе с записями выключаются
     find_object<RecordTableScreen>("recordTableScreen")->disableAllActions();
 
-    // Вначале все инструменты работы с веткой включаются
+    // Вначале все инструменты работы с веткой включаются, если это не ветка "Избранное"
     QMapIterator<QString, QAction *> i(actionList);
     while (i.hasNext()) {
         i.next();
-        i.value()->setEnabled(true);
+        i.value()->setEnabled(!isFavoritesItem);
+    }
+
+    // Если это ветка "Избранное", то включаем только пункт меню "Отключить избранное"
+    if (isFavoritesItem) {
+        actionList["disableFavorites"]->setEnabled(true);
     }
 
     // Проверяется, происходит ли клик по зашифрованной ветке
@@ -1460,6 +1511,17 @@ void TreeScreen::updateSelectedBranch(void)
 }
 
 
+void TreeScreen::updateFavoritesBranch()
+{
+ // Если включено отображение избранных записей
+ if (mytetraConfig.get_showFavorites()) {
+  TreeItem *favoriteNode = knowTreeModel->getFavoritesItem();
+  QModelIndex index = knowTreeModel->getIndexByItem(favoriteNode);
+  updateBranchOnScreen(index);
+ }
+}
+
+
 QItemSelectionModel * TreeScreen::getSelectionModel(void)
 {
  return knowTreeView->selectionModel();
@@ -1533,6 +1595,20 @@ int TreeScreen::getFirstSelectedItemIndex(void)
 QModelIndex TreeScreen::getCurrentItemIndex(void)
 {
  return knowTreeView->selectionModel()->currentIndex();
+}
+
+
+// Проверка того, что текущий элемент - это ветка "Избранное"
+bool TreeScreen::isCurrentFavoritesItem()
+{
+ // Если включено отображение избранных записей
+ if (mytetraConfig.get_showFavorites()) {
+  QModelIndex index = knowTreeModel->getIndexByItem(knowTreeModel->getFavoritesItem());
+  QModelIndex currentIndex = knowTreeView->selectionModel()->currentIndex();
+  return currentIndex == index;
+ } else {
+  return false;
+ }
 }
 
 

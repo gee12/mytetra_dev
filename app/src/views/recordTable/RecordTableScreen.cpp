@@ -18,6 +18,7 @@
 #include "libraries/ShortcutManager.h"
 #include "libraries/helpers/ObjectHelper.h"
 #include "libraries/helpers/ActionHelper.h"
+#include "views/tree/TreeScreen.h"
 
 
 extern GlobalParameters globalParameters;
@@ -66,6 +67,14 @@ void RecordTableScreen::setupActions(void)
  // Редактирование свойств записи
  actionEditField = new QAction(this);
  actionEditField->setIcon(QIcon(":/resource/pic/note_edit.svg"));
+
+ // Добавление записи в избранное
+ actionFavorite = new QAction(this);
+ actionFavorite->setIcon(QIcon(":/resource/pic/favorites_yellow.svg"));
+
+ // Кнопка открытия избранной записи в своей исходной ветке
+ actionOpenInSourceNode = new QAction(tr("Open in source node"), this);
+ actionOpenInSourceNode->setStatusTip(tr("Open favorite record in source node"));
 
  // Блокировка записи
  actionBlock = new QAction(this);
@@ -168,7 +177,8 @@ void RecordTableScreen::setupUI(void)
  if(mytetraConfig.getInterfaceMode()=="desktop")
  {
    insertActionAsButton(toolsLine, actionEditField);
-   insertActionAsButton(toolsLine, actionBlock, false);
+   insertActionAsButton(toolsLine, actionFavorite, false); // Действие без видимой кнопки
+   insertActionAsButton(toolsLine, actionBlock, false); // Действие без видимой кнопки
    insertActionAsButton(toolsLine, actionDelete);
  }
 
@@ -213,6 +223,9 @@ void RecordTableScreen::setupShortcuts(void)
 
     // Редактирование свойств записи
     shortcutManager.initAction("note-editField", actionEditField);
+
+    // Добаление записи в избранное
+    shortcutManager.initAction("note-favorite", actionFavorite);
 
     // Блокировка/разблокировка записи
     shortcutManager.initAction("note-block", actionBlock);
@@ -260,6 +273,12 @@ void RecordTableScreen::setupSignals(void)
 
     // Редактирование записи
     connect(actionEditField, &QAction::triggered, recordTableController, &RecordTableController::onEditFieldContext);
+
+    // Добавление записи в избранное
+    connect(actionFavorite, &QAction::triggered, recordTableController, &RecordTableController::onFavoriteContext);
+
+    // Открытие исходной ветки у избранной записи
+    connect(actionOpenInSourceNode, &QAction::triggered, recordTableController, &RecordTableController::onOpenInSourceNodeClick);
 
     // Блокировка записи
     connect(actionBlock, &QAction::triggered, recordTableController, &RecordTableController::onBlockContext);
@@ -348,6 +367,8 @@ void RecordTableScreen::disableAllActions(void)
  actionAddNewBefore->setEnabled(false);
  actionAddNewAfter->setEnabled(false);
  actionEditField->setEnabled(false);
+ actionFavorite->setEnabled(false);
+ actionOpenInSourceNode->setEnabled(false);
  actionBlock->setEnabled(false);
  actionDelete->setEnabled(false);
 
@@ -391,16 +412,37 @@ void RecordTableScreen::toolsWidgetsUpdate()
 
  // Включаются те действия которые разрешены
 
+ TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
+ bool isCurrentFavoritesItem = treeScreen->isCurrentFavoritesItem();
+ bool isShowFavorites = mytetraConfig.get_showFavorites();
+
+ // Если включено избранное и выбрана ветка "Избранное"
+ if (isShowFavorites && isCurrentFavoritesItem) {
+   int pos = getFirstSelectionPos();
+   QModelIndex index = recordTableController->convertPosToProxyIndex(pos);
+   // Если отображается ветка "Избранное", и выделена запись, которая зашифрована и не расшифрована,
+   // то все действия оставляем отключенными
+   if (!recordTableController->isRecordNotEncryptedOrDecrypted(index)) {
+    return;
+   }
+
+   // Открыть исходную ветку избранной записи можно,
+   // только если текущая ветка - "Избранное"
+   actionOpenInSourceNode->setEnabled(true);
+ }
+
  // Добавление записи
- // Добавлять можно к любой ветке
- actionAddNewToEnd->setEnabled(true);
+ // Добавлять можно к любой ветке, кроме "Избранного"
+ if (!isCurrentFavoritesItem)
+   actionAddNewToEnd->setEnabled(true);
 
  // Добавление записи до
  // Добавлять "до" можно только тогда, когда выбрана только одна строка
  // и не включена сортировка
  if(recordTableController->getView()->selectionModel()->hasSelection() &&
          (recordTableController->getView()->selectionModel()->selectedRows()).size()==1 &&
-         recordTableController->getView()->isSortingEnabled()==false )
+         recordTableController->getView()->isSortingEnabled()==false &&
+         !isCurrentFavoritesItem)
    actionAddNewBefore->setEnabled(true);
 
  // Добавление записи после
@@ -408,7 +450,8 @@ void RecordTableScreen::toolsWidgetsUpdate()
  // и не включена сортировка
  if(recordTableController->getView()->selectionModel()->hasSelection() &&
     (recordTableController->getView()->selectionModel()->selectedRows()).size()==1 &&
-    recordTableController->getView()->isSortingEnabled()==false )
+    recordTableController->getView()->isSortingEnabled()==false &&
+     !isCurrentFavoritesItem)
    actionAddNewAfter->setEnabled(true);
 
  // Редактирование записи и получение ссылки на запись
@@ -417,24 +460,30 @@ void RecordTableScreen::toolsWidgetsUpdate()
     (recordTableController->getView()->selectionModel()->selectedRows()).size()==1)
  {
    actionEditField->setEnabled(true);
+   actionFavorite->setEnabled(true);
    actionBlock->setEnabled(true);
    actionCopyRecordReference->setEnabled(true);
  }
 
  // Удаление записи
  // Пункт активен только если запись (или записи) выбраны в списке
- if(recordTableController->getView()->selectionModel()->hasSelection())
-  actionDelete->setEnabled(true);
+ if(recordTableController->getView()->selectionModel()->hasSelection() &&
+     !isCurrentFavoritesItem)
+   actionDelete->setEnabled(true);
 
  // Удаление с копированием записи в буфер обмена
  // Пункт активен только если запись (или записи) выбраны в списке
- if(recordTableController->getView()->selectionModel()->hasSelection())
-  actionCut->setEnabled(true);
+ if(recordTableController->getView()->selectionModel()->hasSelection() &&
+     !isCurrentFavoritesItem)
+   actionCut->setEnabled(true);
 
  // Копирование записи в буфер обмена
- // Пункт активен только если запись (или записи) выбраны в списке
- if(recordTableController->getView()->selectionModel()->hasSelection())
-  actionCopy->setEnabled(true);
+ // Пункт активен если запись (или записи) выбраны в списке,
+ // а также, если находимся в ветки "Избранное" и среди выделенных нет нерасшифрованных
+ if(recordTableController->getView()->selectionModel()->hasSelection()) {
+   if (!isCurrentFavoritesItem || recordTableController->isAllSelectedRecordsNotEncryptedOrDecrypted())
+     actionCopy->setEnabled(true);
+ }
 
  // Вставка записи из буфера обмена
  // Вставлять записи можно только тогда, когда выбрана
@@ -442,9 +491,11 @@ void RecordTableScreen::toolsWidgetsUpdate()
  // или не выбрано ни одной строки (тогда добавляется в конец списка)
  // или записей вообще нет
  // И проверяется, содержит ли буфер обмена данные нужного формата
- if((recordTableController->getView()->selectionModel()->hasSelection() && (recordTableController->getView()->selectionModel()->selectedRows()).size()==1) ||
+ if(((recordTableController->getView()->selectionModel()->hasSelection()
+       && (recordTableController->getView()->selectionModel()->selectedRows()).size()==1) ||
      recordTableController->getView()->selectionModel()->hasSelection()==false ||
-     recordTableController->getView()->model()->rowCount()==0)
+      recordTableController->getView()->model()->rowCount()==0) &&
+     !isCurrentFavoritesItem)
   {
    const QMimeData *mimeData=QApplication::clipboard()->mimeData();
    if(mimeData!=nullptr)

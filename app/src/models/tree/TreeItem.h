@@ -104,7 +104,7 @@ class TreeItem
     void switchToDecrypt(void);
 
     // Первичное заполнение таблицы конечных записей, "промежуточный" метод
-    void recordtableInit(QDomElement domModel);
+    void recordtableInit(QDomElement domModel, TreeItem *favoriteNode);
 
     // Взятие количества записей в таблице конечных записей, "промежуточный" метод
     int recordtableGetRowCount(void);

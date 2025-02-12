@@ -49,6 +49,10 @@ public:
     int get_trashmaxfilecount(void);
     bool set_trashmaxfilecount(int count);
 
+    // Используется ли список избранных записей
+    bool get_showFavorites(void);
+    bool set_showFavorites(bool confirm);
+
     // Нужно ли показывать подтверждение при выполнении действия "cut на ветке
     bool get_cutbranchconfirm(void);
     bool set_cutbranchconfirm(bool confirm);

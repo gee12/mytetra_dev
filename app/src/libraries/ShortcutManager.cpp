@@ -73,6 +73,7 @@ void ShortcutManager::initDefaultKeyTable()
     defaultKeyTable.insert("note-addNewBefore", Data{ QKeySequence("Ctrl+Alt+J"), tr("Add a note before"), tr("Add a note before current selected note") });
     defaultKeyTable.insert("note-addNewAfter",  Data{ QKeySequence("Ctrl+Alt+M"), tr("Add a note after"), tr("Add a note after current selected note") });
     defaultKeyTable.insert("note-editField",    Data{ QKeySequence("Ctrl+Alt+E"), tr("Edit properties"), tr("Edit note properties (name, author, tags...)") });
+    defaultKeyTable.insert("note-favorite",     Data{ QKeySequence("Ctrl+Alt+F"), tr("Set/unset favorite note"), tr("Set or unset current selected note to/from favorites notes") });
     defaultKeyTable.insert("note-block",        Data{ QKeySequence("Ctrl+Alt+B"), tr("Block/Unblock note"), tr("Block or unblock current selected note") });
     defaultKeyTable.insert("note-delete",       Data{ QKeySequence("Ctrl+Alt+R"), tr("Delete note(s)"), tr("") });
     defaultKeyTable.insert("note-cut",          Data{ QKeySequence("Ctrl+Alt+X"), tr("Cut notes(s)"), tr("Cut notes(s) to clipboard") });

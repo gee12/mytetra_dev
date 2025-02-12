@@ -31,9 +31,11 @@ public:
  bool reloadKnowTree(void);
 
  void updateSelectedBranch(void);
+ void updateFavoritesBranch();
 
  int getFirstSelectedItemIndex(void);
  QModelIndex getCurrentItemIndex(void);
+ bool isCurrentFavoritesItem();
  
  QItemSelectionModel *getSelectionModel(void);
 
@@ -54,6 +56,7 @@ public slots:
 
 private slots:
 
+ void disableFavorites(void);
  void expandAllSubbranch(void);
  void collapseAllSubbranch(void);
  void expandOrCollapseRecurse(QModelIndex modelIndex, bool mode);
