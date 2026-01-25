@@ -519,6 +519,17 @@ FindScreen *GlobalParameters::getFindScreen()
 }
 
 
+void GlobalParameters::setTagsScreen(TagsScreen *point)
+{
+    pointTagsScreen=point;
+}
+
+TagsScreen *GlobalParameters::getTagsScreen()
+{
+    return pointTagsScreen;
+}
+
+
 void GlobalParameters::setMetaEditor(MetaEditor *point)
 {
     pointMetaEditor=point;

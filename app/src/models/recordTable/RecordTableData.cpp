@@ -226,7 +226,7 @@ Record RecordTableData::getRecordLite(int pos)
 {
     // Если индекс недопустимый, возвращается пустая запись
     if(pos<0 || pos>=(int)size())
-        return Record();
+        criticalError("RecordTableData::getRecordLite() : get unavailable record index " + QString::number(pos));
 
     // Хранимая в дереве запись не может быть "тяжелой"
     if(!tableData.at(pos)->isLite())
@@ -581,6 +581,20 @@ void RecordTableData::deleteRecordFromFavorites(int pos)
     // Удаляется элемент
     tableData.removeAt(pos);
     qDebug() << "Delete record from favorites succesfull";
+}
+
+
+void RecordTableData::initByTag(TreeItem *startNode)
+{
+    qDebug() << "RecordTableData.initByTag()";
+
+    treeItem = startNode;
+}
+
+
+void RecordTableData::insertRecordByTag(Record *record)
+{
+    tableData << record;
 }
 
 

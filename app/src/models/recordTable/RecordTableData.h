@@ -81,6 +81,10 @@ public:
     void deleteRecordFromFavorites(QString recordId);
     void deleteRecordFromFavorites(int pos);
 
+    // Список записей по метке
+    void initByTag(TreeItem *startNode);
+    void insertRecordByTag(Record *record);
+
     void editRecordFields(int pos,
                           QMap<QString, QString> editFields);
 
@@ -120,7 +124,8 @@ private:
     // Таблица записей (в нормальном виде содержит только "легкие" объекты записей)
     QList< Record* > tableData;
 
-    // Ссылка на ветку, которой принадлежит данная таблица
+    // Ссылка на ветку, которой принадлежит данная таблица.
+    // Для таблиц по записям метки данная ссылка пустая.
     TreeItem *treeItem;
 
     // Номер записи, с которой работал пользователь

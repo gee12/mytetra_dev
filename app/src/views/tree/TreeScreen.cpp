@@ -25,12 +25,14 @@
 #include "libraries/WindowSwitcher.h"
 #include "libraries/helpers/DiskHelper.h"
 #include "controllers/recordTable/RecordTableController.h"
+#include "controllers/tags/TagsTableController.h"
 #include "libraries/IconSelectDialog.h"
 #include "libraries/ShortcutManager.h"
 #include "libraries/helpers/ObjectHelper.h"
 #include "libraries/helpers/ActionHelper.h"
 #include "libraries/helpers/MessageHelper.h"
 #include "libraries/helpers/UniqueIdHelper.h"
+#include "views/tags/TagsScreen.h"
 
 
 extern AppConfig mytetraConfig;
@@ -883,6 +885,9 @@ void TreeScreen::delBranch(QString mode)
    // так как количество избранных записей могло поменяться
    treeScreen->updateFavoritesBranch();
 
+   // Перезагружаем список меток
+   find_object<TagsScreen>("tagsScreen")->reloadTags();
+
    qDebug() << "Save new tree finish";
   }
 
@@ -1115,6 +1120,9 @@ void TreeScreen::pasteBranchSmart(bool is_branch)
 
  // Разблокируется главное окно
  find_object<MainWindow>("mainwindow")->setEnabled(true);
+
+ // Перезагружаем список меток
+ find_object<TagsScreen>("tagsScreen")->reloadTags();
 }
 
 
@@ -1177,6 +1185,9 @@ void TreeScreen::encryptBranchItem(void)
 
  // Обновляеются на экране ветка и ее подветки
  updateBranchOnScreen( getCurrentItemIndex() );
+
+ // Перезагружаем список меток
+ find_object<TagsScreen>("tagsScreen")->reloadTags();
 }
 
 
@@ -1196,6 +1207,9 @@ void TreeScreen::decryptBranchItem(void)
 
  // Обновляеются на экране ветка и ее подветки
  updateBranchOnScreen( getCurrentItemIndex() );
+
+ // Перезагружаем список меток
+ find_object<TagsScreen>("tagsScreen")->reloadTags();
 
  // Проверяется, остались ли в дереве зашифрованные данные
  // если зашифрованных данных нет, будет предложено сбросить пароль
@@ -1429,6 +1443,11 @@ void TreeScreen::onKnowtreeClicked(const QModelIndex &index)
         i.value()->setEnabled(!isFavoritesItem);
     }
 
+    if (index.isValid()) {
+        // Убираем выделение метки в списке
+        find_object<TagsTableController>("tagsTableController")->clearSelection();
+    }
+
     // Если это ветка "Избранное", то включаем только пункт меню "Отключить избранное"
     if (isFavoritesItem) {
         actionList["disableFavorites"]->setEnabled(true);
@@ -1458,6 +1477,11 @@ void TreeScreen::onKnowtreeClicked(const QModelIndex &index)
                 isThisSlotWork=false;
 
                 return; // Программа дальше не идет, доделать...
+            }
+            else
+            {
+                // Перезагружаем список меток
+                find_object<TagsScreen>("tagsScreen")->reloadTags();
             }
         }
     }
@@ -1525,6 +1549,11 @@ void TreeScreen::updateFavoritesBranch()
 QItemSelectionModel * TreeScreen::getSelectionModel(void)
 {
  return knowTreeView->selectionModel();
+}
+
+
+void TreeScreen::clearSelection() {
+  knowTreeView->selectionModel()->clear();
 }
 
 

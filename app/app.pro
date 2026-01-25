@@ -138,6 +138,7 @@ INSTALLS+=icon_48_file
 
 
 HEADERS = src/main.h \
+    src/controllers/tags/TagsTableController.h \
     src/libraries/RandomInitter.h \
     src/libraries/helpers/ActionHelper.h \
     src/libraries/helpers/ConfigEditorHelper.h \
@@ -188,6 +189,8 @@ HEADERS = src/main.h \
     src/models/appConfig/AppConfig.h \
     src/views/record/AddNewRecord.h \
     src/libraries/ClipboardRecords.h \
+    src/views/tags/TagsScreen.h \
+    src/views/tags/TagsTableWidget.h \
     src/views/tree/TreeScreen.h \
     src/views/findInBaseScreen/FindScreen.h \
     src/views/findInBaseScreen/FindTableWidget.h \
@@ -296,6 +299,7 @@ HEADERS+=\
     src/libraries/MtStyledItemDelegate.h
 
 SOURCES = src/main.cpp \
+    src/controllers/tags/TagsTableController.cpp \
     src/libraries/RandomInitter.cpp \
     src/libraries/helpers/ActionHelper.cpp \
     src/libraries/helpers/ConfigEditorHelper.cpp \
@@ -317,6 +321,7 @@ SOURCES = src/main.cpp \
     src/libraries/wyedit/mvc/models/editorToolbarSettings/EditorToolbarSettingsAvailableToolsModel.cpp \
     src/libraries/wyedit/mvc/models/editorToolbarSettings/EditorToolbarSettingsUsedToolsModel.cpp \
     src/libraries/wyedit/mvc/views/editorToolbarSettings/EditorToolbarCommandsListView.cpp \
+    src/models/tags/TagsModel.cpp \
     src/views/appConfigWindow/AppConfigPage_Appearance.cpp \
     src/views/appConfigWindow/AppConfigPage_History.cpp \
     src/views/appConfigWindow/AppConfigPage_Tree.cpp \
@@ -346,6 +351,8 @@ SOURCES = src/main.cpp \
     src/models/appConfig/AppConfig.cpp \
     src/views/record/AddNewRecord.cpp \
     src/libraries/ClipboardRecords.cpp \
+    src/views/tags/TagsScreen.cpp \
+    src/views/tags/TagsTableWidget.cpp \
     src/views/tree/TreeScreen.cpp \
     src/views/findInBaseScreen/FindScreen.cpp \
     src/views/findInBaseScreen/FindTableWidget.cpp \

@@ -297,6 +297,19 @@ void AppConfig::set_findsplitter_size_list(QList<int> list)
 }
 
 
+int AppConfig::get_tagsscreen_width(void)
+{
+    return conf->value("tagsscreen_width", "100").toString().toInt();
+}
+
+
+void AppConfig::set_tagsscreen_width(int width)
+{
+    qDebug() << "Config set tags screen width to " << width;
+    conf->setValue("tagsscreen_width", width);
+}
+
+
 QList<int> AppConfig::get_splitter_size_list(QString name)
 {
     QStringList line_list;
@@ -410,6 +423,26 @@ bool AppConfig::get_findscreen_show(void)
 void AppConfig::set_findscreen_show(bool isShow)
 {
     conf->setValue("findscreen_show",isShow);
+}
+
+
+bool AppConfig::get_tagsscreen_show(void)
+{
+    return conf->value("tagsscreen_show",0).toBool();
+}
+
+
+void AppConfig::set_tagsscreen_show(bool isShow)
+{
+    conf->setValue("tagsscreen_show",isShow);
+}
+
+QString AppConfig::get_tags_sort() {
+    return get_parameter("tags_sort");
+}
+
+void AppConfig::set_tags_sort(QString sort) {
+    conf->setValue("tags_sort",sort);
 }
 
 
@@ -1172,6 +1205,7 @@ void AppConfig::update_version_process(void)
     parameterFunctions << &AppConfig::get_parameter_table_37;
     parameterFunctions << &AppConfig::get_parameter_table_38;
     parameterFunctions << &AppConfig::get_parameter_table_39;
+    parameterFunctions << &AppConfig::get_parameter_table_40;
 
     for(int i=1; i<parameterFunctions.count()-1; ++i)
     {
@@ -1954,6 +1988,27 @@ QStringList AppConfig::get_parameter_table_39(bool withEndSignature)
     table << "theme" << "QString" << "light";
 
     if(withEndSignature)
+        table << "0" << "0" << "0";
+
+    return table;
+}
+
+
+QStringList AppConfig::get_parameter_table_40(bool withEndSignature)
+{
+    // Таблица параметров
+    // Имя, Тип, Значение на случай когда в конфиге параметра прочему-то нет
+    QStringList table;
+
+    // Старые параметры, аналогичные версии 39
+    table << get_parameter_table_39(false);
+
+    // Список меток
+    table << "tagsscreen_show" << "bool" << "true";
+    table << "tagsscreen_width" << "int" << "100";
+    table << "tags_sort" << "QString" << "0,0";
+
+    if (withEndSignature)
         table << "0" << "0" << "0";
 
     return table;

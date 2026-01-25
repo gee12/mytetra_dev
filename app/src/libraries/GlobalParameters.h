@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QStatusBar>
 
+class TagsScreen;
 class TreeScreen;
 class MetaEditor;
 class RecordTableScreen;
@@ -44,6 +45,9 @@ public:
 
     void setFindScreen(FindScreen *point);
     FindScreen *getFindScreen();
+
+    void setTagsScreen(TagsScreen *point);
+    TagsScreen *getTagsScreen();
 
     void setMetaEditor(MetaEditor *point);
     MetaEditor *getMetaEditor();
@@ -97,6 +101,7 @@ private:
     TreeScreen *pointTreeScreen=nullptr;
     RecordTableScreen *pointRecordTableScreen=nullptr;
     FindScreen *pointFindScreen=nullptr;
+    TagsScreen *pointTagsScreen=nullptr;
     MetaEditor *pointMetaEditor=nullptr;
     QStatusBar *pointStatusBar=nullptr;
     WindowSwitcher *windowSwitcher=nullptr;

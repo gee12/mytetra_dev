@@ -38,6 +38,7 @@ public:
  bool isCurrentFavoritesItem();
  
  QItemSelectionModel *getSelectionModel(void);
+ void clearSelection();
 
  void exportBranchToDirectory(QString exportDir);
  void importBranchFromDirectory(QString importDir);

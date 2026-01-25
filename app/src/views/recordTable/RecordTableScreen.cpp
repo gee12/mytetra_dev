@@ -117,6 +117,10 @@ void RecordTableScreen::setupActions(void)
  actionFindInBase=new QAction(shortcutManager.getDescriptionWithShortcut("misc-findInBase"), this);
  actionFindInBase->setIcon(QIcon(":/resource/pic/find_in_base.svg"));
 
+ // Список меток (клик связывается с действием в MainWindow)
+ actionTagsTable=new QAction(shortcutManager.getDescriptionWithShortcut("misc-tagsTable"), this);
+ actionTagsTable->setIcon(QIcon(":/resource/pic/tag.png"));
+
  // Перемещение по истории посещаемых записей назад
  actionWalkHistoryPrevious=new QAction(tr("Previous viewing note"), this);
  actionWalkHistoryPrevious->setIcon(QIcon(":/resource/pic/walk_history_previous.svg"));
@@ -200,6 +204,7 @@ void RecordTableScreen::setupUI(void)
    insertActionAsButton(extraToolsLine, actionWalkHistoryNext);
  }
  insertActionAsButton(extraToolsLine, actionFindInBase);
+ insertActionAsButton(extraToolsLine, actionTagsTable);
 
  treePathLabel=new QLabel(this);
  treePathLabel->setWordWrap(true);
@@ -306,6 +311,9 @@ void RecordTableScreen::setupSignals(void)
 
     // Поиск по базе (клик связывается с действием в MainWindow)
     connect(actionFindInBase, &QAction::triggered, find_object<MainWindow>("mainwindow"), &MainWindow::toolsFindInBase);
+
+    // Список меток (клик связывается с действием в MainWindow)
+    connect(actionTagsTable, &QAction::triggered, find_object<MainWindow>("mainwindow"), &MainWindow::toolsTagsTable);
 
     // Синхронизация
     connect(actionSyncro, &QAction::triggered, this, &RecordTableScreen::onSyncroClick);

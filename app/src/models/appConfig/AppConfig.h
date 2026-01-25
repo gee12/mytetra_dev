@@ -83,6 +83,9 @@ public:
     QList<int> get_findsplitter_size_list(void);
     void set_findsplitter_size_list(QList<int> list);
 
+    int get_tagsscreen_width(void);
+    void set_tagsscreen_width(int width);
+
     QList<int> get_splitter_size_list(QString name);
     void set_splitter_size_list(QString name, QList<int> list);
 
@@ -111,6 +114,12 @@ public:
 
     bool get_findscreen_show(void);
     void set_findscreen_show(bool isShow);
+
+    bool get_tagsscreen_show(void);
+    void set_tagsscreen_show(bool isShow);
+
+    QString get_tags_sort(void);
+    void set_tags_sort(QString sort);
 
     QString get_howpassrequest(void);
     void set_howpassrequest(QString mode);
@@ -324,6 +333,7 @@ private:
     QStringList get_parameter_table_37(bool withEndSignature=true);
     QStringList get_parameter_table_38(bool withEndSignature=true);
     QStringList get_parameter_table_39(bool withEndSignature=true);
+    QStringList get_parameter_table_40(bool withEndSignature=true);
 
     bool is_init_flag;
 };

@@ -135,5 +135,6 @@
         <file>resource/pic/open_image.svg</file>
         <file>resource/pic/favorites_gray.svg</file>
         <file>resource/pic/favorites_yellow.svg</file>
+        <file>resource/pic/tag.png</file>
     </qresource>
 </RCC>

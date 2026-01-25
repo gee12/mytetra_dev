@@ -9,6 +9,7 @@
 #include "views/recordTable/RecordTableView.h"
 #include "views/recordTable/RecordTableScreen.h"
 #include "views/recordTable/RecordTablePrint.h"
+#include "views/tags/TagsScreen.h"
 #include "views/mainWindow/MainWindow.h"
 #include "views/tree/KnowTreeView.h"
 #include "views/tree/TreeScreen.h"
@@ -118,6 +119,9 @@ void RecordTableController::clickToRecord(const QModelIndex &index)
     if (password.retrievePassword()==false) {
        // Если пароль указан неверно, открывать запись не нужно
       return;
+    } else {
+      // Если пароль указан верно, то перезагружаем список меток
+      find_object<TagsScreen>("tagsScreen")->reloadTags();
     }
   }
 
@@ -654,6 +658,9 @@ void RecordTableController::addNew(int mode, Record &record)
 
         // Сохранение дерева веток
         find_object<TreeScreen>("treeScreen")->saveKnowTree();
+
+        // Перезагружаем список меток
+        find_object<TagsScreen>("tagsScreen")->reloadTags();
     }
 }
 
@@ -858,12 +865,20 @@ void RecordTableController::editFieldContext(QModelIndex proxyIndex)
   if(i==QDialog::Rejected)
     return; // Была нажата отмена, ничего не нужно делать
 
+  QString oldTags = table->getField("tags", pos);
+  QString newTags = editRecordWin.getField("tags");
+
   // Измененные данные записываются
   editField(pos,
             editRecordWin.getField("name"),
             editRecordWin.getField("author"),
             editRecordWin.getField("url"),
             editRecordWin.getField("tags"));
+
+  if (oldTags != newTags) {
+    // Перезагружаем список меток
+    find_object<TagsScreen>("tagsScreen")->reloadTags();
+  }
 }
 
 
@@ -1027,6 +1042,9 @@ void RecordTableController::deleteRecords(void)
   // Обновление на экране ветки "Избранное",
   // так как количество избранных записей могло поменяться
   treeScreen->updateFavoritesBranch();
+
+  // Перезагружаем список меток
+  find_object<TagsScreen>("tagsScreen")->reloadTags();
 
   // Установка курсора на нужную позицию
   if(selectionRowNum>=0 && selectionRowNum<recordProxyModel->rowCount())

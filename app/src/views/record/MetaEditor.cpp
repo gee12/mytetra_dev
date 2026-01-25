@@ -385,6 +385,8 @@ void MetaEditor::setTags(QString tags)
 // по нему восстанавливается текст метки
 void MetaEditor::onClickToTag(const QString &link_text)
 {
+    //TODO: отображать список записей по метке
+
  qDebug() << "Click to tag " << link_text;
 
  // Текст метки
