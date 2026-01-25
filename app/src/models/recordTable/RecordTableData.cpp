@@ -64,7 +64,7 @@ QString RecordTableData::getField(QString name, int pos) const
         criticalError("RecordTableData::getField() : get unavailable record index "+i);
     }
 
-    return tableData.at(pos).getField(name);
+    return tableData.at(pos)->getField(name);
 }
 
 
@@ -79,7 +79,7 @@ void RecordTableData::setField(QString name, QString value, int pos)
         criticalError("In RecordTableData::setField() unavailable record index "+i+" in table while field "+name+" try set to "+value);
     }
 
-    tableData[pos].setField(name, value);
+    tableData[pos]->setField(name, value);
 }
 
 
@@ -92,7 +92,7 @@ QString RecordTableData::getText(int pos)
     if(pos<0 || pos>=(int)size())
         return QString();
 
-    return tableData[pos].getTextDirect();
+    return tableData[pos]->getTextDirect();
 }
 
 
@@ -229,10 +229,10 @@ Record RecordTableData::getRecordLite(int pos)
         return Record();
 
     // Хранимая в дереве запись не может быть "тяжелой"
-    if(!tableData.at(pos).isLite())
+    if(!tableData.at(pos)->isLite())
         criticalError("In RecordTableData::getRecordLite() try get fat record");
 
-    return tableData.at(pos);
+    return *tableData.at(pos);
 }
 
 
@@ -263,7 +263,7 @@ Record *RecordTableData::getRecord(int pos)
     if(pos<0 || pos>=(int)size())
         return nullptr;
 
-    return &(tableData[pos]);
+    return tableData[pos];
 }
 
 
@@ -288,7 +288,7 @@ QSet<QString> RecordTableData::getRecordsIdList()
 
     for( auto record : tableData)
     {
-        ids << record.getField("id");
+        ids << record->getField("id");
     }
 
     return ids;
@@ -328,20 +328,17 @@ void RecordTableData::setupDataFromDom(QDomElement *domModel, TreeItem *favorite
     while(!currentRecordDom.isNull())
     {
         // Структура, куда будет помещена текущая запись
-        Record currentRecord;
+        Record *record = new Record();
 
         // Текущая запись добавляется в таблицу конечных записей (и располагается по определенному адресу в памяти)
-        tableData << currentRecord;
+        tableData << record;
 
-        // Запись инициализируется данными. Она должна инициализироватся после размещения в списке tableData,
-        // чтобы в подчиненных объектах прописались правильные указатели на данную запись
-        Record *addedRecord = &tableData.last();
-        addedRecord->setupDataFromDom(currentRecordDom);
+        record->setupDataFromDom(currentRecordDom);
 
         // Обновляем максимальную позицию для списка избранных записей
         // Если запись избранная, тодобавляем ее в ветку "Избранное"
-        if (favoriteNode != nullptr && addedRecord->isFavorite()) {
-            favoriteNode->recordtableGetTableData()->insertRecordToFavorites(addedRecord);
+        if (favoriteNode != nullptr && record->isFavorite()) {
+            favoriteNode->recordtableGetTableData()->insertRecordToFavorites(record);
         }
 
         currentRecordDom=currentRecordDom.nextSiblingElement("record");
@@ -362,7 +359,7 @@ QDomElement RecordTableData::exportDataToDom(QDomDocument *doc) const
 
     // Пробегаются все записи в таблице
     for(int i=0; i<tableData.size(); i++)
-        recordTableDomData.appendChild( tableData.at(i).exportDataToDom( doc ) ); // К элементу recordtabledata прикрепляются конечные записи
+        recordTableDomData.appendChild( tableData.at(i)->exportDataToDom( doc ) ); // К элементу recordtabledata прикрепляются конечные записи
 
     // qDebug() << "In export_modeldata_to_dom() recordtabledata " << doc.toString();
 
@@ -380,7 +377,7 @@ void RecordTableData::exportDataToStreamWriter(QXmlStreamWriter *xmlWriter) cons
 
     // Пробегаются все записи в таблице
     for(int i=0; i<tableData.size(); i++)
-        tableData.at(i).exportDataToStreamWriter( xmlWriter );
+        tableData.at(i)->exportDataToStreamWriter( xmlWriter );
 
     xmlWriter->writeEndElement(); // Закрылся recordtable
 }
@@ -398,7 +395,7 @@ void RecordTableData::exportDataToStreamWriter(QXmlStreamWriter *xmlWriter) cons
 // Объект для вставки приходит как незашифрованным, так и зашифрованным
 int RecordTableData::insertNewRecord(int mode,
                                      int pos,
-                                     Record record,
+                                     Record &record,
                                      bool isCheckAndAddToFavorites)
 {
     qDebug() << "RecordTableData::insert_new_record() : Insert new record to tree item " << treeItem->getAllFields();
@@ -470,17 +467,17 @@ int RecordTableData::insertNewRecord(int mode,
     int insertPos=-1;
     if(mode==GlobalParameters::AddNewRecordBehavior::ADD_TO_END) // В конец списка
     {
-        tableData << record;
+        tableData << &record;
         insertPos=tableData.size()-1;
     }
     else if(mode==GlobalParameters::AddNewRecordBehavior::ADD_BEFORE) // Перед указанной позицией
     {
-        tableData.insert(pos, record);
+        tableData.insert(pos, &record);
         insertPos=pos;
     }
     else if(mode==GlobalParameters::AddNewRecordBehavior::ADD_AFTER) // После указанной позиции
     {
-        tableData.insert(pos+1, record);
+        tableData.insert(pos+1, &record);
         insertPos=pos+1;
     }
 
@@ -533,19 +530,13 @@ int RecordTableData::getFavoriteOrderNumber(int pos)
 }
 
 
-// Функция для сортировки списка записей исходя из поля "favor"
-static bool compareFavoriteOrderNumber(Record &record1, Record &record2)
-{
-    return record1.getFavoriteOrderNumber() < record2.getFavoriteOrderNumber();
-}
-
-
 // Сортировка списка записей по порядковым номерам
 void RecordTableData::sortByFavorField()
 {
-    std::sort(tableData.begin(), tableData.end(), compareFavoriteOrderNumber);
+    std::sort(tableData.begin(), tableData.end(), [](Record *record1, Record *record2) {
+        return record1->getFavoriteOrderNumber() < record2->getFavoriteOrderNumber();
+    });
 }
-
 
 
 // Добавление записи в избранное.
@@ -556,7 +547,7 @@ void RecordTableData::insertRecordToFavorites(Record *record)
     qDebug() << "RecordTableData::insert_record_to_favorites() : Insert record to favorites";
 
     // Запись добавляется в конец таблицы конечных записей
-    tableData << *record;
+    tableData << record;
     int insertPos = tableData.size()-1;
 
     qDebug() << "RecordTableData::insert_record_to_favorites() : Record pos in favorites " << QString::number(insertPos);
@@ -770,7 +761,7 @@ void RecordTableData::switchToEncrypt(void)
             continue;
 
         // Шифрация записи
-        tableData[i].switchToEncryptAndSaveLite(); // В таблице конечных записей хранятся легкие записи
+        tableData[i]->switchToEncryptAndSaveLite(); // В таблице конечных записей хранятся легкие записи
     }
 }
 
@@ -787,7 +778,7 @@ void RecordTableData::switchToDecrypt(void)
             continue;
 
         // Расшифровка записи
-        tableData[i].switchToDecryptAndSaveLite(); // В таблице конечных записей хранятся легкие записи
+        tableData[i]->switchToDecryptAndSaveLite(); // В таблице конечных записей хранятся легкие записи
     }
 }
 

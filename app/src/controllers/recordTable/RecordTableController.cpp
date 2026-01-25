@@ -546,9 +546,10 @@ void RecordTableController::paste(void)
   int nList=clipboardRecords->getCount();
 
   // Пробегаются все записи в буфере
-  for(int i=0;i<nList;i++)
-    addNew(GlobalParameters::AddNewRecordBehavior::ADD_TO_END, clipboardRecords->getRecord(i));
-
+  for(int i=0;i<nList;i++) {
+    Record *record = new Record(clipboardRecords->getRecord(i));
+    addNew(GlobalParameters::AddNewRecordBehavior::ADD_TO_END, *record);
+  }
   TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
 
   // Обновление на экране ветки, на которой стоит засветка,
@@ -606,14 +607,14 @@ void RecordTableController::addNewRecord(int mode)
 
   // todo: сделать заполнение таблицы приаттаченных файлов
 
-  Record record;
-  record.switchToFat();
-  record.setText( addNewRecordWin.getField("text") );
-  record.setField("name",   addNewRecordWin.getField("name"));
-  record.setField("author", addNewRecordWin.getField("author"));
-  record.setField("url",    addNewRecordWin.getField("url"));
-  record.setField("tags",   addNewRecordWin.getField("tags"));
-  record.setPictureFiles( DiskHelper::getFilesFromDirectory(directory, "*.png") );
+  Record *record = new Record();
+  record->switchToFat();
+  record->setText( addNewRecordWin.getField("text") );
+  record->setField("name",   addNewRecordWin.getField("name"));
+  record->setField("author", addNewRecordWin.getField("author"));
+  record->setField("url",    addNewRecordWin.getField("url"));
+  record->setField("tags",   addNewRecordWin.getField("tags"));
+  record->setPictureFiles( DiskHelper::getFilesFromDirectory(directory, "*.png") );
 
   // Пока что принята концепция, что файлы нельзя приаттачить в момент создания записи
   // Запись должна быть создана, потом можно аттачить файлы.
@@ -624,7 +625,7 @@ void RecordTableController::addNewRecord(int mode)
   DiskHelper::removeDirectory(directory);
 
   // Введенные данные добавляются (все только что введенные данные передаются в функцию addNew() незашифрованными)
-  addNew(mode, record);
+  addNew(mode, *record);
 
   // После добавления новой записи редактор всегда должен переключаться на слой текста
   // (а не оставаться на слое аттачей, если он ранее был активным)
@@ -635,7 +636,7 @@ void RecordTableController::addNewRecord(int mode)
 
 // Функция добавления новой записи в таблицу конечных записей
 // Принимает полный формат записи
-void RecordTableController::addNew(int mode, Record record)
+void RecordTableController::addNew(int mode, Record &record)
 {
     qDebug() << "In add_new()";
 

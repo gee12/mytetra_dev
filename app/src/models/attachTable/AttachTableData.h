@@ -78,7 +78,7 @@ protected:
   bool liteFlag;
 
   // Перечень файлов и их свойств
-  QList< Attach > attachTable;
+  QList< Attach > attachTable; //FIXME Attach* ?
 
   // Какой записи принадлежит таблица файлов
   Record *record;

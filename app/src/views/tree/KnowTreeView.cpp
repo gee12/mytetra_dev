@@ -235,14 +235,14 @@ void KnowTreeView::dropEvent(QDropEvent *event)
    for(int i=0; i<clipboardRecords->getCount(); i++)
     {
      // Полные данные записи
-     Record record=clipboardRecords->getRecord(i);
+     Record *record = new Record(clipboardRecords->getRecord(i)); //FIXME ?
 
      qDebug() << " Before delete, cursor at row: " << recordTableController->getView()->currentIndex().row();
 
      // Удаление записи из исходной ветки, удаление должно быть вначале, чтобы сохранился ID записи
      // В этот момент вид таблицы конечных записей показывает таблицу, из которой совершается Drag
      // TreeItem *treeItemFrom=parentPointer->knowTreeModel->getItem(indexFrom);
-     recordTableController->removeRowById( record.getField("id") );
+     recordTableController->removeRowById( record->getField("id") );
 
      qDebug() << " After delete, cursor at row: " << recordTableController->getView()->currentIndex().row();
 
@@ -272,7 +272,7 @@ void KnowTreeView::dropEvent(QDropEvent *event)
      // Добавление записи в базу
      recordTableData->insertNewRecord(GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
                                       0,
-                                      record,
+                                      *record,
                                       isCheckAndAddToFavorites);
 
      // Сохранение дерева веток

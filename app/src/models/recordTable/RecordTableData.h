@@ -69,7 +69,7 @@ public:
 
     int insertNewRecord(int mode,
                         int pos,
-                        Record record,
+                        Record &record,
                         bool isCheckAndAddToFavorites=true);
 
     // Избранное
@@ -118,7 +118,7 @@ private:
     void setupDataFromDom(QDomElement *domModel, TreeItem *favoriteNode);
 
     // Таблица записей (в нормальном виде содержит только "легкие" объекты записей)
-    QList< Record > tableData;
+    QList< Record* > tableData;
 
     // Ссылка на ветку, которой принадлежит данная таблица
     TreeItem *treeItem;

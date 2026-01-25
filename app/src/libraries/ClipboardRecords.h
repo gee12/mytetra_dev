@@ -14,7 +14,7 @@
 // которая будет передаваться через буфер обмена
 struct CLIPB_RECORDS_STRUCT
 {
-  QList< Record > table;
+  QList< Record > table; //FIXME Record* ?
 };
 Q_DECLARE_METATYPE(CLIPB_RECORDS_STRUCT);
 

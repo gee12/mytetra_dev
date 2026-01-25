@@ -1427,14 +1427,16 @@ QString KnowTreeModel::pasteSubbranchRecurse(TreeItem *item,
   // -----------------------------------------------
 
   // Выясняются данные конечных записей
+  //FIXME Record* ?
   QList< Record > records=subbranch->getBranchRecords(startBranchId);
 
   foreach(Record record, records)
   {
+    Record *recordNew = new Record(record);
     qDebug() << "Add table record "+record.getField("name");
     newitem->recordtableGetTableData()->insertNewRecord(GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
                                                         0,
-                                                        record);
+                                                        *recordNew);
   }
 
   // --------------------

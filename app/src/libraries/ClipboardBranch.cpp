@@ -141,9 +141,9 @@ QMap<QString, QString> ClipboardBranch::getBranchFieldsById(QString id)
 
 
 // Получение списка записей для указанной ветки
-QList< Record > ClipboardBranch::getBranchRecords(QString id)
+QList< Record > ClipboardBranch::getBranchRecords(QString id) //FIXME Record* ?
 {
- QList< Record > records;
+ QList< Record > records; //FIXME Record* ?
 
  // Находятся записи с нужным идентификатором
  // Записи добавляются в records в последовательности задом-наперёд

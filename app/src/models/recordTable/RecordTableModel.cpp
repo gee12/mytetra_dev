@@ -381,7 +381,7 @@ RecordTableData *RecordTableModel::getTableData(void)
 // Функция возвращает позицию нового добавленного элемента
 int RecordTableModel::addTableData(int mode,
                                    QModelIndex posIndex,
-                                   Record record)
+                                   Record &record)
 {
     if(table==nullptr)
     {

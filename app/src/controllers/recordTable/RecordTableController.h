@@ -120,7 +120,7 @@ protected:
 
   void addNewRecord(int mode);
 
-  void addNew(int mode, Record record);
+  void addNew(int mode, Record &record);
 
   void editField(int pos,
                  QString name,

@@ -64,7 +64,7 @@ public:
  QMap<QString, QString> getBranchFieldsById(QString id);
 
  // Получение списка записей для указанной ветки
- QList<Record> getBranchRecords(QString id);
+ QList<Record> getBranchRecords(QString id); //FIXME Record* ?
 
 protected:
  // Этот метод QMimeData надо переопределить, так как он виртуальный
