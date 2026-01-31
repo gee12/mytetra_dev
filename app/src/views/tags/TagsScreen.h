@@ -32,7 +32,6 @@ public:
  virtual ~TagsScreen();
 
  void reloadTags();
- void onTagSelected(RecordTableData *rtdata);
  void setWarningMessage(const QString &warningMessage);
 
 public slots:

@@ -10,6 +10,7 @@ class TagsModel;
 class TagsTableController : public QObject
 {
   Q_OBJECT
+
 public:
   TagsTableController(QObject *parent = nullptr);
   virtual ~TagsTableController();
@@ -21,6 +22,12 @@ public:
   void onSortChanged(int columnIndex, Qt::SortOrder order) const;
   void findInTags();
   TagsTableWidget *getView();
+
+  void renameTag(const QModelIndex &proxyIndex, QString newName);
+  void deleteTag(QModelIndex proxyIndex);
+
+public slots:
+  void onCopyTagReferenceContext();
 
 protected:
   void sortTags();

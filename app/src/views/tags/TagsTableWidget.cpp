@@ -2,9 +2,11 @@
 #include <QString>
 #include <QHeaderView>
 #include <QTableView>
+#include <QInputDialog>
 
 #include "TagsTableWidget.h"
 #include "main.h"
+#include "controllers/tags/TagsTableController.h"
 #include "views/mainWindow/MainWindow.h"
 #include "models/appConfig/AppConfig.h"
 #include "libraries/helpers/GestureHelper.h"
@@ -13,21 +15,27 @@
 extern AppConfig mytetraConfig;
 
 
-TagsTableWidget::TagsTableWidget(QWidget *parent) : QWidget(parent)
-{
+TagsTableWidget::TagsTableWidget(QWidget *parent, TagsTableController *controller) : QWidget(parent) {
+  setController(controller);
   setupUI();
+  setupActions();
   setupSignals();
   assembly();
+
+  assemblyContextMenu();
 }
 
 
-TagsTableWidget::~TagsTableWidget()
-{
+TagsTableWidget::~TagsTableWidget() {
 }
 
 
-void TagsTableWidget::setupUI()
-{
+void TagsTableWidget::setController(TagsTableController *controller) {
+  this->controller = controller;
+}
+
+
+void TagsTableWidget::setupUI() {
   tagsTableView = new QTableView(this);
   tagsTableView->setObjectName("tagsTableView");
   tagsTableView->setMinimumSize(200,1);
@@ -74,16 +82,56 @@ void TagsTableWidget::setupUI()
 }
 
 
-void TagsTableWidget::setupSignals()
-{
-  // Подключаем сигнал изменения размера столбцов
-  connect(tagsTableView->horizontalHeader(), &QHeaderView::sectionResized,
-          this, &TagsTableWidget::onSectionResized);
+void TagsTableWidget::setupActions() {
+  // Переименование метки
+  actionRenameTag = new QAction(tr("Rename tag"), this);
+  actionRenameTag->setIcon(QIcon(":/resource/pic/note_edit.svg"));
+
+  // Копирование ссылки на метку
+  actionCopyTagReference = new QAction(tr("Copy tag reference"), this);
+  actionCopyTagReference->setIcon(QIcon(":/resource/pic/note_reference.svg"));
+
+  // Удаление метки
+  actionDeleteTag = new QAction(tr("Delete tag"), this);
+  actionDeleteTag->setIcon(QIcon(":/resource/pic/note_delete.svg"));
 }
 
 
-void TagsTableWidget::assembly()
-{
+void TagsTableWidget::setupSignals() {
+  // Клик по метке
+  connect(tagsTableView, &QTableView::pressed, controller, &TagsTableController::onTagClicked);
+  // Сортировка меток
+  connect(tagsTableView->horizontalHeader(), &QHeaderView::sortIndicatorChanged, controller, &TagsTableController::onSortChanged);
+  // Изменение размера столбцов
+  connect(tagsTableView->horizontalHeader(), &QHeaderView::sectionResized,
+          this, &TagsTableWidget::onSectionResized);
+  // Контекстное меню по правому клику на списке меток
+  connect(tagsTableView, &QTableView::customContextMenuRequested,
+          this, &TagsTableWidget::onCustomContextMenuRequested);
+  // Контекстное меню по долгому нажатию
+  //connect(tagsTableView, &QTableView::tapAndHoldGestureFinished,
+  //        this, &TagsTableWidget::onCustomContextMenuRequested);
+  // Переименование метки
+  connect(actionRenameTag, &QAction::triggered, this, &TagsTableWidget::onRenameTagContext);
+  // Копирование ссылки на метку
+  connect(actionCopyTagReference, &QAction::triggered, controller, &TagsTableController::onCopyTagReferenceContext);
+  // Удаление метки
+  connect(actionDeleteTag, &QAction::triggered, this, &TagsTableWidget::onDeleteTagContext);
+}
+
+
+void TagsTableWidget::assemblyContextMenu() {
+  contextMenu = new QMenu(this);
+
+  contextMenu->addAction(actionRenameTag);
+  contextMenu->addAction(actionCopyTagReference);
+  contextMenu->addAction(actionDeleteTag);
+
+  tagsTableView->setContextMenuPolicy(Qt::CustomContextMenu);
+}
+
+
+void TagsTableWidget::assembly() {
   auto *centralLayout = new QHBoxLayout();
 
   centralLayout->addWidget(tagsTableView);
@@ -95,28 +143,23 @@ void TagsTableWidget::assembly()
 }
 
 
-void TagsTableWidget::clearAll()
-{
+void TagsTableWidget::clearAll() {
   setOverdrawMessage("");
 }
 
 
-void TagsTableWidget::onDataLoaded()
-{
+void TagsTableWidget::onDataLoaded() {
     const auto *model = tagsTableView->model();
-    if (model->rowCount()==0)
-    {
+    if (model->rowCount()==0) {
         setOverdrawMessage(tr("Tags not found."));
     }
 }
 
 
-void TagsTableWidget::paintEvent(QPaintEvent *event)
-{
+void TagsTableWidget::paintEvent(QPaintEvent *event) {
   QWidget::paintEvent(event);
 
-  if (overdrawMessage.length() > 0)
-  {
+  if (overdrawMessage.length() > 0) {
     QPainter painter(this);
     painter.setPen( QApplication::palette().color(QPalette::ToolTipText) );
     painter.drawText(rect(), Qt::AlignCenter, overdrawMessage);
@@ -195,7 +238,7 @@ void TagsTableWidget::onSectionResized(int logicalIndex, int oldSize, int newSiz
   }
 
   // Меняем ширину следующего столбца (если он есть),
-  // чтобы общая ширина теблицы оставалась неизменной
+  // чтобы общая ширина таблицы оставалась неизменной
   if (logicalIndex < columnCount - 1) {
     int currentSizeForNextColumn = tagsTableView->horizontalHeader()->sectionSize(logicalIndex + 1);
     int newSizeForNextColumn = qMax(minSize, currentSizeForNextColumn - excess);
@@ -208,8 +251,53 @@ void TagsTableWidget::onSectionResized(int logicalIndex, int oldSize, int newSiz
 }
 
 
-void TagsTableWidget::setOverdrawMessage(const QString message)
-{
+void TagsTableWidget::onCustomContextMenuRequested(const QPoint &mousePos) {
+  // Отображение контекстного меню
+  contextMenu->exec(tagsTableView->viewport()->mapToGlobal(mousePos));
+}
+
+
+void TagsTableWidget::onRenameTagContext() {
+  QModelIndex proxyIndex = getFirstSelectedIndex();
+  if (proxyIndex.isValid()) {
+    // Получение имени ветки
+    QString oldName = proxyIndex.data(USER_ROLE_TAG_NAME).toString();
+
+    // Создается окно ввода данных
+    bool result;
+    QString newName = QInputDialog::getText(this,
+                                            tr("Rename tag"),
+                                            tr("Tag name:"),
+                                            QLineEdit::Normal,
+                                            oldName,
+                                            &result);
+    if (result && !newName.trimmed().isEmpty()) {
+      controller->renameTag(proxyIndex, newName);
+    }
+  }
+}
+
+void TagsTableWidget::onDeleteTagContext() {
+  QModelIndex proxyIndex = getFirstSelectedIndex();
+  if (proxyIndex.isValid()) {
+    QString tagName = proxyIndex.data(USER_ROLE_TAG_NAME).toString();
+
+    QMessageBox messageBox(tagsTableView);
+    messageBox.setWindowTitle("Delete tag");
+    messageBox.setText(tr("Are you sure to delete tag \"%1\" from records?").arg(tagName));
+    messageBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
+    QAbstractButton *deleteButton = messageBox.addButton(tr("Delete"), QMessageBox::AcceptRole);
+
+    messageBox.exec();
+    if (messageBox.clickedButton() == deleteButton)
+    {
+      controller->deleteTag(proxyIndex);
+    }
+  }
+}
+
+
+void TagsTableWidget::setOverdrawMessage(const QString message) {
   // Установка надписи, которая появляется поверх виджета
   overdrawMessage = message;
 
@@ -221,6 +309,16 @@ void TagsTableWidget::setOverdrawMessage(const QString message)
   // Обновляется внешний вид виджета
   update();
 }
+
+QModelIndex TagsTableWidget::getFirstSelectedIndex() {
+  QModelIndexList selectItems = tagsTableView->selectionModel()->selectedIndexes();
+
+  if (!selectItems.isEmpty()) {
+    return selectItems.at(0);
+  }
+  return QModelIndex();
+}
+
 
 QTableView* TagsTableWidget::getTableView() {
     return tagsTableView;

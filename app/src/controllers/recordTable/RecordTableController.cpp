@@ -168,6 +168,7 @@ void RecordTableController::initMetaEditorAtClickToRecord(const int pos)
   QString fullFileName=fullDir+"/"+currentFile;
   qDebug() << " File " << fullFileName << "\n";
 
+  QString tags = table->getField("tags", pos);
 
   // В редактор заносится информация о приаттаченных к записи файлах
   // Это действие нужно сделать до проверки на открытие той же самой записи (см. далее), т. к. список приаттаченных файлов может измениться
@@ -176,8 +177,10 @@ void RecordTableController::initMetaEditorAtClickToRecord(const int pos)
 
 
   // Если в окне содержимого записи уже находится выбираемая запись
+  // и у записи не менялись метки
   if(edView->getWorkDirectory()==fullDir &&
-     edView->getFileName()==currentFile)
+     edView->getFileName()==currentFile
+     && edView->getTags()==tags)
   {
     globalParameters.getWindowSwitcher()->switchFromRecordtableToRecord();
     return;

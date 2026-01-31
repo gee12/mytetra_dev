@@ -11,6 +11,8 @@
 
 class TreeItem;
 
+const QString TAG_SEPARATORS = "[,;]+";
+
 class TagsModel : public QStandardItemModel
 {
 
@@ -20,7 +22,10 @@ public:
 
     void init(TreeItem *startNode);
     QString getTagNameByIndex(const QModelIndex & index);
+    QModelIndex getIndexByTagName(const QString &tagName);
     RecordTableData* getRecordTableByIndex(const QModelIndex &index, TreeItem *startNode);
+    QModelIndex renameTag(const QModelIndex &sourceIndex, const QString &newName);
+    void deleteTag(const QModelIndex &sourceIndex);
 
     bool isUnsearchCryptBranchPresent; // были ли зашированные ветки, но пароль небыл введен
 

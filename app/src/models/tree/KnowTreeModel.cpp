@@ -114,12 +114,12 @@ void KnowTreeModel::init(QDomDocument *domModel)
   if (mytetraConfig.get_showFavorites()) {
     // Находим и запоминаем максимальный порядковый номер в списке избранных записей,
     // который пригодится при добавлении новых записей в избранное
-    RecordTableData *table = favoritesNode->recordtableGetTableData();
-    for(unsigned int i=0; i<table->size(); i++) {
-      checkAndSetFavoriteMaxOrderNumber(table->getFavoriteOrderNumber(i));
+    RecordTableData *favoritesTable = favoritesNode->recordtableGetTableData();
+    for(unsigned int i=0; i<favoritesTable->size(); i++) {
+      checkAndSetFavoriteMaxOrderNumber(favoritesTable->getFavoriteOrderNumber(i));
     }
     // Сортируем избранные записи в списке
-    table->sortByFavorField();
+    favoritesTable->sortByFavorField();
   }
 
   endResetModel();

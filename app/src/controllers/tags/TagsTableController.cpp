@@ -5,6 +5,7 @@
 
 #include <QHeaderView>
 
+#include "libraries/FixedParameters.h"
 #include "views/recordTable/RecordTableView.h"
 #include "views/recordTable/RecordTableScreen.h"
 #include "views/tags/TagsScreen.h"
@@ -23,9 +24,8 @@ extern AppConfig mytetraConfig;
 extern WalkHistory walkHistory;
 
 
-TagsTableController::TagsTableController(QObject *parent) : QObject(parent)
-{
-    view = new TagsTableWidget( qobject_cast<QWidget *>(parent) );
+TagsTableController::TagsTableController(QObject *parent) : QObject(parent) {
+    view = new TagsTableWidget(qobject_cast<QWidget *>(parent), this);
     view->setObjectName("tagsTableView");
 
     // Создание модели данных
@@ -46,13 +46,11 @@ TagsTableController::TagsTableController(QObject *parent) : QObject(parent)
 }
 
 
-TagsTableController::~TagsTableController()
-{
+TagsTableController::~TagsTableController() {
 }
 
 
-void TagsTableController::loadTags()
-{
+void TagsTableController::loadTags() {
     clearData();
 
     auto *knowTreeModel = find_object<TreeScreen>("treeScreen")->knowTreeModel;
@@ -95,9 +93,9 @@ void TagsTableController::onTagClicked(const QModelIndex &proxyIndex) const {
     QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);
     RecordTableData *recordTableByTag = sourceModel->getRecordTableByIndex(sourceIndex, treeScreen->knowTreeModel->rootItem);
 
-    auto *tagsScreen = find_object<TagsScreen>("tagsScreen");
-    tagsScreen->onTagSelected(recordTableByTag);
+    find_object<RecordTableController>("recordTableController")->setTableData(recordTableByTag);
 }
+
 
 void TagsTableController::onSortChanged(const int columnIndex, const Qt::SortOrder order) const {
     qDebug() << "onTagsHeaderClicked: index " << columnIndex << ", order " << order;
@@ -105,6 +103,7 @@ void TagsTableController::onSortChanged(const int columnIndex, const Qt::SortOrd
     const QString sort = QString("%1,%2").arg(columnIndex).arg(order);
     mytetraConfig.set_tags_sort(sort);
 }
+
 
 void TagsTableController::findInTags() {
     //TODO
@@ -115,6 +114,19 @@ TagsTableWidget *TagsTableController::getView()
 {
     return view;
 }
+
+
+void TagsTableController::onCopyTagReferenceContext() {
+    QModelIndex proxyIndex = view->getFirstSelectedIndex();
+    if (proxyIndex.isValid()) {
+        QString selectedTagName = proxyIndex.data(USER_ROLE_TAG_NAME).toString();
+        QString reference = FixedParameters::appTextId + "://tag/" + selectedTagName;
+
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(reference);
+    }
+}
+
 
 void TagsTableController::sortTags() {
     // Включается сортировка по нужному столбцу
@@ -133,3 +145,80 @@ void TagsTableController::sortTags() {
 }
 
 
+void TagsTableController::renameTag(const QModelIndex &proxyIndex, QString newName) {
+    QString oldName = proxyIndex.data(USER_ROLE_TAG_NAME).toString();
+    newName = newName.trimmed();
+
+    qDebug() << "Rename tag [" << oldName << "] to [" << newName << "]";
+
+    QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);
+
+    auto mainWindow = find_object<MainWindow>("mainwindow");
+    auto *treeScreen = find_object<TreeScreen>("treeScreen");
+
+    mainWindow->setDisabled(true);
+
+    // Переименовуем метку в модели
+    QModelIndex targetSourceIndex = sourceModel->renameTag(sourceIndex, newName);
+    // Сохраняем изменения в дереве
+    treeScreen->saveKnowTree();
+
+    mainWindow->setDisabled(false);
+
+    if (sourceIndex == targetSourceIndex) {
+        // Если после переименования метка не была объединена с другой, то выделение в списке меток не меняем.
+        // Перевыбираем запись в списке, чтобы обновить поля в редакторе.
+        auto *recordTableController = find_object<RecordTableController>("recordTableController");
+        int recordPos = recordTableController->getFirstSelectionPos();
+        if (recordPos > -1) {
+            QModelIndex index = recordTableController->convertPosToProxyIndex(recordPos);
+            recordTableController->clickToRecord(index);
+        }
+    } else {
+        // Если после переименования метка не была объединена с другой, то выделяем результирующую метку.
+        QModelIndex targetProxyIndex = proxyModel->mapFromSource(targetSourceIndex);
+        int pos = targetProxyIndex.row();
+        view->getTableView()->selectRow(pos);
+        view->getTableView()->scrollTo(targetProxyIndex);
+
+        RecordTableData *recordTableByTag = sourceModel->getRecordTableByIndex(targetSourceIndex, treeScreen->knowTreeModel->rootItem);
+        find_object<RecordTableController>("recordTableController")->setTableData(recordTableByTag);
+    }
+
+    // Если сортировка активна, proxyModel автоматически пересортирует строку
+    // Но можно принудительно обновить сортировку:
+    // int sortColumn = view->getTableView()->horizontalHeader()->sortIndicatorSection();
+    // Qt::SortOrder sortOrder = view->getTableView()->horizontalHeader()->sortIndicatorOrder();
+    // if (sortColumn >= 0) {
+    //     proxyModel->sort(sortColumn, sortOrder);
+    // }
+}
+
+
+void TagsTableController::deleteTag(QModelIndex proxyIndex) {
+    QString tagName = proxyIndex.data(USER_ROLE_TAG_NAME).toString();
+    qDebug() << "Delete tag [" << tagName << "]";
+
+    QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);
+
+    auto mainWindow = find_object<MainWindow>("mainwindow");
+    auto *treeScreen = find_object<TreeScreen>("treeScreen");
+
+    mainWindow->setDisabled(true);
+
+    // Удаляем метку из модели
+    sourceModel->deleteTag(sourceIndex);
+    // Сохраняем изменения в дереве
+    treeScreen->saveKnowTree();
+
+    mainWindow->setDisabled(false);
+
+    QModelIndex newProxyIndex = view->getFirstSelectedIndex();
+    if (newProxyIndex.isValid()) {
+        // Принудительно "кликаем" метку, которая автоматически стала выделенной после удаления предыдущей
+        onTagClicked(newProxyIndex);
+    } else {
+        // Устанавливаем пустые данные для отображения таблицы конечных записей
+        find_object<RecordTableController>("recordTableController")->setTableData(nullptr);
+    }
+}

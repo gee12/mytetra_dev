@@ -82,7 +82,6 @@ public:
     void deleteRecordFromFavorites(int pos);
 
     // Список записей по метке
-    void initByTag(TreeItem *startNode);
     void insertRecordByTag(Record *record);
 
     void editRecordFields(int pos,

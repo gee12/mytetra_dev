@@ -4,14 +4,10 @@
 #include <QBoxLayout>
 #include <QLineEdit>
 #include <QtGlobal>
-#include <QTableView>
 
 #include "main.h"
 #include "views/mainWindow/MainWindow.h"
 #include "TagsScreen.h"
-
-#include <QHeaderView>
-
 #include "TagsTableWidget.h"
 #include "models/appConfig/AppConfig.h"
 #include "views/record/MetaEditor.h"
@@ -131,11 +127,6 @@ void TagsScreen::assemblyHeaderLayout()
 
 void TagsScreen::setupSignals()
 {
-  auto tableView = controller->getView()->getTableView();
-  // Клик по метке
-  connect(tableView, &QTableView::pressed, controller, &TagsTableController::onTagClicked);
-  // Сортировка меток
-  connect(tableView->horizontalHeader(), &QHeaderView::sortIndicatorChanged, controller, &TagsTableController::onSortChanged);
   // Поиск по меткам
   connect(actionFind, &QAction::triggered, controller, &TagsTableController::findInTags);
   // Закрытие окна
@@ -150,13 +141,6 @@ void TagsScreen::reloadTags()
     controller->loadTags();
 }
 
-
-// Действия при клике на ветку дерева через selection-модель
-void TagsScreen::onTagSelected(RecordTableData *rtdata)
-{
-    qDebug() << "TagsScreen::onTagSelected";
-    find_object<RecordTableController>("recordTableController")->setTableData(rtdata);
-}
 
 void TagsScreen::setWarningMessage(const QString &warningMessage) {
   warningLabel->setText(warningMessage);

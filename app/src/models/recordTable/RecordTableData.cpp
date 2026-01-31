@@ -584,17 +584,11 @@ void RecordTableData::deleteRecordFromFavorites(int pos)
 }
 
 
-void RecordTableData::initByTag(TreeItem *startNode)
-{
-    qDebug() << "RecordTableData.initByTag()";
-
-    treeItem = startNode;
-}
-
-
 void RecordTableData::insertRecordByTag(Record *record)
 {
-    tableData << record;
+    if (!tableData.contains(record)) {
+        tableData << record;
+    }
 }
 
 

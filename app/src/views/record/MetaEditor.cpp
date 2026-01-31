@@ -17,6 +17,7 @@
 #include "models/appConfig/AppConfig.h"
 #include "views/attachTable/AttachTableScreen.h"
 #include "libraries/helpers/ObjectHelper.h"
+#include "models/tags/TagsModel.h"
 
 
 extern GlobalParameters globalParameters;
@@ -300,8 +301,8 @@ void MetaEditor::setTags(QString tags)
  recordTagsText=tags;
 
 
- // Строка с метками разделяется на отдельные меки
- recordTagsTextList = recordTagsText.split(QRegExp("[,;]+"), QString::SkipEmptyParts);
+ // Строка с метками разделяется на отдельные метки
+ recordTagsTextList = recordTagsText.split(QRegExp(TAG_SEPARATORS), Qt::SkipEmptyParts);
 
  // В каждой метке убираются лишние пробелы по краям
  for(int i = 0; i < recordTagsTextList.size(); ++i)
@@ -425,4 +426,9 @@ void MetaEditor::setReadOnly(bool state)
 void MetaEditor::setFocusToBaseWidget()
 {
     textArea->setFocus();
+}
+
+QString MetaEditor::getTags()
+{
+  return recordTagsText;
 }
