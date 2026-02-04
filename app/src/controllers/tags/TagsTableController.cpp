@@ -83,17 +83,33 @@ void TagsTableController::clearSelection() const {
 }
 
 
-void TagsTableController::onTagClicked(const QModelIndex &proxyIndex) const {
-    qDebug() << "onTagClicked";
+void TagsTableController::selectTag(const QModelIndex &sourceIndex) const {
+    qDebug() << "TagsTableController::selectTag";
 
-    auto *treeScreen = find_object<TreeScreen>("treeScreen");
     // Убираем текущее выделение ветки в дереве
+    auto *treeScreen = find_object<TreeScreen>("treeScreen");
     treeScreen->clearSelection();
 
-    QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);
     RecordTableData *recordTableByTag = sourceModel->getRecordTableByIndex(sourceIndex, treeScreen->knowTreeModel->rootItem);
-
     find_object<RecordTableController>("recordTableController")->setTableData(recordTableByTag);
+}
+
+
+void TagsTableController::selectTag(const QString &tagName) const {
+    QModelIndex sourceIndex = sourceModel->getIndexByTagName(tagName);
+
+    // Выделяем метку в списке
+    QModelIndex proxyIndex = proxyModel->mapFromSource(sourceIndex);
+    view->selectTableRow(proxyIndex);
+
+    // Устанавливаем список записей по метке
+    selectTag(sourceIndex);
+}
+
+
+void TagsTableController::onTagClicked(const QModelIndex &proxyIndex) const {
+    QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);
+    selectTag(sourceIndex);
 }
 
 
@@ -177,9 +193,7 @@ void TagsTableController::renameTag(const QModelIndex &proxyIndex, QString newNa
     } else {
         // Если после переименования метка не была объединена с другой, то выделяем результирующую метку.
         QModelIndex targetProxyIndex = proxyModel->mapFromSource(targetSourceIndex);
-        int pos = targetProxyIndex.row();
-        view->getTableView()->selectRow(pos);
-        view->getTableView()->scrollTo(targetProxyIndex);
+        view->selectTableRow(targetProxyIndex);
 
         RecordTableData *recordTableByTag = sourceModel->getRecordTableByIndex(targetSourceIndex, treeScreen->knowTreeModel->rootItem);
         find_object<RecordTableController>("recordTableController")->setTableData(recordTableByTag);

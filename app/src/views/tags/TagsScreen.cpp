@@ -141,6 +141,14 @@ void TagsScreen::reloadTags()
     controller->loadTags();
 }
 
+void TagsScreen::showTag(const QString tagName) {
+  // Показываем виджет, если не показан
+  if (isVisible() == false)
+    widgetShow();
+
+  controller->selectTag(tagName);
+}
+
 
 void TagsScreen::setWarningMessage(const QString &warningMessage) {
   warningLabel->setText(warningMessage);

@@ -14,6 +14,7 @@
 #include "libraries/wyedit/indentslider/IndentSlider.h"
 #include "libraries/GlobalParameters.h"
 #include "views/findInBaseScreen/FindScreen.h"
+#include "views/tags/TagsScreen.h"
 #include "models/appConfig/AppConfig.h"
 #include "views/attachTable/AttachTableScreen.h"
 #include "libraries/helpers/ObjectHelper.h"
@@ -59,8 +60,7 @@ MetaEditor::~MetaEditor(void)
 
 void MetaEditor::setupSignals(void)
 {
-  connect(this,                             &MetaEditor::setFindTextSignal,
-          globalParameters.getFindScreen(), &FindScreen::setFindText);
+  connect(this, &MetaEditor::setFindTextSignal, globalParameters.getTagsScreen(), &TagsScreen::showTag);
 
 }
 
@@ -397,13 +397,6 @@ void MetaEditor::onClickToTag(const QString &link_text)
  // -----------------------------
  // Запуск поиска по тексту метки
  // -----------------------------
-
- // Определяется ссылка на виджет поиска
- FindScreen *findScreen=find_object<FindScreen>("findScreenDisp");
-
- // Если виджет не показан, он выводится на экран
- if(findScreen->isVisible()==false)
-  findScreen->widgetShow();
 
  emit setFindTextSignal(tag);
 }

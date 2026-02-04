@@ -32,6 +32,7 @@ public:
  virtual ~TagsScreen();
 
  void reloadTags();
+ void showTag(QString tagName);
  void setWarningMessage(const QString &warningMessage);
 
 public slots:

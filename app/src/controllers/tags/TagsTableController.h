@@ -18,15 +18,16 @@ public:
   void loadTags();
   void clearData();
   void clearSelection() const;
-  void onTagClicked(const QModelIndex &proxyIndex) const;
-  void onSortChanged(int columnIndex, Qt::SortOrder order) const;
+  void selectTag(const QModelIndex &sourceIndex) const;
+  void selectTag(const QString &tagName) const;
   void findInTags();
-  TagsTableWidget *getView();
-
   void renameTag(const QModelIndex &proxyIndex, QString newName);
   void deleteTag(QModelIndex proxyIndex);
+  TagsTableWidget *getView();
 
 public slots:
+  void onSortChanged(int columnIndex, Qt::SortOrder order) const;
+  void onTagClicked(const QModelIndex &proxyIndex) const;
   void onCopyTagReferenceContext();
 
 protected:

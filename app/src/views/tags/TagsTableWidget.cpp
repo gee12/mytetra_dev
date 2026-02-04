@@ -310,6 +310,15 @@ void TagsTableWidget::setOverdrawMessage(const QString message) {
   update();
 }
 
+
+void TagsTableWidget::selectTableRow(const QModelIndex &proxyIndex) {
+  int pos = proxyIndex.row();
+  tagsTableView->selectRow(pos);
+  tagsTableView->setFocus();
+  tagsTableView->scrollTo(proxyIndex);
+}
+
+
 QModelIndex TagsTableWidget::getFirstSelectedIndex() {
   QModelIndexList selectItems = tagsTableView->selectionModel()->selectedIndexes();
 

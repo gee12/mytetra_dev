@@ -24,6 +24,7 @@ public:
   void onDataLoaded();
   void clearAll();
   void setOverdrawMessage(QString message);
+  void selectTableRow(const QModelIndex &proxyIndex);
   QModelIndex getFirstSelectedIndex();
   QTableView* getTableView();
 
