@@ -78,8 +78,9 @@ void TagsTableWidget::setupUI() {
   // Убираем выделение заголовков
   tagsTableView->horizontalHeader()->setHighlightSections(false);
 
-  // Видимость горизонтального скролла
+  // Видимость скролла
   tagsTableView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  tagsTableView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 }
 
 
