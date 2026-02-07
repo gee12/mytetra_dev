@@ -952,6 +952,15 @@ void MainWindow::reload(void)
 }
 
 
+void MainWindow::openRecordByInternalHref(const QString &recordId) {
+    // Нахождение ветки, в которой лежит данная запись
+    QStringList pathToRecord = treeScreen->knowTreeModel->getRecordPath(recordId);
+
+    setTreePosition( pathToRecord);
+    setRecordtablePositionById( recordId);
+}
+
+
 // Перечитывание дерева знаний, стадия Save
 void MainWindow::reloadSaveStage(void)
 {

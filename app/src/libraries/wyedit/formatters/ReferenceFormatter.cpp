@@ -16,6 +16,7 @@
 #include "../EditorToolBarAssistant.h"
 #include "../EditorCursorPositionDetector.h"
 #include "../../TraceLogger.h"
+#include "views/tags/TagsScreen.h"
 
 
 ReferenceFormatter::ReferenceFormatter()
@@ -141,26 +142,24 @@ void ReferenceFormatter::onClickedGotoReference(QString href)
     if(href.length()==0)
         return;
 
-    // Если клик по обычной ссылке
-    if(!isHrefInternal(href))
-    {
-        QDesktopServices::openUrl(QUrl(href));
+    // Попытка получения ID записи из ссылки
+    QString recordId = getRecordIdFromInternalHref(href);
+    if (!recordId.isEmpty()) {
+        // Клик по внутренней ссылке на запись
+        find_object<MainWindow>("mainwindow")->openRecordByInternalHref(recordId);
+        return;
     }
-    else
-    {
-        // Иначе клик по внутренней ссылке
 
-        // Пролучение ID из ссылки
-        QString recordId=getIdFromInternalHref(href);
-
-        // todo: вынести следующий код в отдельный метод главного окна
-
-        // Нахождение ветки, в которой лежит данная запись
-        QStringList pathToRecord=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model())->getRecordPath(recordId);
-
-        find_object<MainWindow>("mainwindow")->setTreePosition( pathToRecord );
-        find_object<MainWindow>("mainwindow")->setRecordtablePositionById( recordId );
+    // Попытка получения имени метки из ссылки
+    QString tagName = getTagNameFromInternalHref(href);
+    if (!tagName.isEmpty()) {
+        // Клик по внутренней ссылке на метку
+        find_object<TagsScreen>("tagsScreen")->showTag(tagName);
+        return;
     }
+
+    // Иначе клик по обычной ссылке
+    QDesktopServices::openUrl(QUrl(href));
 }
 
 
@@ -173,12 +172,29 @@ bool ReferenceFormatter::isHrefInternal(QString href)
 }
 
 
-QString ReferenceFormatter::getIdFromInternalHref(QString href)
+bool ReferenceFormatter::isHrefInternalToTag(QString href)
+{
+    return href.contains(QRegExp("^"+FixedParameters::appTextId+":\\/\\/tag\\/.+$"));
+}
+
+
+QString ReferenceFormatter::getRecordIdFromInternalHref(QString href)
 {
     if(!isHrefInternal(href))
         return "";
 
     href.replace(QRegExp("^"+FixedParameters::appTextId+":\\/\\/note\\/"), "");
+
+    return href;
+}
+
+
+QString ReferenceFormatter::getTagNameFromInternalHref(QString href)
+{
+    if (!isHrefInternalToTag(href))
+        return "";
+
+    href.replace(QRegExp("^"+FixedParameters::appTextId+":\\/\\/tag\\/"), "");
 
     return href;
 }

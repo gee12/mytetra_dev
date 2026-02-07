@@ -24,7 +24,9 @@ public slots:
 protected:
 
     bool isHrefInternal(QString href);
-    QString getIdFromInternalHref(QString href);
+    bool isHrefInternalToTag(QString href);
+    QString getRecordIdFromInternalHref(QString href);
+    QString getTagNameFromInternalHref(QString href);
 };
 
 

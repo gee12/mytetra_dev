@@ -97,6 +97,8 @@ public:
 
  void reload(void);
 
+ void openRecordByInternalHref(const QString &recordId);
+
 signals:
 
  void globalPressKey(int key);
