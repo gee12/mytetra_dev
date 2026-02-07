@@ -438,7 +438,7 @@ void AppConfig::set_tagsscreen_show(bool isShow)
 }
 
 QString AppConfig::get_tags_sort() {
-    return get_parameter("tags_sort");
+    return conf->value("tags_sort").toString();
 }
 
 void AppConfig::set_tags_sort(QString sort) {
