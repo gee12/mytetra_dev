@@ -38,7 +38,7 @@ void TagsTableWidget::setController(TagsTableController *controller) {
 void TagsTableWidget::setupUI() {
   tagsTableView = new QTableView(this);
   tagsTableView->setObjectName("tagsTableView");
-  tagsTableView->setMinimumSize(200,1);
+  tagsTableView->setMinimumSize(100,1);
 
   // Включение сортировки
   tagsTableView->setSortingEnabled(true);
@@ -48,7 +48,8 @@ void TagsTableWidget::setupUI() {
 
   // Растянуть столбцы таблицы о ширине
   tagsTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
-  tagsTableView->horizontalHeader()->setMinimumSectionSize(100);
+  tagsTableView->horizontalHeader()->setDefaultSectionSize(100);
+  tagsTableView->horizontalHeader()->setMinimumSectionSize(50);
 
   // Установка высоты строки с принудительной стилизацией (если это необходимо),
   // так как стилизация через QSS для элементов QTableView полноценно не работает
