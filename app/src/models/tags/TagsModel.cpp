@@ -73,6 +73,9 @@ void TagsModel::readRecordTags(RecordTableData *searchRecordTable, int index) {
     foreach (const QString &tag, tagsList) {
         QString tagValue = tag.trimmed().toLower();
 
+        if (tagValue.isEmpty())
+            continue;
+
         if (data.contains(tagValue)) {
             // Если метка уже была добавлена, тогда данную заметку просто добавляем в список
             data[tagValue]->insertRecordByTag(record);
