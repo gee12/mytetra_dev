@@ -121,8 +121,81 @@ void TagsTableController::onSortChanged(const int columnIndex, const Qt::SortOrd
 }
 
 
-void TagsTableController::findInTags() {
-    //TODO
+bool TagsTableController::checkRowMatching(const QString &text, int row) {
+    QModelIndex index = proxyModel->index(row, 0);
+    QString currentTagName = index.data(USER_ROLE_TAG_NAME).toString();
+
+    if (currentTagName.contains(text, Qt::CaseInsensitive)) {
+        qDebug() << "Found matching at row=" << row;
+        view->selectTableRow(index);
+        selectTag(index);
+        return true;
+    }
+    return false;
+}
+
+
+void TagsTableController::findNextTag(const QString &text, QTextDocument::FindFlags flags) {
+    qDebug() << "findNextTag: text=[" << text << "], flags=" << flags;
+
+    int totalRows = proxyModel->rowCount();
+    if (totalRows == 0) {
+        qDebug() << "No rows in model";
+        return;
+    }
+
+    // Определяем направление поиска
+    bool isFindForward = !(flags & QTextDocument::FindBackward);
+
+    qDebug() << "totalRows=" << totalRows << ", isFindForward=" << isFindForward;
+
+    QModelIndex proxyIndex = view->getFirstSelectedIndex();
+    if (proxyIndex.isValid()) {
+        int currentRow = proxyIndex.row();
+        qDebug() << "currentRow=" << currentRow;
+
+        if (isFindForward) {
+            // Поиск вперед: от следующей строки до конца, затем с начала до текущей
+            int startRow = (currentRow == totalRows - 1) ? 0 : currentRow + 1;
+            int endRow = totalRows;
+
+            // Проходим от startRow до конца
+            for (int row = startRow; row < endRow; ++row)
+                if (checkRowMatching(text, row)) return;
+
+            // Если не нашли и начинали не с начала, продолжаем с начала до текущей строки
+            if (startRow > 0) {
+                for (int row = 0; row <= currentRow; ++row)
+                    if (checkRowMatching(text, row)) return;
+            }
+        } else {
+            // Поиск назад: от предыдущей строки до начала, затем с конца до текущей
+            int startRow = (currentRow == 0) ? totalRows - 1 : currentRow - 1;
+            int endRow = -1; // -1 означает "до начала включительно"
+
+            // Проходим от startRow до начала (включительно)
+            for (int row = startRow; row > endRow; --row)
+                if (checkRowMatching(text, row)) return;
+
+            // Если не нашли и начинали не с конца, продолжаем с конца до текущей строки
+            if (startRow < totalRows - 1) {
+                for (int row = totalRows - 1; row >= currentRow; --row)
+                    if (checkRowMatching(text, row)) return;
+            }
+        }
+
+        qDebug() << "No match found";
+    } else {
+        // Если нет выделенной строки, начинаем поиск с начала (вперед) или с конца (назад)
+        int startRow = isFindForward ? 0 : totalRows - 1;
+        int endRow = isFindForward ? totalRows : -1;
+        int step = isFindForward ? 1 : -1;
+
+        for (int row = startRow; row != endRow; row += step)
+            if (checkRowMatching(text, row)) return;
+
+        qDebug() << "No match found";
+    }
 }
 
 

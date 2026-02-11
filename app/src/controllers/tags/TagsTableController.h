@@ -2,6 +2,7 @@
 #define __TAGSTABLECONTROLLER_H__
 
 #include <QObject>
+#include <QTextDocument>
 
 class QSortFilterProxyModel;
 class TagsTableWidget;
@@ -20,7 +21,7 @@ public:
   void clearSelection() const;
   void selectTag(const QModelIndex &sourceIndex) const;
   void selectTag(const QString &tagName) const;
-  void findInTags();
+  void findNextTag(const QString &text, QTextDocument::FindFlags flags);
   void renameTag(const QModelIndex &proxyIndex, QString newName);
   void deleteTag(QModelIndex proxyIndex);
   TagsTableWidget *getView();
@@ -32,6 +33,7 @@ public slots:
 
 protected:
   void sortTags();
+  bool checkRowMatching(const QString &text, int row);
 
   TagsTableWidget *view;
   TagsModel *sourceModel;

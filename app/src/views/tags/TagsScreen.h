@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+#include "TagsFindDialog.h"
 #include "controllers/recordTable/RecordTableController.h"
 #include "controllers/tags/TagsTableController.h"
 
@@ -35,6 +36,8 @@ public:
  void showTag(QString tagName);
  void setWarningMessage(const QString &warningMessage);
 
+ void findInTags();
+
 public slots:
  void widgetShow();
  void widgetHide();
@@ -54,7 +57,9 @@ private:
  QLabel *warningLabel;
 
  QVBoxLayout *mainLayout;
- 
+
+ TagsFindDialog *findDialog;
+
  void setupActions();
  void setupUI();
  void setupHeaderUI();

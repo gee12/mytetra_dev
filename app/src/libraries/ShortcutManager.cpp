@@ -10,7 +10,7 @@
 extern GlobalParameters globalParameters;
 
 
-const QStringList ShortcutManager::availableSection={"note", "tree", "editor", "actionLog", "attach", "misc"};
+const QStringList ShortcutManager::availableSection={"note", "tree", "tags", "editor", "actionLog", "attach", "misc"};
 
 const QStringList ShortcutManager::overloadSection={"actionLog:*", "attach:editor"};
 
@@ -73,7 +73,7 @@ void ShortcutManager::initDefaultKeyTable()
     defaultKeyTable.insert("note-addNewBefore", Data{ QKeySequence("Ctrl+Alt+J"), tr("Add a note before"), tr("Add a note before current selected note") });
     defaultKeyTable.insert("note-addNewAfter",  Data{ QKeySequence("Ctrl+Alt+M"), tr("Add a note after"), tr("Add a note after current selected note") });
     defaultKeyTable.insert("note-editField",    Data{ QKeySequence("Ctrl+Alt+E"), tr("Edit properties"), tr("Edit note properties (name, author, tags...)") });
-    defaultKeyTable.insert("note-favorite",     Data{ QKeySequence("Ctrl+Alt+F"), tr("Set/unset favorite note"), tr("Set or unset current selected note to/from favorites notes") });
+    defaultKeyTable.insert("note-favorite",     Data{ QKeySequence("Ctrl+Alt+Shift+F"), tr("Set/unset favorite note"), tr("Set or unset current selected note to/from favorites notes") });
     defaultKeyTable.insert("note-block",        Data{ QKeySequence("Ctrl+Alt+B"), tr("Block/Unblock note"), tr("Block or unblock current selected note") });
     defaultKeyTable.insert("note-delete",       Data{ QKeySequence("Ctrl+Alt+R"), tr("Delete note(s)"), tr("") });
     defaultKeyTable.insert("note-cut",          Data{ QKeySequence("Ctrl+Alt+X"), tr("Cut notes(s)"), tr("Cut notes(s) to clipboard") });
@@ -99,6 +99,8 @@ void ShortcutManager::initDefaultKeyTable()
     defaultKeyTable.insert("tree-encryptBranch",        Data{ QKeySequence("Ctrl+Shift+1"), tr("Encrypt item"), tr("Encrypt item and all subitem") });
     defaultKeyTable.insert("tree-decryptBranch",        Data{ QKeySequence("Ctrl+Shift+0"), tr("Decrypt item"), tr("Decrypt item and all subitem") });
     defaultKeyTable.insert("tree-setIcon",              Data{ QKeySequence("Ctrl+Shift+O"), tr("Set icon"), tr("Set item icon") });
+
+    defaultKeyTable.insert("tags-findTag",              Data{ QKeySequence("Ctrl+Alt+F"), tr("Find in tags"), tr("") });
 
     defaultKeyTable.insert("editor-selectAll",           Data{ QKeySequence("Ctrl+A"), tr("Select all"), tr("") });
     defaultKeyTable.insert("editor-copy",                Data{ QKeySequence("Ctrl+C"), tr("Copy"), tr("") });

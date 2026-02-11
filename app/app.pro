@@ -191,6 +191,7 @@ HEADERS = src/main.h \
     src/libraries/ClipboardRecords.h \
     src/views/tags/TagsScreen.h \
     src/views/tags/TagsTableWidget.h \
+    src/views/tags/TagsFindDialog.h \
     src/views/tree/TreeScreen.h \
     src/views/findInBaseScreen/FindScreen.h \
     src/views/findInBaseScreen/FindTableWidget.h \
@@ -351,6 +352,7 @@ SOURCES = src/main.cpp \
     src/models/appConfig/AppConfig.cpp \
     src/views/record/AddNewRecord.cpp \
     src/libraries/ClipboardRecords.cpp \
+    src/views/tags/TagsFindDialog.cpp \
     src/views/tags/TagsScreen.cpp \
     src/views/tags/TagsTableWidget.cpp \
     src/views/tree/TreeScreen.cpp \

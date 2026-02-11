@@ -15,10 +15,12 @@
 #include "libraries/MtComboBox.h"
 #include "libraries/helpers/ObjectHelper.h"
 #include "controllers/tags/TagsTableController.h"
+#include "libraries/ShortcutManager.h"
 #include "libraries/helpers/ActionHelper.h"
 
 extern AppConfig mytetraConfig;
 extern GlobalParameters globalParameters;
+extern ShortcutManager shortcutManager;
 
 
 TagsScreen::TagsScreen(QWidget *parent) : QWidget(parent)
@@ -43,6 +45,7 @@ void TagsScreen::setupActions() {
   actionFind = new QAction(this);
   //TODO
   actionFind->setIcon(QIcon(":/resource/pic/find_in_base.svg"));
+  shortcutManager.initAction("tags-findTag", actionFind);
 
   // Закрытие окна
   actionClose = new QAction(this);
@@ -60,6 +63,10 @@ void TagsScreen::setupUI()
   warningLabel->hide();
 
   // TagsTableWidget создается в контроллере
+
+  // Диалог поиска
+  findDialog = new TagsFindDialog(this);
+  findDialog->hide();
 }
 
 
@@ -128,9 +135,11 @@ void TagsScreen::assemblyHeaderLayout()
 void TagsScreen::setupSignals()
 {
   // Поиск по меткам
-  connect(actionFind, &QAction::triggered, controller, &TagsTableController::findInTags);
+  connect(actionFind, &QAction::triggered, this, &TagsScreen::findInTags);
   // Закрытие окна
   connect(actionClose, &QAction::triggered, this, &TagsScreen::widgetHide);
+  // Вызов диалога поиска по меткам
+  connect(findDialog, &TagsFindDialog::onFindTag, controller, &TagsTableController::findNextTag, Qt::DirectConnection);
 }
 
 
@@ -153,6 +162,12 @@ void TagsScreen::showTag(const QString tagName) {
 void TagsScreen::setWarningMessage(const QString &warningMessage) {
   warningLabel->setText(warningMessage);
   warningLabel->setVisible(!warningMessage.isEmpty());
+}
+
+
+void TagsScreen::findInTags() {
+  findDialog->show();
+  findDialog->activateWindow();
 }
 
 
