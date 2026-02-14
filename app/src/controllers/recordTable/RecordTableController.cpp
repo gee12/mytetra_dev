@@ -1234,12 +1234,18 @@ void RecordTableController::onRecordTableConfigChange(void)
 
 void RecordTableController::onPrintClick(void)
 {
-  RecordTableScreen *parentPointer=qobject_cast<RecordTableScreen *>(parent());
+  // Формирование заголовка - признака, по которому построена таблица
+  RecordTableData * tableData = recordSourceModel->getTableData();
+  QString title = (tableData->getItem() != nullptr)
+                    ? tableData->getItem()->getPathAsNameWithDelimeter(" / ")
+                    : tr("Tag: ") + tableData->getTagName();
+  qDebug() << "RecordTableController::onPrintClick " << title;
 
+  RecordTableScreen *parentPointer=qobject_cast<RecordTableScreen *>(parent());
   RecordTablePrint printDialog(parentPointer);
   printDialog.setModel(recordProxyModel);
   printDialog.generateHtmlTableFromModel();
-  printDialog.setTitleToHtml( recordSourceModel->getTableData()->getItem()->getPathAsNameWithDelimeter(" / ") );
+  printDialog.setTitleToHtml(title);
   printDialog.exec();
 }
 

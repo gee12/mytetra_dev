@@ -347,6 +347,10 @@ void RecordTableData::setupDataFromDom(QDomElement *domModel, TreeItem *favorite
     return;
 }
 
+void RecordTableData::setTagName(QString tagName) {
+    this->tagName = tagName;
+}
+
 
 // Преобразование таблицы конечных записей в Dom документ
 QDomElement RecordTableData::exportDataToDom(QDomDocument *doc) const
@@ -795,6 +799,10 @@ void RecordTableData::switchToDecrypt(void)
 TreeItem *RecordTableData::getItem(void)
 {
     return treeItem;
+}
+
+QString RecordTableData::getTagName() {
+    return tagName;
 }
 
 

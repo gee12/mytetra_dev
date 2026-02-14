@@ -82,6 +82,7 @@ void TagsModel::readRecordTags(RecordTableData *searchRecordTable, int index) {
         } else {
             // Иначе добавляем метку с данной заметкой
             auto *tableData = new RecordTableData();
+            tableData->setTagName(tag);
             tableData->insertRecordByTag(record);
             data[tagValue] = tableData;
         }

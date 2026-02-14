@@ -82,6 +82,8 @@ public:
     void deleteRecordFromFavorites(int pos);
 
     // Список записей по метке
+    void setTagName(QString tagName);
+    QString getTagName();
     void insertRecordByTag(Record *record);
 
     void editRecordFields(int pos,
@@ -126,6 +128,10 @@ private:
     // Ссылка на ветку, которой принадлежит данная таблица.
     // Для таблиц по записям метки данная ссылка пустая.
     TreeItem *treeItem;
+
+    // Имя метки, которой принадлежит данная таблица.
+    // Для таблиц по ветке ссылка на данную строку пустая.
+    QString tagName;
 
     // Номер записи, с которой работал пользователь
     int workPos;
