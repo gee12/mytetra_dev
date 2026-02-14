@@ -56,6 +56,8 @@ private:
 
  QLabel *warningLabel;
 
+ TagsTableWidget *tagsTableWidget;
+
  QVBoxLayout *mainLayout;
 
  TagsFindDialog *findDialog;

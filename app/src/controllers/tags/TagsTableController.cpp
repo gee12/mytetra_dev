@@ -4,6 +4,7 @@
 #include "TagsTableController.h"
 
 #include <QHeaderView>
+#include <QItemSelectionModel>
 
 #include "libraries/FixedParameters.h"
 #include "views/recordTable/RecordTableView.h"
@@ -25,9 +26,15 @@ extern WalkHistory walkHistory;
 
 
 TagsTableController::TagsTableController(QObject *parent) : QObject(parent) {
-    view = new TagsTableWidget(qobject_cast<QWidget *>(parent), this);
-    view->setObjectName("tagsTableView");
+    initModels();
+}
 
+
+TagsTableController::~TagsTableController() {
+}
+
+
+void TagsTableController::initModels() {
     // Создание модели данных
     sourceModel = new TagsModel(this);
     sourceModel->setObjectName("sourceModel");
@@ -38,15 +45,17 @@ TagsTableController::TagsTableController(QObject *parent) : QObject(parent) {
     proxyModel->setSourceModel(sourceModel);
     proxyModel->setObjectName("proxyModel");
     proxyModel->setSortRole(SORT_ROLE);
-
-    // Модель данных задается для вида
-    view->getTableView()->setModel(proxyModel);
-
-    sortTags();
 }
 
 
-TagsTableController::~TagsTableController() {
+void TagsTableController::setView(TagsTableWidget *view) {
+    this->view = view;
+
+    // Для вида задается модель данных
+    view->getTableView()->setModel(proxyModel);
+
+    // Включается сортировка по нужному столбцу
+    setSortIndicator();
 }
 
 
@@ -108,8 +117,21 @@ void TagsTableController::selectTag(const QString &tagName) const {
 
 
 void TagsTableController::onTagClicked(const QModelIndex &proxyIndex) const {
+    qDebug() << "TagsTableController::onTagClicked";
+
     QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);
     selectTag(sourceIndex);
+}
+
+
+void TagsTableController::onSelectionChanged(const QItemSelection &selectedIndex, const QItemSelection &deselectedIndex) {
+    Q_UNUSED(deselectedIndex)
+    qDebug() << "TagsTableController::onSelectionChanged";
+
+    if (!selectedIndex.indexes().isEmpty()) {
+        auto proxyIndex = selectedIndex.indexes().at(0);
+        onTagClicked(proxyIndex);
+    }
 }
 
 
@@ -199,12 +221,6 @@ void TagsTableController::findNextTag(const QString &text, QTextDocument::FindFl
 }
 
 
-TagsTableWidget *TagsTableController::getView()
-{
-    return view;
-}
-
-
 void TagsTableController::onCopyTagReferenceContext() {
     QModelIndex proxyIndex = view->getFirstSelectedIndex();
     if (proxyIndex.isValid()) {
@@ -217,7 +233,7 @@ void TagsTableController::onCopyTagReferenceContext() {
 }
 
 
-void TagsTableController::sortTags() {
+void TagsTableController::setSortIndicator() {
     // Включается сортировка по нужному столбцу
     QString sortString = mytetraConfig.get_tags_sort();
     if (!sortString.isEmpty() && sortString.contains(",")) {
@@ -240,9 +256,7 @@ void TagsTableController::renameTag(const QModelIndex &proxyIndex, QString newNa
 
     qDebug() << "Rename tag [" << oldName << "] to [" << newName << "]";
 
-    QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);
-
-    auto mainWindow = find_object<MainWindow>("mainwindow");
+    QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);    auto mainWindow = find_object<MainWindow>("mainwindow");
     auto *treeScreen = find_object<TreeScreen>("treeScreen");
 
     mainWindow->setDisabled(true);
@@ -302,8 +316,8 @@ void TagsTableController::deleteTag(QModelIndex proxyIndex) {
 
     QModelIndex newProxyIndex = view->getFirstSelectedIndex();
     if (newProxyIndex.isValid()) {
-        // Принудительно "кликаем" метку, которая автоматически стала выделенной после удаления предыдущей
-        onTagClicked(newProxyIndex);
+        // Принудительно выделяем метку, которая автоматически стала текущей после удаления предыдущей
+        view->selectTableRow(newProxyIndex);
     } else {
         // Устанавливаем пустые данные для отображения таблицы конечных записей
         find_object<RecordTableController>("recordTableController")->setTableData(nullptr);

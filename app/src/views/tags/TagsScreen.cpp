@@ -62,7 +62,8 @@ void TagsScreen::setupUI()
   warningLabel->setAlignment(Qt::AlignCenter);
   warningLabel->hide();
 
-  // TagsTableWidget создается в контроллере
+  tagsTableWidget = new TagsTableWidget(qobject_cast<QWidget *>(this), controller);
+  tagsTableWidget->setObjectName("tagsTableView");
 
   // Диалог поиска
   findDialog = new TagsFindDialog(this);
@@ -105,7 +106,7 @@ void TagsScreen::assembly()
   mainLayout->addWidget(warningLabel);
 
   // table
-  mainLayout->addWidget(controller->getView(), 10);
+  mainLayout->addWidget(tagsTableWidget, 10);
 
   // main
   mainLayout->setContentsMargins(0,0,0,0);

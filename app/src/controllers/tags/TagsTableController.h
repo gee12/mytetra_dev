@@ -1,6 +1,7 @@
 #ifndef __TAGSTABLECONTROLLER_H__
 #define __TAGSTABLECONTROLLER_H__
 
+#include <QItemSelectionModel>
 #include <QObject>
 #include <QTextDocument>
 
@@ -24,15 +25,17 @@ public:
   void findNextTag(const QString &text, QTextDocument::FindFlags flags);
   void renameTag(const QModelIndex &proxyIndex, QString newName);
   void deleteTag(QModelIndex proxyIndex);
-  TagsTableWidget *getView();
+  void setView(TagsTableWidget *view);
 
 public slots:
   void onSortChanged(int columnIndex, Qt::SortOrder order) const;
   void onTagClicked(const QModelIndex &proxyIndex) const;
+  void onSelectionChanged(const QItemSelection &selectedIndex, const QItemSelection &deselectedIndex);
   void onCopyTagReferenceContext();
 
 protected:
-  void sortTags();
+  void initModels();
+  void setSortIndicator();
   bool checkRowMatching(const QString &text, int row);
 
   TagsTableWidget *view;

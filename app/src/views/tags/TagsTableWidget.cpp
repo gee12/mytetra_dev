@@ -2,6 +2,7 @@
 #include <QString>
 #include <QHeaderView>
 #include <QTableView>
+#include <QItemSelectionModel>
 #include <QInputDialog>
 
 #include "TagsTableWidget.h"
@@ -18,6 +19,7 @@ extern AppConfig mytetraConfig;
 TagsTableWidget::TagsTableWidget(QWidget *parent, TagsTableController *controller) : QWidget(parent) {
   setController(controller);
   setupUI();
+  controller->setView(this);
   setupActions();
   setupSignals();
   assembly();
@@ -100,8 +102,8 @@ void TagsTableWidget::setupActions() {
 
 
 void TagsTableWidget::setupSignals() {
-  // Клик по метке
-  connect(tagsTableView, &QTableView::pressed, controller, &TagsTableController::onTagClicked);
+  // Изменение выделения в таблице
+  connect(tagsTableView->selectionModel(), &QItemSelectionModel::selectionChanged, controller, &TagsTableController::onSelectionChanged);
   // Сортировка меток
   connect(tagsTableView->horizontalHeader(), &QHeaderView::sortIndicatorChanged, controller, &TagsTableController::onSortChanged);
   // Изменение размера столбцов
