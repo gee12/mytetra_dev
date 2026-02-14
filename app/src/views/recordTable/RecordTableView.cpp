@@ -312,6 +312,8 @@ void RecordTableView::onCustomContextMenuRequested(const QPoint &mousePos)
   bool isShowFavorites = mytetraConfig.get_showFavorites();
   // Если находимся в ветке "Избранное", то отображаем особое контекстное меню
   bool isCurrentFavoritesItem = find_object<TreeScreen>("treeScreen")->isCurrentFavoritesItem();
+  // Если это список записей по метке
+  bool isRecordsByTag = controller->isTableByTag();
 
   // Если находимся в ветке "Избранное" и запись зашифрована, но не расшифрована,
   // то контекстное меню не отображаем
@@ -322,9 +324,9 @@ void RecordTableView::onCustomContextMenuRequested(const QPoint &mousePos)
             return;
   }
 
-  // Установка видимости команды для открытия исходной ветки избранной записи
-  // только если текущая ветка - "Избранное"
-  parentPointer->actionOpenInSourceNode->setVisible(isShowFavorites && isCurrentFavoritesItem);
+  // Установка видимости команды для открытия исходной ветки записи,
+  // только если это избранная запись в "Избранном" или это записи по метке
+  parentPointer->actionOpenInSourceNode->setVisible(isShowFavorites && isCurrentFavoritesItem || isRecordsByTag);
 
   // Установка надписи и иконки для команды добавления/удаления записи из избранного
   QAction *actionFavorite = parentPointer->actionFavorite;

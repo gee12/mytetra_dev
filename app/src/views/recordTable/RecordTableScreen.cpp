@@ -74,7 +74,7 @@ void RecordTableScreen::setupActions(void)
 
  // Кнопка открытия избранной записи в своей исходной ветке
  actionOpenInSourceNode = new QAction(tr("Open in source node"), this);
- actionOpenInSourceNode->setStatusTip(tr("Open favorite record in source node"));
+ actionOpenInSourceNode->setStatusTip(tr("Open record in source node"));
 
  // Блокировка записи
  actionBlock = new QAction(this);
@@ -423,6 +423,8 @@ void RecordTableScreen::toolsWidgetsUpdate()
  TreeScreen *treeScreen = find_object<TreeScreen>("treeScreen");
  bool isCurrentFavoritesItem = treeScreen->isCurrentFavoritesItem();
  bool isShowFavorites = mytetraConfig.get_showFavorites();
+  // Если это список записей по метке
+ bool isRecordsByTag = recordTableController->isTableByTag();
 
  // Если включено избранное и выбрана ветка "Избранное"
  if (isShowFavorites && isCurrentFavoritesItem) {
@@ -433,11 +435,11 @@ void RecordTableScreen::toolsWidgetsUpdate()
    if (!recordTableController->isRecordNotEncryptedOrDecrypted(index)) {
     return;
    }
-
-   // Открыть исходную ветку избранной записи можно,
-   // только если текущая ветка - "Избранное"
-   actionOpenInSourceNode->setEnabled(true);
  }
+
+  // Открыть исходную ветку записи можно,
+  // только если это избранная запись в "Избранном" или это записи по метке
+  actionOpenInSourceNode->setEnabled(isShowFavorites && isCurrentFavoritesItem || isRecordsByTag);
 
  // Добавление записи
  // Добавлять можно к любой ветке, кроме "Избранного"

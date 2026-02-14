@@ -758,9 +758,9 @@ void RecordTableController::onOpenInSourceNodeClick(void)
 
     qDebug() << "Get path to record:" << path;
 
-    MainWindow *mainWIndow = find_object<MainWindow>("mainwindow");
-    mainWIndow->setTreePosition(path);
-    mainWIndow->setRecordtablePositionById(recordId);
+    MainWindow *mainWindow = find_object<MainWindow>("mainwindow");
+    mainWindow->setTreePosition(path);
+    mainWindow->setRecordtablePositionById(recordId);
 }
 
 
@@ -1302,4 +1302,10 @@ bool RecordTableController::isAllSelectedRecordsNotEncryptedOrDecrypted()
         }
     }
     return true;
+}
+
+bool RecordTableController::isTableByTag() {
+  // Если ветка у таблицы не заполнена, значит это список записей по метке.
+  // TODO: По хорошему, нужно создать флаг/enum для этого в RecordTableData.
+  return recordSourceModel->getTableData()->getItem() == nullptr;
 }

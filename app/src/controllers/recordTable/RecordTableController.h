@@ -62,6 +62,8 @@ public:
   bool isRecordNotEncryptedOrDecrypted(QModelIndex index);
   bool isAllSelectedRecordsNotEncryptedOrDecrypted();
 
+  bool isTableByTag();
+
 signals:
 
   void doCloseDetachedWindowsByIdVector(const QVector<QString> &ids);

@@ -3633,7 +3633,7 @@ MyTetra will try to create a blank entry to fix it.</source>
     <message>
         <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="77"/>
         <source>Open favorite record in source node</source>
-        <translation>Открыть избранную запись в исходной ветке</translation>
+        <translation>Открыть запись в исходной ветке</translation>
     </message>
     <message>
         <location filename="../../../src/views/recordTable/RecordTableScreen.cpp" line="100"/>
