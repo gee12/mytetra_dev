@@ -33,10 +33,11 @@ public:
  virtual ~TagsScreen();
 
  void reloadTags();
- void showTag(QString tagName);
+ void showTag(const QString &tagName);
  void setWarningMessage(const QString &warningMessage);
-
  void findInTags();
+ int restoreWidth();
+ void saveWidth();
 
 public slots:
  void widgetShow();

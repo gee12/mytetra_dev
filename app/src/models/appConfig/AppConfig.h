@@ -83,8 +83,8 @@ public:
     QList<int> get_findsplitter_size_list(void);
     void set_findsplitter_size_list(QList<int> list);
 
-    int get_tagsscreen_width(void);
-    void set_tagsscreen_width(int width);
+    QList<int> getTagsTableSizeList();
+    void setTagsTableSizeList(QList<int> list);
 
     QList<int> get_splitter_size_list(QString name);
     void set_splitter_size_list(QString name, QList<int> list);

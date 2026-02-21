@@ -4,6 +4,7 @@
 #include <QTableView>
 #include <QItemSelectionModel>
 #include <QInputDialog>
+#include <QScrollBar>
 
 #include "TagsTableWidget.h"
 #include "main.h"
@@ -175,7 +176,7 @@ void TagsTableWidget::resizeEvent(QResizeEvent *event) {
   QWidget::resizeEvent(event);
 
   // Общая ширина виджета без полосы прокрутки
-  int widgetWidth = this->width() - 22;
+  int widgetWidth = this->width() - getVerticalScrollBarWidth();
 
   // Если виджет еще не показан, выходим
   if (widgetWidth <= 0) {
@@ -213,7 +214,7 @@ void TagsTableWidget::onSectionResized(int logicalIndex, int oldSize, int newSiz
   Q_UNUSED(newSize)
 
   // Общая ширина виджета без полосы прокрутки
-  int widgetWidth = this->width() - 22;
+  int widgetWidth = this->width() - getVerticalScrollBarWidth();
 
   // Если виджет еще не показан, выходим
   if (widgetWidth <= 0) {
@@ -333,6 +334,32 @@ QModelIndex TagsTableWidget::getFirstSelectedIndex() {
 }
 
 
+void TagsTableWidget::setSectionsSizes(QList<int> sizes) {
+  if (sizes.size() >= 2) {
+    auto horizontalHeader = tagsTableView->horizontalHeader();
+
+    horizontalHeader->blockSignals(true);
+    horizontalHeader->resizeSection(0, sizes[0]);
+    horizontalHeader->resizeSection(1, sizes[1]);
+    horizontalHeader->blockSignals(false);
+  }
+}
+
+
+QList<int> TagsTableWidget::getSectionsSizes() {
+  auto horizontalHeader = tagsTableView->horizontalHeader();
+  return {
+    horizontalHeader->sectionSize(0),
+    horizontalHeader->sectionSize(1)
+  };
+}
+
+
 QTableView* TagsTableWidget::getTableView() {
     return tagsTableView;
+}
+
+
+int TagsTableWidget::getVerticalScrollBarWidth() {
+  return tagsTableView->verticalScrollBar()->width();
 }

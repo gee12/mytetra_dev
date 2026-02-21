@@ -26,7 +26,10 @@ public:
   void setOverdrawMessage(QString message);
   void selectTableRow(const QModelIndex &proxyIndex);
   QModelIndex getFirstSelectedIndex();
+  void setSectionsSizes(QList<int> sizes);
+  QList<int> getSectionsSizes();
   QTableView* getTableView();
+  int getVerticalScrollBarWidth();
 
 protected slots:
   void onSectionResized(int logicalIndex, int oldSize, int newSize);

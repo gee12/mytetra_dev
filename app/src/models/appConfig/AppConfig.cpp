@@ -297,16 +297,13 @@ void AppConfig::set_findsplitter_size_list(QList<int> list)
 }
 
 
-int AppConfig::get_tagsscreen_width(void)
-{
-    return conf->value("tagsscreen_width", "100").toString().toInt();
+QList<int> AppConfig::getTagsTableSizeList() {
+    return get_splitter_size_list("tags_table");
 }
 
 
-void AppConfig::set_tagsscreen_width(int width)
-{
-    qDebug() << "Config set tags screen width to " << width;
-    conf->setValue("tagsscreen_width", width);
+void AppConfig::setTagsTableSizeList(QList<int> list) {
+    set_splitter_size_list("tags_table", list);
 }
 
 
@@ -2005,7 +2002,7 @@ QStringList AppConfig::get_parameter_table_40(bool withEndSignature)
 
     // Список меток
     table << "tagsscreen_show" << "bool" << "true";
-    table << "tagsscreen_width" << "int" << "100";
+    table << "tags_table_size_list" << "QString" << "100,100";
     table << "tags_sort" << "QString" << "0,0";
 
     if (withEndSignature)

@@ -319,12 +319,12 @@ void MainWindow::restoreWindowGeometry(void)
         restoreGeometry( mytetraConfig.get_mainwingeometry() );
 
     vSplitter->setSizes(mytetraConfig.get_vspl_size_list());
-    // Ширина панели со списком меток устанавливается отдельно
+
     QList<int> hSizes = mytetraConfig.get_hspl_size_list();
-    if (!mytetraConfig.get_tagsscreen_show()) {
-        int width = mytetraConfig.get_tagsscreen_width();
-        hSizes[2] = width;
-    }
+
+    // Ширина панели меток устанавливается отдельно по ширине таблицы
+    hSizes[2] = tagsScreen->restoreWidth();
+
     hSplitter->setSizes(hSizes);
     findSplitter->setSizes(mytetraConfig.get_findsplitter_size_list());
 }
@@ -353,8 +353,7 @@ void MainWindow::saveWindowGeometry(void)
 
     // Сохраняем ширину панели со списком меток
     if (mytetraConfig.get_tagsscreen_show()) {
-        int width = hSplitter->sizes().at(2);
-        mytetraConfig.set_tagsscreen_width(width);
+        tagsScreen->saveWidth();
     }
 }
 

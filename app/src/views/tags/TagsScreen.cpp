@@ -13,7 +13,6 @@
 #include "views/record/MetaEditor.h"
 #include "libraries/GlobalParameters.h"
 #include "libraries/MtComboBox.h"
-#include "libraries/helpers/ObjectHelper.h"
 #include "controllers/tags/TagsTableController.h"
 #include "libraries/ShortcutManager.h"
 #include "libraries/helpers/ActionHelper.h"
@@ -151,7 +150,7 @@ void TagsScreen::reloadTags()
     controller->loadTags();
 }
 
-void TagsScreen::showTag(const QString tagName) {
+void TagsScreen::showTag(const QString &tagName) {
   // Показываем виджет, если не показан
   if (isVisible() == false)
     widgetShow();
@@ -172,20 +171,33 @@ void TagsScreen::findInTags() {
 }
 
 
-void TagsScreen::widgetShow()
-{
+int TagsScreen::restoreWidth() {
+  QList<int> tagTableSizes = mytetraConfig.getTagsTableSizeList();
+  tagsTableWidget->setSectionsSizes(tagTableSizes);
+
+  return std::accumulate(tagTableSizes.begin(), tagTableSizes.end(), 0)
+         + tagsTableWidget->getVerticalScrollBarWidth();
+}
+
+
+void TagsScreen::saveWidth() {
+  mytetraConfig.setTagsTableSizeList(tagsTableWidget->getSectionsSizes());
+}
+
+
+void TagsScreen::widgetShow() {
+  int newWidth = restoreWidth();
+  int heigth = height();
+  this->resize(newWidth, heigth);
+
   mytetraConfig.set_tagsscreen_show(true);
   this->show();
 }
 
 
-// Полное сокрытие виджета
-void TagsScreen::widgetHide()
-{
-  // Сохранение размера сплиттера перед скрытием виджета
-  QSplitter *hSplitter = find_object<QSplitter>("hSplitter");
-  int size = hSplitter->sizes().at(2);
-  mytetraConfig.set_tagsscreen_width(size);
+void TagsScreen::widgetHide() {
+  // Сохранение ширины колонок перед скрытием виджета
+  saveWidth();
 
   mytetraConfig.set_tagsscreen_show(false);
   this->close();
