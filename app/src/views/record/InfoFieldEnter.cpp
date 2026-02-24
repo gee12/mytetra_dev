@@ -29,6 +29,25 @@ InfoFieldEnter::~InfoFieldEnter()
 
 void InfoFieldEnter::setup_ui(void)
 {
+    QPalette bgPalette = this->palette();
+    bgPalette.setColor(QPalette::Base, bgPalette.color(QPalette::Background));
+
+    // Элементы для отображения id записи
+    recordIdLabel = new QLabel(this);
+    recordIdLabel->setText(tr("Id"));
+    recordId = new QLineEdit(this);
+    recordId->setMinimumWidth(500);
+    recordId->setReadOnly(true);
+    recordId->setPalette(bgPalette);
+
+    // Элементы для отображения названия каталога
+    dirNameLabel = new QLabel(this);
+    dirNameLabel->setText(tr("Directory name"));
+    dirName = new QLineEdit(this);
+    dirName->setMinimumWidth(500);
+    dirName->setReadOnly(true);
+    dirName->setPalette(bgPalette);
+
     // Элементы для запроса названия записи
     recordNameLabel = new QLabel(this);
     recordNameLabel->setText(tr("Title"));
@@ -72,6 +91,8 @@ void InfoFieldEnter::setup_ui(void)
         expandInfo->setIcon(QIcon(":/resource/pic/triangl_up.svg"));
         // expandInfo->setIcon(this->style()->standardIcon(QStyle::SP_ArrowUp));
     }
+
+    updateReadOnlyFieldsVisibility();
 }
 
 
@@ -108,6 +129,15 @@ void InfoFieldEnter::assembly(void)
     // Устанавливается видимость или невидимость полей author, url, tags...
     expandInfoOnDisplay( mytetraConfig.get_addnewrecord_expand_info() );
 
+    infoFieldLayout->addWidget(recordIdLabel,++y,0);
+    infoFieldLayout->addWidget(recordId,y,1);
+
+    infoFieldLayout->addWidget(dirNameLabel,++y,0);
+    infoFieldLayout->addWidget(dirName,y,1);
+
+ // Устанавливается видимость или невидимость полей author, url, tags...
+ expandInfoOnDisplay( mytetraConfig.get_addnewrecord_expand_info() );
+
     // Полученый набор элементов устанавливается для текущего виджета
     setLayout(infoFieldLayout);
 
@@ -138,6 +168,13 @@ void InfoFieldEnter::expandInfoOnDisplay(QString expand)
 
     recordTagsLabel->setVisible(i);
     recordTags->setVisible(i);
+
+    bool isDisplayReadOnlyFields = i && !isDisplayOnlyEditableFields;
+    recordIdLabel->setVisible(isDisplayReadOnlyFields);
+    recordId->setVisible(isDisplayReadOnlyFields);
+
+    dirNameLabel->setVisible(isDisplayReadOnlyFields);
+    dirName->setVisible(isDisplayReadOnlyFields);
 }
 
 
@@ -185,7 +222,9 @@ bool InfoFieldEnter::checkFieldName(QString name)
     if (name=="name" ||
             name=="author" ||
             name=="url" ||
-            name=="tags")
+            name=="tags" ||
+            name=="id" ||
+            name=="dir")
         return true;
     else
         return false;
@@ -212,6 +251,8 @@ void InfoFieldEnter::setField(QString name,QString value)
 {
     if (checkFieldName(name))
     {
+        if (name=="id")  recordId->setText(value);
+        if (name=="dir")  dirName->setText(value);
         if (name=="name")  recordName->setText(value);
         if (name=="author")recordAuthor->setText(value);
         if (name=="url")   recordUrl->setText(value);
@@ -234,4 +275,23 @@ void InfoFieldEnter::setReadOnly(bool state)
 bool InfoFieldEnter::isReadOnly()
 {
     return recordName->isReadOnly();
+}
+
+
+void InfoFieldEnter::setDisplayOnlyEditableFields(bool value)
+{
+  isDisplayOnlyEditableFields = value;
+
+  updateReadOnlyFieldsVisibility();
+}
+
+void InfoFieldEnter::updateReadOnlyFieldsVisibility()
+{
+  bool isVisible = !isDisplayOnlyEditableFields;
+
+  recordIdLabel->setVisible(isVisible);
+  recordId->setVisible(isVisible);
+
+  dirNameLabel->setVisible(isVisible);
+  dirName->setVisible(isVisible);
 }

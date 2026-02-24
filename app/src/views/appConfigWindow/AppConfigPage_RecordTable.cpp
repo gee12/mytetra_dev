@@ -23,6 +23,11 @@ AppConfigPage_RecordTable::AppConfigPage_RecordTable(QWidget *parent) : ConfigPa
   QMap<QString, QString> descriptionFields=FixedParameters::recordFieldDescription( allFieldNames );
   QStringList showFields=mytetraConfig.getRecordTableShowFields();
 
+  // Если отключено отображение избранного, то поле не должно использоваться
+  if (!mytetraConfig.get_showFavorites()) {
+      allFieldNames.removeOne("favor");
+  }
+
   // Создаются чекбоксы для каждого поля, хранимого в записи
   for(int i=0; i<allFieldNames.size(); i++)
   {

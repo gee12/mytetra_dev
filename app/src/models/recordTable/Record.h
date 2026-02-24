@@ -77,6 +77,9 @@ public:
 
   static void replaceInternalReferenceByTranslateTable(QString recordFileName, QMap<QString, QString> idRecordTranslate);
 
+  bool isFavorite();
+  int getFavoriteOrderNumber();
+
 protected:
 
   // ----------------------------------------------------------------------

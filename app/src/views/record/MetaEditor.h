@@ -47,6 +47,8 @@ public:
 
  void setFocusToBaseWidget();
 
+ QString getTags();
+
 private:
  void setupLabels(void);
  void setupUI(void);

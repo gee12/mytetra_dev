@@ -39,6 +39,8 @@ public:
  QAction *actionAddNewBefore;
  QAction *actionAddNewAfter;
  QAction *actionEditField;
+ QAction *actionFavorite;
+ QAction *actionOpenInSourceNode;
  QAction *actionBlock;
  QAction *actionDelete;
  QAction *actionCut;
@@ -47,6 +49,7 @@ public:
  QAction *actionSettings;
  QAction *actionBack;
  QAction *actionFindInBase;
+ QAction *actionTagsTable;
  QAction *actionSort;
  QAction *actionPrint;
  QAction *actionCopyRecordReference;

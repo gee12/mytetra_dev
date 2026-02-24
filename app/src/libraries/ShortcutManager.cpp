@@ -10,7 +10,7 @@
 extern GlobalParameters globalParameters;
 
 
-const QStringList ShortcutManager::availableSection={"note", "tree", "editor", "actionLog", "attach", "misc"};
+const QStringList ShortcutManager::availableSection={"note", "tree", "tags", "editor", "actionLog", "attach", "misc"};
 
 const QStringList ShortcutManager::overloadSection={"actionLog:*", "attach:editor"};
 
@@ -73,6 +73,7 @@ void ShortcutManager::initDefaultKeyTable()
     defaultKeyTable.insert("note-addNewBefore", Data{ QKeySequence("Ctrl+Alt+J"), tr("Add a note before"), tr("Add a note before current selected note") });
     defaultKeyTable.insert("note-addNewAfter",  Data{ QKeySequence("Ctrl+Alt+M"), tr("Add a note after"), tr("Add a note after current selected note") });
     defaultKeyTable.insert("note-editField",    Data{ QKeySequence("Ctrl+Alt+E"), tr("Edit properties"), tr("Edit note properties (name, author, tags...)") });
+    defaultKeyTable.insert("note-favorite",     Data{ QKeySequence("Ctrl+Alt+Shift+F"), tr("Set/unset favorite note"), tr("Set or unset current selected note to/from favorites notes") });
     defaultKeyTable.insert("note-block",        Data{ QKeySequence("Ctrl+Alt+B"), tr("Block/Unblock note"), tr("Block or unblock current selected note") });
     defaultKeyTable.insert("note-delete",       Data{ QKeySequence("Ctrl+Alt+R"), tr("Delete note(s)"), tr("") });
     defaultKeyTable.insert("note-cut",          Data{ QKeySequence("Ctrl+Alt+X"), tr("Cut notes(s)"), tr("Cut notes(s) to clipboard") });
@@ -98,6 +99,8 @@ void ShortcutManager::initDefaultKeyTable()
     defaultKeyTable.insert("tree-encryptBranch",        Data{ QKeySequence("Ctrl+Shift+1"), tr("Encrypt item"), tr("Encrypt item and all subitem") });
     defaultKeyTable.insert("tree-decryptBranch",        Data{ QKeySequence("Ctrl+Shift+0"), tr("Decrypt item"), tr("Decrypt item and all subitem") });
     defaultKeyTable.insert("tree-setIcon",              Data{ QKeySequence("Ctrl+Shift+O"), tr("Set icon"), tr("Set item icon") });
+
+    defaultKeyTable.insert("tags-findTag",              Data{ QKeySequence("Ctrl+Alt+F"), tr("Find in tags"), tr("") });
 
     defaultKeyTable.insert("editor-selectAll",           Data{ QKeySequence("Ctrl+A"), tr("Select all"), tr("") });
     defaultKeyTable.insert("editor-copy",                Data{ QKeySequence("Ctrl+C"), tr("Copy"), tr("") });
@@ -145,6 +148,7 @@ void ShortcutManager::initDefaultKeyTable()
     defaultKeyTable.insert("editor-tableMergeCells",     Data{ QKeySequence(""), tr("Merge cells"), tr("") });
     defaultKeyTable.insert("editor-tableSplitCell",      Data{ QKeySequence(""), tr("Split cell"), tr("") });
     defaultKeyTable.insert("editor-tableProperties",     Data{ QKeySequence(""), tr("Table properties"), tr("") });
+    defaultKeyTable.insert("editor-openImage",           Data{ QKeySequence("Ctrl+Shift+Y"), tr("Open image"), tr("Open selected image in external viewer") });
     defaultKeyTable.insert("editor-insertImageFromFile", Data{ QKeySequence("Ctrl+Shift+I"), tr("Insert/edit image"), tr("Insert image from file or edit selected image properties") });
     defaultKeyTable.insert("editor-insertHorizontalLine",Data{ QKeySequence("Ctrl+H"), tr("Insert horizontal line"), tr("Insert a horizontal line into the empty paragraph from cursor") });
     defaultKeyTable.insert("editor-mathExpression",      Data{ QKeySequence("Ctrl+Shift+M"), tr("Insert/edit math expression"), tr("") });
@@ -171,6 +175,7 @@ void ShortcutManager::initDefaultKeyTable()
     defaultKeyTable.insert("misc-focusNoteTable", Data{ QKeySequence("F6"), tr("Set focus to notes table"), tr("") });
     defaultKeyTable.insert("misc-focusEditor", Data{ QKeySequence("F4"), tr("Set focus to editor"), tr("") });
     defaultKeyTable.insert("misc-findInBase",  Data{ QKeySequence("Ctrl+Shift+F"), tr("Find in base"), tr("") });
+    defaultKeyTable.insert("misc-tagsTable",   Data{ QKeySequence("Ctrl+Shift+T"), tr("Tags list"), tr("") });
     defaultKeyTable.insert("misc-syncro",      Data{ QKeySequence("F9"), tr("Synchronization"), tr("Run synchronization") });
     defaultKeyTable.insert("misc-editConfirm", Data{ QKeySequence(Qt::CTRL + Qt::Key_Return), tr("Ok"), tr("") });
     defaultKeyTable.insert("misc-print",       Data{ QKeySequence("Ctrl+P"), tr("Print"), tr("") });

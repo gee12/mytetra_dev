@@ -75,6 +75,26 @@ void criticalError(QString message)
 }
 
 
+void warning(QString message)
+{
+  QMap<QString, QString> data;
+  data["message"]=message;
+  actionLogger.addAction("warning", data);
+
+  qDebug() << " ";
+  qDebug() << "---------------";
+  qDebug() << "Warning!";
+  qDebug() << "---------------";
+  qDebug() << message;
+  qDebug() << "---------------";
+  qDebug() << " ";
+
+  QMessageBox::warning(qobject_cast<QWidget *>(pMainWindow), "Warning",
+                        message,
+                        QMessageBox::Ok);
+}
+
+
 void smartPrintDebugMessage(QString msg)
 {
     if(globalParameters.getTargetOs()=="any" ||

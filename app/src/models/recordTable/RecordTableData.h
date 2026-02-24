@@ -39,7 +39,7 @@ public:
 
 
     // Получение указателя на запись по известному номеру записи в таблице
-    Record *getRecord(int pos);
+    Record *getRecord(int pos) const;
 
     // Получение указателя на запись по известному id записи
     Record *getRecordById(const QString &id);
@@ -50,7 +50,7 @@ public:
 
 
     // Первичное заполнение таблицы конечных записей
-    void init(TreeItem *item, QDomElement domModel);
+    void init(TreeItem *item, QDomElement domModel, TreeItem *favoriteNode);
 
     // Удаление всех элементов таблицы конечных записей
     void deleteAllRecords(void);
@@ -67,7 +67,22 @@ public:
 
     int insertNewRecord(int mode,
                         int pos,
-                        Record record);
+                        Record &record,
+                        bool isCheckAndAddToFavorites=true);
+
+    // Избранное
+    bool isFavorite(int pos);
+    int getFavoriteOrderNumber(int pos);
+    void sortByFavorField();
+    // Вставка/удаление записи в/из списка избранных записей
+    void insertRecordToFavorites(Record *record);
+    void deleteRecordFromFavorites(QString recordId);
+    void deleteRecordFromFavorites(int pos);
+
+    // Список записей по метке
+    void setTagName(QString tagName);
+    QString getTagName();
+    void insertRecordByTag(Record *record);
 
     void editRecordFields(int pos,
                           QMap<QString, QString> editFields);
@@ -103,13 +118,18 @@ public:
 private:
 
     // Функция заполнения таблицы из DOM-документа
-    void setupDataFromDom(QDomElement *domModel);
+    void setupDataFromDom(QDomElement *domModel, TreeItem *favoriteNode);
 
     // Таблица записей (в нормальном виде содержит только "легкие" объекты записей)
-    QList< Record > tableData;
+    QList< Record* > tableData;
 
-    // Ссылка на ветку, которой принадлежит данная таблица
+    // Ссылка на ветку, которой принадлежит данная таблица.
+    // Для таблиц по записям метки данная ссылка пустая.
     TreeItem *treeItem;
+
+    // Имя метки, которой принадлежит данная таблица.
+    // Для таблиц по ветке ссылка на данную строку пустая.
+    QString tagName;
 
     // Номер записи, с которой работал пользователь
     int workPos;

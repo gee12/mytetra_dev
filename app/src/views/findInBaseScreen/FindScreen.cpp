@@ -19,6 +19,7 @@
 #include "models/appConfig/AppConfig.h"
 #include "models/tree/TreeItem.h"
 #include "libraries/GlobalParameters.h"
+#include "libraries/FixedParameters.h"
 #include "views/tree/TreeScreen.h"
 #include "libraries/MtComboBox.h"
 #include "views/tree/KnowTreeView.h"
@@ -476,8 +477,12 @@ void FindScreen::findStart(void)
     cancelFlag=0;
     isUnsearchCryptBranchPresent=false;
 
+    // Ищем в ветке "Избранное" только если выбран поиск в текущей ветке и эта ветка "Избранное"
+    bool findInFavorites = mytetraConfig.getFindScreenTreeSearchArea()==1
+        && startItem->getField("id") == FixedParameters::favoritesItemId;
+
     //Вызывается рекурсивный поиск в дереве
-    this->findRecurse( startItem );
+    this->findRecurse(startItem, findInFavorites);
 
     // После вставки всех данных подгоняется ширина колонок
     findTable->updateColumnsWidth();
@@ -500,10 +505,14 @@ void FindScreen::findStart(void)
 }
 
 
-void FindScreen::findRecurse(const TreeItem* curritem)
+void FindScreen::findRecurse(const TreeItem* curritem, bool findInFavorites)
 {
     // Если была нажата отмена поиска
     if(cancelFlag==1)return;
+
+    // Если данная ветка - "Избранное", то пропускаем ее
+    if (!findInFavorites && curritem->getField("id") == FixedParameters::favoritesItemId)
+        return;
 
     // Если ветка зашифрована, и пароль не был введен
     if(curritem->getField("crypt")=="1" &&
@@ -551,6 +560,15 @@ void FindScreen::findRecurse(const TreeItem* curritem)
             {
                 cancelFlag=1;
                 return;
+            }
+
+            // Если ищем среди избранных записей, и запись зашифрована, и пароль не был введен
+            if(findInFavorites &&
+                searchRecordTable->getField("crypt",i) == "1" &&
+                globalParameters.getCryptKey().length()==0)
+            {
+                isUnsearchCryptBranchPresent=true;
+                continue;
             }
 
             // Результаты поиска в полях
@@ -625,7 +643,7 @@ void FindScreen::findRecurse(const TreeItem* curritem)
 
     // Рекурсивная обработка каждой подчиненной ветки
     for(int i=0; i<curritem->childCount(); i++)
-        findRecurse(curritem->child(i));
+        findRecurse(curritem->child(i), findInFavorites);
 
 }
 

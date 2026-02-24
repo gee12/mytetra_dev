@@ -114,7 +114,15 @@ void Record::exportDataToStreamWriter(QXmlStreamWriter *xmlWriter) const
 
     // Устанавливается значение поля как атрибут записи
     if(isNaturalFieldExists(currentFieldName))
-      xmlWriter->writeAttribute(currentFieldName, getNaturalFieldSource(currentFieldName));
+    {
+      QString fieldValue = getNaturalFieldSource(currentFieldName);
+      // Если это поле "favor", тогда проверяем, что значение не пусто,
+      // чтобы не "захламлять" дерево пустыми аттрибутами
+      if (currentFieldName != "favor" || !fieldValue.isEmpty())
+      {
+        xmlWriter->writeAttribute(currentFieldName, fieldValue);
+      }
+    }
   }
 
   // К элементу записи прикрепляется элемент таблицы приаттаченных файлов, если таковые есть
@@ -956,4 +964,22 @@ void Record::checkAndCreateTextFile() const
     // Создается пустой текст записи
     saveTextDirect( QString() );
   }
+}
+
+
+// Является ли запись избранной
+bool Record::isFavorite()
+{
+  bool isNumber;
+  int favorOrderNumber = getField("favor").toInt(&isNumber);
+  return isNumber && favorOrderNumber > 0;
+}
+
+
+// Получение значения поля "favor" - порядкового номера записи в избранном
+int Record::getFavoriteOrderNumber()
+{
+  bool isNumber;
+  int favorOrderNumber = getField("favor").toInt(&isNumber);
+  return (isNumber) ? favorOrderNumber : 0;
 }

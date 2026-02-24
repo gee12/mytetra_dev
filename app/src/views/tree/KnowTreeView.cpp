@@ -116,8 +116,16 @@ void KnowTreeView::dragMoveEvent(QDragMoveEvent *event)
         // Указатель на родительский элемент, чтобы далее получить модель данных
         TreeScreen *parentPointer=qobject_cast<TreeScreen *>( parent() );
 
-        // В модели данных отмечается элемент дерева, над которым находится курсор
-        parentPointer->knowTreeModel->setData(index, QVariant(true), Qt::UserRole);
+        // Получаем элемент дерева
+        TreeItem *item = parentPointer->knowTreeModel->getItem(index);
+
+        // Если это ветка "Избранное" - игнорируем событие
+        if (item->getField("id") == FixedParameters::favoritesItemId) {
+            event->ignore();
+        } else {
+            // В модели данных отмечается элемент дерева, над которым находится курсор
+            parentPointer->knowTreeModel->setData(index, QVariant(true), Qt::UserRole);
+        }
     }
     else
     {
@@ -142,7 +150,9 @@ bool KnowTreeView::isDragableData(X *event)
 
     QObject *sourceObject=qobject_cast<QObject *>( event->source() );
 
-    if( sourceObject->objectName()=="recordTableView" )
+    // А также, если выделенная курсором ветка - это не "Избранное"
+    if( sourceObject->objectName()=="recordTableView"
+        && !find_object<TreeScreen>("treeScreen")->isCurrentFavoritesItem())
     {
         return true;
     }
@@ -202,6 +212,32 @@ void KnowTreeView::dropEvent(QDropEvent *event)
             return;
         }
 
+       // Если перенос происходит из ветки "Избранное"
+       if (treeItemDrag->getField("id") == FixedParameters::favoritesItemId)
+       {
+           // Выводится уведомление что невозможен перенос из ветки "Избранное"
+           QMessageBox msgBox;
+           msgBox.setWindowTitle(tr("Warning!"));
+           msgBox.setText( tr("Unable to move record from item \"Favorites\".") );
+           msgBox.setIcon(QMessageBox::Information);
+           msgBox.exec();
+
+           return;
+       }
+
+       // Если перенос происходит в ветку "Избранное"
+       if (treeItemDrop->getField("id") == FixedParameters::favoritesItemId)
+       {
+           // Выводится уведомление что невозможен перенос в ветку "Избранное"
+           QMessageBox msgBox;
+           msgBox.setWindowTitle(tr("Warning!"));
+           msgBox.setText( tr("Unable to move record to item \"Favorites\".") );
+           msgBox.setIcon(QMessageBox::Information);
+           msgBox.exec();
+
+           return;
+       }
+
         // Если перенос происходит из не зашифрованной ветки в зашифрованную,
         // а пароль не установлен
         if(treeItemDrag->getField("crypt")!="1" &&
@@ -227,7 +263,7 @@ void KnowTreeView::dropEvent(QDropEvent *event)
         for(int i=0; i<clipboardRecords->getCount(); i++)
         {
             // Полные данные записи
-            Record record=clipboardRecords->getRecord(i);
+            Record *record = new Record(clipboardRecords->getRecord(i));
 
             qDebug() << " Before delete, cursor at row: " << recordTableController->getView()->currentIndex().row();
 
@@ -236,7 +272,7 @@ void KnowTreeView::dropEvent(QDropEvent *event)
             // В этот момент вид таблицы конечных записей показывает таблицу,
             // из которой совершается Drag.
             // TreeItem *treeItemFrom=parentPointer->knowTreeModel->getItem(indexFrom);
-            recordTableController->removeRowById( record.getField("id") );
+            recordTableController->removeRowById( record->getField("id") );
 
             qDebug() << " After delete, cursor at row: " << recordTableController->getView()->currentIndex().row();
 
@@ -263,10 +299,14 @@ void KnowTreeView::dropEvent(QDropEvent *event)
 
             find_object<RecordTableScreen>("recordTableScreen")->toolsUpdate();
 
+            // Не добавляем заново запись в избранное (если она там была), т.к. запись просто перемещается по дереву
+            bool isCheckAndAddToFavorites = false;
+
             // Добавление записи в базу
             recordTableData->insertNewRecord(GlobalParameters::AddNewRecordBehavior::ADD_TO_END,
                                              0,
-                                             record);
+                                             *record,
+                                             isCheckAndAddToFavorites);
 
             // Сохранение дерева веток
             find_object<TreeScreen>("treeScreen")->saveKnowTree();

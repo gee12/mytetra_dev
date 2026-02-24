@@ -2,6 +2,7 @@
 #define APPCONFIGPAGE_APPEARANCE_H
 
 #include "ConfigPage.h"
+#include "libraries/MtComboBox.h"
 
 class QWidget;
 class QGroupBox;

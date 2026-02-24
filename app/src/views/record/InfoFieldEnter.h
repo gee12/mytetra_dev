@@ -28,11 +28,23 @@ public:
     void setReadOnly(bool state);
     bool isReadOnly();
 
+  void setDisplayOnlyEditableFields(bool value);
+
 public slots:
 
     void expandInfoClick(void);
 
 private:
+
+    bool isDisplayOnlyEditableFields;
+
+    // Id записи
+    QLabel    *recordIdLabel;
+    QLineEdit *recordId;
+
+    // Название каталога
+    QLabel    *dirNameLabel;
+    QLineEdit *dirName;
 
     // Ввод названия записи
     QLabel    *recordNameLabel;
@@ -61,6 +73,7 @@ private:
     void assembly(void);
 
     void expandInfoOnDisplay(QString expand);
+    void updateReadOnlyFieldsVisibility();
 
 };
 

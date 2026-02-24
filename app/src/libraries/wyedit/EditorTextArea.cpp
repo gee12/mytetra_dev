@@ -12,6 +12,7 @@
 #include <QTapAndHoldGesture>
 #include <QDebug>
 #include <QApplication>
+#include <QAbstractTextDocumentLayout>
 
 #include "EditorTextArea.h"
 #include "../TraceLogger.h"
@@ -118,9 +119,37 @@ void EditorTextArea::keyPressEvent(QKeyEvent *event)
 {
     // Если нажата клавиша Ctrl
     if( event->key() == Qt::Key_Control )
+    {
         switchReferenceClickMode(true);
-
-    QTextEdit::keyPressEvent(event);
+        QTextEdit::keyPressEvent(event);
+    }
+    // Если нажата комбинация Shift+Tab
+    else if (event->key() == Qt::Key_Backtab)
+    {
+        QTextCursor cursor = textCursor();
+        // Сохраняем текущую позицию курсора
+        int pos = cursor.position();
+        int anchor = cursor.anchor();
+        // Сбрасывает текущую позицию
+        cursor.clearSelection();
+        // Выделяем первый символ в строке
+        cursor.movePosition(QTextCursor::StartOfLine);
+        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+        QString selectedText = cursor.selectedText();
+        // Проверяем, если выделенный символ - это табуляция
+        if (selectedText.startsWith('\t')) {
+            // Если табуляция, то удаляем выделенный символ и возвращаем курсор обратно (но уже на 1 символ левее)
+            cursor.removeSelectedText();
+            cursor.setPosition(anchor-1);
+            cursor.setPosition(pos-1, QTextCursor::KeepAnchor);
+        } else {
+            // Это не табуляция, возвращаем курсор обратно
+            cursor.setPosition(anchor);
+            cursor.setPosition(pos, QTextCursor::KeepAnchor);
+        }
+    } else {
+        QTextEdit::keyPressEvent(event);
+    }
 }
 
 
@@ -167,11 +196,24 @@ void EditorTextArea::switchReferenceClickMode(bool flag)
             globalParameters.getStatusBar()->showMessage(href);
             qDebug() << "Cursor href in key event: " << href;
         }
+        else
+        {
+            // Сразу нужно проверить, не наведен ли курсор на изображение, и если наведен, то поменять его вид
+            QString imageName = imageAt(m_currentMousePosition);
+
+            if(!imageName.isEmpty())
+            {
+                qApp->setOverrideCursor(QCursor(Qt::PointingHandCursor)); // Меняется форма курсора на указатель клика по ссылке
+                m_mouseCursorOverriden = true;
+                globalParameters.getStatusBar()->showMessage(imageName); // Имя изображения отображается в строке статуса
+                qDebug() << "Cursor image in mouse event: " << imageName;
+            }
+        }
     }
     else
     {
         // Вид курсора сбрасывается на основной. Нужно для того, чтобы курсор поменялся,
-        // если мышка в момент отжатия клавиши была наведена на ссылку и курсор был с указательным пальцем
+        // если мышка в момент отжатия клавиши была наведена на ссылку или изображение и курсор был с указательным пальцем
         qApp->restoreOverrideCursor();
 
         m_mouseCursorOverriden = false;
@@ -205,16 +247,33 @@ void EditorTextArea::mouseMoveEvent(QMouseEvent *event)
         }
         else
         {
-            if(m_mouseCursorOverriden)
+            QString imageName = imageAt(m_currentMousePosition);
+
+            if(!imageName.isEmpty())
             {
-                qApp->restoreOverrideCursor(); // Воостанавливается обычный курсор
-                m_mouseCursorOverriden = false;
-                globalParameters.getStatusBar()->showMessage("");
+                if(!m_mouseCursorOverriden)
+                {
+                    qApp->setOverrideCursor(QCursor(Qt::PointingHandCursor)); // Меняется форма курсора на указатель клика по ссылке
+                    m_mouseCursorOverriden = true;
+                    globalParameters.getStatusBar()->showMessage(imageName); // Имя изображения отображается в строке статуса
+                    qDebug() << "Cursor image in mouse event: " << imageName;
+                }
+            }
+            else
+            {
+                if(m_mouseCursorOverriden)
+                {
+                    qApp->restoreOverrideCursor(); // Воостанавливается обычный курсор
+                    m_mouseCursorOverriden = false;
+                    globalParameters.getStatusBar()->showMessage("");
+                }
             }
         }
     }
     else
+    {
         qApp->restoreOverrideCursor(); // Иначе клавиша Ctrl не нажата и курсор не может быть курсором ссылки
+    }
 
     QTextEdit::mouseMoveEvent(event);
 }
@@ -227,8 +286,22 @@ void EditorTextArea::mousePressEvent(QMouseEvent *event)
     {
         QString href = this->anchorAt(event->pos());
         if(!href.isEmpty())
+        {
             emit clickedOnReference(href);
+        }
+        else
+        {
+            QString imageName = imageAt(m_currentMousePosition);
 
+            if(!imageName.isEmpty())
+            {
+                // Устанавливаем курсор на изображение, по которому кликнули
+                setTextCursorFromPoint(m_currentMousePosition);
+
+                // Открываем изображение
+                emit clickOnImage();
+            }
+        }
         // Cобытие игнорируется, чтобы текстовый курсор не переместился в место где сделан клик
         event->ignore();
         return;
@@ -669,3 +742,33 @@ void EditorTextArea::onDownloadImagesSuccessfull(const QString html,
     this->textCursor().insertHtml( htmlFilterDoc.toHtml() );
 }
 
+
+QString EditorTextArea::imageAt(const QPoint& point)
+{
+    int scrollY = verticalScrollBar()->value();
+    int scrollX = horizontalScrollBar()->value();
+    QPoint mousePositionWithScroll = QPoint(point.x()+scrollX, point.y()+scrollY);
+    return document()->documentLayout()->imageAt(mousePositionWithScroll);
+}
+
+
+int EditorTextArea::hitTest(const QPointF &point, Qt::HitTestAccuracy accuracy)
+{
+    int scrollY = verticalScrollBar()->value();
+    int scrollX = horizontalScrollBar()->value();
+    QPoint mousePositionWithScroll = QPoint(point.x()+scrollX, point.y()+scrollY);
+    return document()->documentLayout()->hitTest(mousePositionWithScroll, accuracy);
+}
+
+
+void EditorTextArea::setTextCursorFromPoint(const QPointF &point)
+{
+    int pos = hitTest(point, Qt::ExactHit);
+    if (pos < 0)
+        return;
+    QTextCursor cursor(textCursor());
+    if (!cursor.atEnd())
+        pos+=1;
+    cursor.setPosition(pos);
+    setTextCursor(cursor);
+}

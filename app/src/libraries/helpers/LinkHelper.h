@@ -17,7 +17,9 @@ private:
 
     static bool isExternal(const QUrl &url);
     static bool isHrefInternal(QString href);
-    static QString getIdFromInternalHref(QString href);
+    static bool isHrefInternalToTag(QString href);
+    static QString getRecordIdFromInternalHref(QString href);
+    static QString getTagNameFromInternalHref(QString href);
 
 };
 

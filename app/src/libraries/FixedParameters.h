@@ -50,6 +50,8 @@ public:
   // Имена доступных размеров иконок
   static const OrderedMap< QString, QPair<QString, float> > interfaceIconSizeAvailableMap;
 
+  static const QString favoritesItemId; // ID ветки "Избранное"
+
   static bool isRecordFieldAvailable(QString name);
   static bool isRecordFieldNatural(QString name);
   static bool isRecordFieldCalculable(QString name);

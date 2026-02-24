@@ -54,6 +54,10 @@ public:
     int get_trashmaxfilecount(void);
     bool set_trashmaxfilecount(int count);
 
+    // Используется ли список избранных записей
+    bool get_showFavorites(void);
+    bool set_showFavorites(bool confirm);
+
     // Нужно ли показывать подтверждение при выполнении действия "cut на ветке
     bool get_cutbranchconfirm(void);
     bool set_cutbranchconfirm(bool confirm);
@@ -84,6 +88,9 @@ public:
     QList<int> get_findsplitter_size_list(void);
     void set_findsplitter_size_list(QList<int> list);
 
+    QList<int> getTagsTableSizeList();
+    void setTagsTableSizeList(QList<int> list);
+
     QList<int> get_splitter_size_list(QString name);
     void set_splitter_size_list(QString name, QList<int> list);
 
@@ -112,6 +119,12 @@ public:
 
     bool get_findscreen_show(void);
     void set_findscreen_show(bool isShow);
+
+    bool get_tagsscreen_show(void);
+    void set_tagsscreen_show(bool isShow);
+
+    QString get_tags_sort(void);
+    void set_tags_sort(QString sort);
 
     QString get_howpassrequest(void);
     void set_howpassrequest(QString mode);
@@ -335,6 +348,7 @@ private:
     QStringList get_parameter_table_40(bool withEndSignature=true);
     QStringList get_parameter_table_41(bool withEndSignature=true);
     QStringList get_parameter_table_42(bool withEndSignature=true);
+    QStringList get_parameter_table_43(bool withEndSignature=true);
 
     QSettings *m_conf = nullptr; // было static
     bool m_isInit;

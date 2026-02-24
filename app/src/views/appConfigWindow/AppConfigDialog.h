@@ -1,6 +1,7 @@
 #ifndef APPCONFIGDIALOG_H
 #define APPCONFIGDIALOG_H
 
+#include <QObject>
 #include <QString>
 
 // Объект, подготавливающий и отображающий диалог настройки MyTetra
@@ -9,8 +10,9 @@ class ConfigDialog;
 class QListWidgetItem;
 class QWidget;
 
-class AppConfigDialog
+class AppConfigDialog : QObject
 {
+    Q_OBJECT
 
 public:
     explicit AppConfigDialog(const QString &firstPageName, QWidget *parent);
@@ -27,6 +29,7 @@ private:
     QListWidgetItem *pageAppearance;
     QListWidgetItem *pageCrypt;
     QListWidgetItem *pageSynchro;
+    QListWidgetItem *pageTree;
     QListWidgetItem *pageRecordTable;
     QListWidgetItem *pageAttach;
     QListWidgetItem *pageKeyboard;

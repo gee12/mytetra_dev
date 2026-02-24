@@ -14,11 +14,12 @@
 #include "libraries/wyedit/EditorToolBarAssistant.h"
 #include "libraries/wyedit/indentslider/IndentSlider.h"
 #include "libraries/GlobalParameters.h"
-#include "views/findInBaseScreen/FindScreen.h"
+#include "views/tags/TagsScreen.h"
 #include "models/appConfig/AppConfig.h"
 #include "views/attachTable/AttachTableScreen.h"
 #include "libraries/helpers/ObjectHelper.h"
 #include "libraries/helpers/LinkHelper.h"
+#include "models/tags/TagsModel.h"
 
 
 extern GlobalParameters globalParameters;
@@ -62,8 +63,7 @@ MetaEditor::~MetaEditor(void)
 
 void MetaEditor::setupSignals(void)
 {
-  connect(this,                             &MetaEditor::setFindTextSignal,
-          globalParameters.getFindScreen(), &FindScreen::setFindText);
+  connect(this, &MetaEditor::setFindTextSignal, globalParameters.getTagsScreen(), &TagsScreen::showTag);
 
   connect(recordUrl, &QLabel::linkActivated,
           this,      &MetaEditor::onClickToUrl);
@@ -320,8 +320,8 @@ void MetaEditor::setTags(QString tags)
  recordTagsText=tags;
 
 
- // Строка с метками разделяется на отдельные меки
- recordTagsTextList = recordTagsText.split(QRegExp("[,;]+"), QString::SkipEmptyParts);
+ // Строка с метками разделяется на отдельные метки
+ recordTagsTextList = recordTagsText.split(QRegExp(TAG_SEPARATORS), Qt::SkipEmptyParts);
 
  // В каждой метке убираются лишние пробелы по краям
  for(int i = 0; i < recordTagsTextList.size(); ++i)
@@ -476,13 +476,6 @@ void MetaEditor::onClickToTag(const QString &tagNum)
  // Запуск поиска по тексту метки
  // -----------------------------
 
- // Определяется ссылка на виджет поиска
- FindScreen *findScreen=find_object<FindScreen>("findScreenDisp");
-
- // Если виджет не показан, он выводится на экран
- if(findScreen->isVisible()==false)
-  findScreen->widgetShow();
-
  emit setFindTextSignal(tag);
 }
 
@@ -510,4 +503,9 @@ void MetaEditor::setReadOnly(bool state)
 void MetaEditor::setFocusToBaseWidget()
 {
     textArea->setFocus();
+}
+
+QString MetaEditor::getTags()
+{
+  return recordTagsText;
 }

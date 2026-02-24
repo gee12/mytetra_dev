@@ -236,6 +236,19 @@ bool AppConfig::set_trashmaxfilecount(int count)
 }
 
 
+bool AppConfig::get_showFavorites(void)
+{
+    return m_conf->value("showfavorites").toBool();
+}
+
+
+bool AppConfig::set_showFavorites(bool confirm)
+{
+    m_conf->setValue("showfavorites", confirm);
+    return true;
+}
+
+
 bool AppConfig::get_cutbranchconfirm(void)
 {
     return m_conf->value("cutbranchconfirm").toBool();
@@ -344,6 +357,16 @@ void AppConfig::set_findsplitter_size_list(QList<int> list)
 {
     // qDebug() << "Config set find splitter list to " << list;
     set_splitter_size_list("findsplitter", list);
+}
+
+
+QList<int> AppConfig::getTagsTableSizeList() {
+    return get_splitter_size_list("tags_table");
+}
+
+
+void AppConfig::setTagsTableSizeList(QList<int> list) {
+    set_splitter_size_list("tags_table", list);
 }
 
 
@@ -460,6 +483,26 @@ bool AppConfig::get_findscreen_show(void)
 void AppConfig::set_findscreen_show(bool isShow)
 {
     m_conf->setValue("findscreen_show", isShow);
+}
+
+
+bool AppConfig::get_tagsscreen_show(void)
+{
+    return m_conf->value("tagsscreen_show",0).toBool();
+}
+
+
+void AppConfig::set_tagsscreen_show(bool isShow)
+{
+    m_conf->setValue("tagsscreen_show",isShow);
+}
+
+QString AppConfig::get_tags_sort() {
+    return m_conf->value("tags_sort").toString();
+}
+
+void AppConfig::set_tags_sort(QString sort) {
+    m_conf->setValue("tags_sort",sort);
 }
 
 
@@ -653,7 +696,14 @@ void AppConfig::setUglyQssReplaceHeightForTableView(int n)
 // Перечень полей, отображаемых в таблице конечных записей
 QStringList AppConfig::getRecordTableShowFields(void)
 {
-    return (m_conf->value("recordTableShowFields", "name")).toString().split(",");
+    QStringList showList = (m_conf->value("recordTableShowFields", "name")).toString().split(",");
+
+    // Если отключено отображение избранных записей, то не используем столбец "favor"
+    if (!get_showFavorites()) {
+        showList.removeOne("favor");
+    }
+
+    return showList;
 }
 
 
@@ -1243,6 +1293,7 @@ void AppConfig::update_version_process(void)
     parameterFunctions << &AppConfig::get_parameter_table_40;
     parameterFunctions << &AppConfig::get_parameter_table_41;
     parameterFunctions << &AppConfig::get_parameter_table_42;
+    parameterFunctions << &AppConfig::get_parameter_table_43;
 
     for (int i=1; i<parameterFunctions.count()-1; ++i)
     {
@@ -2108,6 +2159,27 @@ QStringList AppConfig::get_parameter_table_42(bool withEndSignature)
     table << "interfaceIconSize" << "QString" << "";
 
     if(withEndSignature)
+        table << "0" << "0" << "0";
+
+    return table;
+}
+
+
+QStringList AppConfig::get_parameter_table_43(bool withEndSignature)
+{
+    // Таблица параметров
+    // Имя, Тип, Значение на случай когда в конфиге параметра прочему-то нет
+    QStringList table;
+
+    // Старые параметры, аналогичные версии 42
+    table << get_parameter_table_42(false);
+
+    // Список меток
+    table << "tagsscreen_show" << "bool" << "true";
+    table << "tags_table_size_list" << "QString" << "100,100";
+    table << "tags_sort" << "QString" << "0,0";
+
+    if (withEndSignature)
         table << "0" << "0" << "0";
 
     return table;

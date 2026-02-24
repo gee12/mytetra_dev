@@ -8,6 +8,7 @@
 #include "LinkHelper.h"
 
 #include "views/mainWindow/MainWindow.h"
+#include "views/tags/TagsScreen.h"
 #include "views/tree/KnowTreeView.h"
 #include "models/tree/KnowTreeModel.h"
 #include "libraries/FixedParameters.h"
@@ -25,25 +26,23 @@ void LinkHelper::gotoReference(QString href)
     if(href.length()==0)
         return;
 
-    // Если клик по обычной ссылке
-    if(!isHrefInternal(href))
-    {
-        openLinkWithDesktopServices( href );
+    // Попытка получения ID записи из ссылки
+    QString recordId = getRecordIdFromInternalHref(href);
+    if (!recordId.isEmpty()) {
+        // Клик по внутренней ссылке на запись
+        find_object<MainWindow>("mainwindow")->openRecordByInternalHref(recordId);
+        return;
     }
-    else
-    {
-        // Иначе клик по "внутренней" ссылке с протоколом "mytetra:"
 
-        // Пролучение ID из ссылки
-        QString recordId=getIdFromInternalHref(href);
-
-        // todo: вынести следующий код в отдельный метод главного окна
-
-        // Нахождение ветки, в которой лежит данная запись
-        QStringList pathToRecord=static_cast<KnowTreeModel*>(find_object<KnowTreeView>("knowTreeView")->model())->getRecordPath(recordId);
-
-        find_object<MainWindow>("mainwindow")->setTreeAndRecordtablePositions(pathToRecord, recordId);
+    // Попытка получения имени метки из ссылки
+    QString tagName = getTagNameFromInternalHref(href);
+    if (!tagName.isEmpty()) {
+        // Клик по внутренней ссылке на метку
+        find_object<TagsScreen>("tagsScreen")->showTag(tagName);
+        return;
     }
+
+    openLinkWithDesktopServices( href );
 }
 
 
@@ -110,7 +109,13 @@ bool LinkHelper::isHrefInternal(QString href)
 }
 
 
-QString LinkHelper::getIdFromInternalHref(QString href)
+bool LinkHelper::isHrefInternalToTag(QString href)
+{
+    return href.contains(QRegExp("^"+FixedParameters::appTextId+":\\/\\/tag\\/.+$"));
+}
+
+
+QString LinkHelper::getRecordIdFromInternalHref(QString href)
 {
     if(!isHrefInternal(href))
         return "";
@@ -118,5 +123,15 @@ QString LinkHelper::getIdFromInternalHref(QString href)
     href.replace(QRegExp("^"+FixedParameters::appTextId+":\\/\\/note\\/"), "");
 
     return href;
+}
 
+
+QString LinkHelper::getTagNameFromInternalHref(QString href)
+{
+    if (!isHrefInternalToTag(href))
+        return "";
+
+    href.replace(QRegExp("^"+FixedParameters::appTextId+":\\/\\/tag\\/"), "");
+
+    return href;
 }

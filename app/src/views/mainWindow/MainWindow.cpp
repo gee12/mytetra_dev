@@ -23,6 +23,7 @@
 #include "views/recordTable/RecordTableScreen.h"
 #include "models/tree/TreeItem.h"
 #include "views/findInBaseScreen/FindScreen.h"
+#include "views/tags/TagsScreen.h"
 #include "models/tree/KnowTreeModel.h"
 #include "libraries/GlobalParameters.h"
 #include "views/consoleEmulator/CommandRunner.h"
@@ -108,6 +109,11 @@ void MainWindow::setupUI(void)
     findScreenDisp->setObjectName("findScreenDisp");
     globalParameters.setFindScreen(findScreenDisp);
 
+    tagsScreen=new TagsScreen( this );
+    tagsScreen->setObjectName("tagsScreen");
+    globalParameters.setTagsScreen(tagsScreen);
+    tagsScreen->reloadTags();
+
     editorScreen=new MetaEditor( this );
     editorScreen->setObjectName("editorScreen");
     globalParameters.setMetaEditor(editorScreen);
@@ -163,6 +169,7 @@ void MainWindow::setupSignals(void)
     }
 
     // Вызов окна просмотра лога
+    connect(actionToolsMenuTagsTable, &QAction::triggered, this, &MainWindow::toolsTagsTable);
     connect(actionToolsMenuActionLog, &QAction::triggered, this, &MainWindow::onActionLogClicked);
 
     // Вызов окна настроек
@@ -236,8 +243,11 @@ void MainWindow::assembly(void)
     hSplitter=new QSplitter(Qt::Horizontal);
     hSplitter->addWidget(treeScreen); // Дерево веток
     hSplitter->addWidget(vSplitter);
+    hSplitter->addWidget(tagsScreen);
     hSplitter->setCollapsible(0,false); // Дерево веток не может смыкаться
     hSplitter->setCollapsible(1,false); // Столбец со списком и содержимым записи не может смыкаться
+    hSplitter->setCollapsible(2,false); // Список меток не может смыкаться
+    hSplitter->setObjectName("hSplitter");
 
     findSplitter=new QSplitter(Qt::Vertical);
     findSplitter->addWidget(hSplitter);
@@ -363,7 +373,16 @@ void MainWindow::restoreWindowGeometry(void)
         restoreGeometry( mytetraConfig.get_mainwingeometry() );
 
     vSplitter->setSizes(mytetraConfig.get_vspl_size_list());
-    hSplitter->setSizes(mytetraConfig.get_hspl_size_list());
+
+    QList<int> hSizes = mytetraConfig.get_hspl_size_list();
+
+    // Ширина панели меток устанавливается отдельно по ширине таблицы
+    int tagsWidth = tagsScreen->restoreWidth();
+    if (hSizes.size() > 2)
+        hSizes[2] = tagsWidth;
+    else hSizes.append(tagsWidth);
+
+    hSplitter->setSizes(hSizes);
     findSplitter->setSizes(mytetraConfig.get_findsplitter_size_list());
 }
 
@@ -388,6 +407,11 @@ void MainWindow::saveWindowGeometry(void)
 
     if(mytetraConfig.get_findscreen_show())
         mytetraConfig.set_findsplitter_size_list(findSplitter->sizes());
+
+    // Сохраняем ширину панели со списком меток
+    if (mytetraConfig.get_tagsscreen_show()) {
+        tagsScreen->saveWidth();
+    }
 }
 
 
@@ -538,11 +562,21 @@ void MainWindow::restoreFindOnBaseVisible(void)
 }
 
 
+void MainWindow::restoreTagsTableVisible()
+{
+    if (mytetraConfig.get_tagsscreen_show())
+         tagsScreen->show();
+    else
+         tagsScreen->hide();
+}
+
+
 void MainWindow::restoreAllWindowState(void)
 {
     globalParameters.getWindowSwitcher()->disableSwitch();
 
     restoreFindOnBaseVisible();
+    restoreTagsTableVisible();
     restoreWindowGeometry();
 
 
@@ -615,6 +649,9 @@ void MainWindow::initToolsMenu(void)
 
     actionToolsMenuFindInBase = new QAction(this); // Так как есть this, указатель не будет потерян основным окном
     menu->addAction(actionToolsMenuFindInBase);
+
+    actionToolsMenuTagsTable = new QAction(this);
+    menu->addAction(actionToolsMenuTagsTable);
 
     actionToolsMenuActionLog = new QAction(tr("Action &log"), this);
     menu->addAction(actionToolsMenuActionLog);
@@ -737,6 +774,7 @@ void MainWindow::setupShortcuts(void)
     shortcutManager.initAction("misc-quit", actionFileMenuQuit );
 
     shortcutManager.initAction("misc-findInBase", actionToolsMenuFindInBase );
+    shortcutManager.initAction("misc-tagsTable", actionToolsMenuTagsTable);
 
     shortcutManager.initAction("misc-focusTree", actionFocusTree );
     shortcutManager.initAction("misc-focusNoteTable", actionFocusNoteTable );
@@ -892,6 +930,15 @@ void MainWindow::toolsFindInBase(void)
 }
 
 
+void MainWindow::toolsTagsTable()
+{
+    if (!tagsScreen->isVisible())
+        tagsScreen->widgetShow();
+    else
+        tagsScreen->widgetHide();
+}
+
+
 void MainWindow::toolsPreferences(void)
 {
     AppConfigDialog dialog("", this); // this нужен чтобы пробрасывать иконку приложения
@@ -1023,6 +1070,15 @@ void MainWindow::reload(void)
 
   // Стадия Load идет сразу после стадии Save, флаг о наличии задержки не выставляется
   reloadLoadStage(false);
+}
+
+
+void MainWindow::openRecordByInternalHref(const QString &recordId) {
+    // Нахождение ветки, в которой лежит данная запись
+    QStringList pathToRecord = treeScreen->knowTreeModel->getRecordPath(recordId);
+
+    setTreePosition( pathToRecord);
+    setRecordtablePositionById( recordId);
 }
 
 

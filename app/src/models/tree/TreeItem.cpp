@@ -237,12 +237,24 @@ void TreeItem::setAllFieldDirect(const QMap<QString, QString> nameAndValue)
   fieldsTable=nameAndValue; // Qt сам должен правильно сделать привязку к переданным данным и оставить их в памяти
 
   // Если есть иконка и нет шифрования, изображение иконки кешируется
-  if(nameAndValue.value("icon").length()>0 &&
-     nameAndValue.value("crypt")!="1")
-    icon=QIcon(mytetraConfig.get_tetradir()+"/"+FixedParameters::iconsRelatedDirectory+"/"+nameAndValue.value("icon"));
-
-  if(nameAndValue.value("icon").length()==0)
-    icon=QIcon();
+  QString iconName = nameAndValue.value("icon");
+  if(iconName.length()>0 &&
+      nameAndValue.value("crypt")!="1")
+  {
+    // Иконку ветки "Избранное" устанавливаем из ресурсов
+    if (getField("id") == FixedParameters::favoritesItemId)
+    {
+      icon=QIcon(iconName);
+    }
+    else
+    {
+      icon=QIcon(mytetraConfig.get_tetradir()+"/"+FixedParameters::iconsRelatedDirectory+"/"+iconName);
+    }
+  }
+  else if(iconName.length()==0)
+  {
+      icon=QIcon();
+  }
 }
 
 
@@ -598,9 +610,9 @@ void TreeItem::switchToDecrypt(void)
 }
 
 
-void TreeItem::recordtableInit(QDomElement domModel)
+void TreeItem::recordtableInit(QDomElement domModel, TreeItem *favoriteNode)
 {
-  recordsTable.init(this, domModel);
+  recordsTable.init(this, domModel, favoriteNode);
 }
 
 

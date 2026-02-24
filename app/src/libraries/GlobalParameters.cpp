@@ -21,6 +21,7 @@
 #include "libraries/WindowSwitcher.h"
 #include "libraries/FixedParameters.h"
 #include "libraries/helpers/DebugHelper.h"
+#include "libraries/helpers/DiskHelper.h"
 
 #include "models/appConfig/AppFiles.h"
 
@@ -432,6 +433,17 @@ void GlobalParameters::setFindScreen(FindScreen *point)
 FindScreen *GlobalParameters::getFindScreen()
 {
     return m_pointFindScreen;
+}
+
+
+void GlobalParameters::setTagsScreen(TagsScreen *point)
+{
+    m_pointTagsScreen=point;
+}
+
+TagsScreen *GlobalParameters::getTagsScreen()
+{
+    return m_pointTagsScreen;
 }
 
 

@@ -81,8 +81,8 @@ contains(TARGET_OS, ANY_OS) {
 
 TARGET = mytetra
 RESOURCES = bin/mytetra.qrc \
-            bin/icons.qrc \ 
-            bin/themes.qrc 
+            bin/icons.qrc \
+            bin/themes.qrc
 TRANSLATIONS = bin/resource/translations/mytetra_ru.ts \ 
                bin/resource/translations/mytetra_fr.ts
 CODECFORTR  = utf8
@@ -171,6 +171,7 @@ HEADERS = src/main.h \
     src/models/databasesManagement/KnownBasesConfig.h \
     src/views/appConfigWindow/AppConfigPage_Appearance.h \
     src/views/appConfigWindow/AppConfigPage_History.h \
+    src/views/appConfigWindow/AppConfigPage_Tree.h \
     src/views/consoleEmulator/CommandRunner.h \
     src/views/databasesManagement/DatabasesManagementPathDelegate.h \
     src/views/databasesManagement/DatabasesManagementScreen.h \
@@ -200,6 +201,11 @@ HEADERS = src/main.h \
     src/models/appConfig/AppConfig.h \
     src/views/record/AddNewRecord.h \
     src/libraries/ClipboardRecords.h \
+    src/views/tags/TagsScreen.h \
+    src/views/tags/TagsTableWidget.h \
+    src/views/tags/TagsFindDialog.h \
+    src/controllers/tags/TagsTableController.h \
+    src/models/tags/TagsModel.h \
     src/views/tree/TreeScreen.h \
     src/views/findInBaseScreen/FindScreen.h \
     src/views/findInBaseScreen/FindTableWidget.h \
@@ -340,6 +346,7 @@ SOURCES = src/main.cpp \
     src/models/databasesManagement/KnownBasesConfig.cpp \
     src/views/appConfigWindow/AppConfigPage_Appearance.cpp \
     src/views/appConfigWindow/AppConfigPage_History.cpp \
+    src/views/appConfigWindow/AppConfigPage_Tree.cpp \
     src/views/consoleEmulator/CommandRunner.cpp \
     src/views/databasesManagement/DatabasesManagementPathDelegate.cpp \
     src/views/databasesManagement/DatabasesManagementScreen.cpp \
@@ -369,6 +376,11 @@ SOURCES = src/main.cpp \
     src/models/appConfig/AppConfig.cpp \
     src/views/record/AddNewRecord.cpp \
     src/libraries/ClipboardRecords.cpp \
+    src/views/tags/TagsFindDialog.cpp \
+    src/views/tags/TagsScreen.cpp \
+    src/views/tags/TagsTableWidget.cpp \
+    src/controllers/tags/TagsTableController.cpp \
+    src/models/tags/TagsModel.cpp \
     src/views/tree/TreeScreen.cpp \
     src/views/findInBaseScreen/FindScreen.cpp \
     src/views/findInBaseScreen/FindTableWidget.cpp \

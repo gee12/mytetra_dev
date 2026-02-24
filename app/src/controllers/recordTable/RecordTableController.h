@@ -58,6 +58,10 @@ public:
 
   void setFocusToBaseWidget();
 
+  bool isRecordNotEncryptedOrDecrypted(QModelIndex index);
+  bool isAllSelectedRecordsNotEncryptedOrDecrypted();
+  bool isTableByTag();
+
 signals:
 
   void doCloseDetachedWindowsByIdVector(const QVector<QString> &ids);
@@ -74,6 +78,8 @@ public slots:
   void paste(void);
 
   void onEditFieldContext(void);
+  void onFavoriteContext(void);
+  void onOpenInSourceNodeClick(void);
   void onBlockContext(void);
 
   void deleteRecords(void);
@@ -114,7 +120,7 @@ protected:
 
   void addNewRecord(int mode);
 
-  void addNew(int mode, Record record);
+  void addNew(int mode, Record &record);
 
   void editField(int pos,
                  QString name,

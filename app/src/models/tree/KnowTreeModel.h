@@ -52,6 +52,13 @@ public:
     //! Добавление новой подветки к Item элементу
     void addNewBranch(TreeItem *parent, QMap<QString, QString> branchFields);
 
+    TreeItem *getFavoritesItem();
+    int getFavoriteMaxOrderNumber();
+    void checkAndSetFavoriteMaxOrderNumber(int value);
+    void addRecordToFavorites(Record *record);
+    void deleteRecordFromFavorites(QModelIndex &index);
+    void deleteRecordFromFavorites(QString recordId);
+
 
     //! Перемещение ветки вверх
     QModelIndex moveUpBranch(const QModelIndex &index);
@@ -125,6 +132,9 @@ private:
     QDateTime m_lastSaveDateTime;
     QDateTime m_lastLoadDateTime;
 
+    TreeItem *favoritesNode = nullptr;
+    int favoriteMaxOrderNumber = 0;
+
     void init(QDomDocument *domModel);
 
     //! Функция заполнения дерева из DOM-документа
@@ -185,6 +195,7 @@ private:
     bool checkFormat(QDomElement elementFormat);
 
     bool updateSubVersionFrom1To2(void);
+    bool updateSubVersionFrom2To3(void);
 
 
     //! Нахождение совпадающих ID в импортируемых данных и в основной базе для веток

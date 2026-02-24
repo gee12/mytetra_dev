@@ -51,6 +51,7 @@ signals:
     void downloadImages(const QString href);
 
     void doubleClickOnImage();
+    void clickOnImage();
 
 public slots:
     void showIndentEdge(bool i);
@@ -83,7 +84,9 @@ private:
     void mouseDoubleClickEvent(QMouseEvent *event);
 
     void switchReferenceClickMode(bool flag);
-
+    QString imageAt(const QPoint& point);
+    int hitTest(const QPointF &point, Qt::HitTestAccuracy accuracy);
+    void setTextCursorFromPoint(const QPointF &point);
 
     bool m_flagShowFormatting; //< Рисовать ли символы форматирования
 

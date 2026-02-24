@@ -6,8 +6,8 @@
 
 
 // Поля для записей
-const QStringList FixedParameters::recordFieldAvailableList=       {"id", "name", "author", "url", "tags", "ctime", "dir", "file", "crypt", "block", "hasAttach", "attachCount"};
-const QStringList FixedParameters::recordNaturalFieldAvailableList={"id", "name", "author", "url", "tags", "ctime", "dir", "file", "crypt", "block"};
+const QStringList FixedParameters::recordFieldAvailableList=       {"id", "name", "author", "url", "tags", "ctime", "dir", "file", "crypt", "block", "favor", "hasAttach", "attachCount"};
+const QStringList FixedParameters::recordNaturalFieldAvailableList={"id", "name", "author", "url", "tags", "ctime", "dir", "file", "crypt", "block", "favor"};
 const QStringList FixedParameters::recordCalculableFieldAvailableList={"hasAttach", "attachCount"};
 const QStringList FixedParameters::recordFieldCryptedList={"name", "author", "url", "tags"};
 
@@ -44,6 +44,9 @@ const OrderedMap< QString, QPair<QString, float> > FixedParameters::interfaceIco
     { "META_ICON_THIRD_PART_SIZE",    { QString("0.33"), 0.33 } },
     { "META_ICON_QUARTER_PART_SIZE",  { QString("0.25"), 0.25 } }
 };
+
+// ID ветки "Избранное"
+const QString FixedParameters::favoritesItemId="favorites";
 
 
 FixedParameters::FixedParameters(QObject *parent) : QObject(parent)
@@ -103,6 +106,7 @@ QMap<QString, QString> FixedParameters::recordFieldDescription(QStringList list)
   names["hasAttach"]=tr("Has attaches");
   names["attachCount"]=tr("Attaches count");
   names["block"]=tr("Block");
+  names["favor"]=tr("Is favorite");
 
 
   // Удаляются строчки, которых нет в переданном списке

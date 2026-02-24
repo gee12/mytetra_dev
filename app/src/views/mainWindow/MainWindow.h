@@ -22,6 +22,7 @@ class TreeScreen;
 class MetaEditor;
 class RecordTableScreen;
 class FindScreen;
+class TagsScreen;
 class WindowSwitcher;
 class CommandRunner;
 
@@ -37,6 +38,7 @@ public:
     RecordTableScreen *recordTableScreen=nullptr;
     MetaEditor *editorScreen=nullptr;
     FindScreen *findScreenDisp=nullptr;
+    TagsScreen *tagsScreen=nullptr;
     QStatusBar *statusBar=nullptr;
     WindowSwitcher *windowSwitcher=nullptr;
 
@@ -46,6 +48,7 @@ public:
     void restoreEditorCursorPosition(void);
     void restoreEditorScrollBarPosition(void);
     void restoreFindOnBaseVisible(void);
+    void restoreTagsTableVisible();
     void restoreAllWindowState(void);
 
     void restoreDockableWindowsState(void);
@@ -70,6 +73,8 @@ public:
 
     void reload(void);
 
+ void openRecordByInternalHref(const QString &recordId);
+
 signals:
 
     void globalPressKey(int key);
@@ -84,6 +89,7 @@ public slots:
     void messageHandler(QString message);
 
     void toolsFindInBase(void);
+    void toolsTagsTable();
 
     void setupShortcuts(void);
 
@@ -160,6 +166,7 @@ private:
     QAction *actionFileMenuQuit;
 
     QAction *actionToolsMenuFindInBase;
+    QAction *actionToolsMenuTagsTable;
     QAction *actionToolsMenuActionLog;
     QAction *actionToolsMenuPreferences; // Вызов окна настроек, используется в десктопе
 

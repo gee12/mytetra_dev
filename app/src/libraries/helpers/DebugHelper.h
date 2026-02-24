@@ -9,6 +9,7 @@ class QDomNode;
 
 void logPrint(char *lpszText, ...);
 
+void warning(QString message);
 [[ noreturn ]] void criticalError(QString message);
 
 QString xmlNodeToString(QDomNode xmlData);
