@@ -961,7 +961,7 @@ void RecordTableController::deleteContext(void)
 {
   // Создается окно с вопросом нужно удалять запись (записи) или нет
   QMessageBox messageBox(view);
-  messageBox.setWindowTitle("Delete");
+  messageBox.setWindowTitle(tr("Delete"));
   messageBox.setText(tr("Are you sure to delete this record(s)?"));
   auto *cancelButton =messageBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
   auto *deleteButton =messageBox.addButton(tr("Delete"), QMessageBox::AcceptRole);

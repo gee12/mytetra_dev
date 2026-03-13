@@ -90,7 +90,7 @@ void TagsTableWidget::setupUI() {
 
 void TagsTableWidget::setupActions() {
   // Переименование метки
-  actionRenameTag = new QAction(tr("Rename tag"), this);
+  actionRenameTag = new QAction(tr("Rename"), this);
   actionRenameTag->setIcon(QIcon(":/resource/pic/note_edit.svg"));
 
   // Копирование ссылки на метку
@@ -98,7 +98,7 @@ void TagsTableWidget::setupActions() {
   actionCopyTagReference->setIcon(QIcon(":/resource/pic/note_reference.svg"));
 
   // Удаление метки
-  actionDeleteTag = new QAction(tr("Delete tag"), this);
+  actionDeleteTag = new QAction(tr("Delete"), this);
   actionDeleteTag->setIcon(QIcon(":/resource/pic/note_delete.svg"));
 }
 
@@ -289,7 +289,7 @@ void TagsTableWidget::onDeleteTagContext() {
     QString tagName = proxyIndex.data(USER_ROLE_TAG_NAME).toString();
 
     QMessageBox messageBox(tagsTableView);
-    messageBox.setWindowTitle("Delete tag");
+    messageBox.setWindowTitle(tr("Delete tag"));
     messageBox.setText(tr("Are you sure to delete tag \"%1\" from records?").arg(tagName));
     messageBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
     QAbstractButton *deleteButton = messageBox.addButton(tr("Delete"), QMessageBox::AcceptRole);
