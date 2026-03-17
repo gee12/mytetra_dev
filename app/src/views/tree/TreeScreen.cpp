@@ -1575,15 +1575,15 @@ void TreeScreen::processKnowtreeClicked(const QModelIndex &index)
             }
 
             isAccessItem = true;
+
+            // Перезагружаем список меток
+            find_object<TagsScreen>("tagsScreen")->reloadTags();
         }
     }
 
 
     if ( isAccessItem )
     {
-        // Перезагружаем список меток
-        find_object<TagsScreen>("tagsScreen")->reloadTags();
-
         // Получаем указатель на данные таблицы конечных записей
         RecordTableData *rtdata=item->recordtableGetTableData();
 
