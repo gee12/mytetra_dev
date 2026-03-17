@@ -33,6 +33,7 @@ public:
  virtual ~TagsScreen();
 
  void reloadTags();
+ void clearTags();
  void showTag(const QString &tagName);
  void setWarningMessage(const QString &warningMessage);
  void findInTags();

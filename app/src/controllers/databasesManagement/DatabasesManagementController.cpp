@@ -24,6 +24,7 @@
 #include "libraries/IconSelectDialog.h"
 #include "controllers/recordTable/RecordTableController.h"
 #include "views/consoleEmulator/CommandRunner.h"
+#include "views/tags/TagsScreen.h"
 
 
 extern GlobalParameters globalParameters;
@@ -168,6 +169,10 @@ bool DatabasesManagementController::switchToDatabase(const QString &dbPath,
     // Устанавливаются пустые данные в таблицу конечных записей
     find_object<RecordTableController>("recordTableController")->setTableData(nullptr);
 
+    // Очищается список меток
+    auto tagsScreen = find_object<TagsScreen>("tagsScreen");
+    tagsScreen->clearTags();
+
     // Изменяются пути к БД в conf.ini файле
     mytetraConfig.set_tetradir(dbPath);
     mytetraConfig.set_trashdir(trashPath);
@@ -180,6 +185,9 @@ bool DatabasesManagementController::switchToDatabase(const QString &dbPath,
 
     // Заполняется модель дерева
     knowTreeModel->initFromXML(dbPath+"/mytetra.xml");
+
+    // Загружается список меток
+    tagsScreen->reloadTags();
 
     return true;
 }

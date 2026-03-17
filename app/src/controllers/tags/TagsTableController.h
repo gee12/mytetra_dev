@@ -17,7 +17,7 @@ public:
   TagsTableController(QObject *parent = nullptr);
   virtual ~TagsTableController();
 
-  void loadTags();
+  void loadData();
   void clearData();
   void clearSelection() const;
   void selectTag(const QModelIndex &sourceIndex) const;

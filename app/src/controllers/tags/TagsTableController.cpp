@@ -59,7 +59,7 @@ void TagsTableController::setView(TagsTableWidget *view) {
 }
 
 
-void TagsTableController::loadTags() {
+void TagsTableController::loadData() {
     clearData();
 
     auto *knowTreeModel = find_object<TreeScreen>("treeScreen")->knowTreeModel;

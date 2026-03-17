@@ -147,7 +147,12 @@ void TagsScreen::reloadTags()
 {
     qDebug() << "Start load tags from storage";
     // Непосредственный сбор меток по всем (расшифрованным) записям хранилища
-    controller->loadTags();
+    controller->loadData();
+}
+
+void TagsScreen::clearTags() {
+    qDebug() << "Clear tags list";
+    controller->clearData();
 }
 
 void TagsScreen::showTag(const QString &tagName) {
