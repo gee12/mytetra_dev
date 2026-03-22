@@ -983,12 +983,12 @@ enable «Decrypt to a temporary file» option in Settings.</source>
 <context>
     <name>DatabasesManagementController</name>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="125"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="126"/>
         <source>Select database</source>
         <translation>Выбор базы данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="126"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="127"/>
         <source>Errors detected when switching to database with
 path &apos;%1&apos;
 and trash path &apos;%2&apos;</source>
@@ -997,44 +997,44 @@ and trash path &apos;%2&apos;</source>
 и путем к корзине &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="142"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="143"/>
         <source>The selected database directory &apos;%1&apos; is not a database directory</source>
         <translation>Выбранная директория базы данных &apos;%1&quot; не содержит базу данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="154"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="155"/>
         <source>It is not possible to use the directory &apos;%1&apos; as a trash directory</source>
         <translation>Невозможно использовать директорию &apos;%1&apos; в качестве директории корзины</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="190"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="198"/>
         <source>Create new database</source>
         <translation>Создание новой базы данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="195"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="203"/>
         <source>&lt;b&gt;Select an empty directory&lt;/b&gt;</source>
         <translation>&lt;b&gt;Выбор пустой директории&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="196"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="204"/>
         <source>To create a new database, please specify an existing empty directory.</source>
         <translation>Для создания новой базы данных необходимо выбрать существующую пустую директорию.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="201"/>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="305"/>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="368"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="209"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="313"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="376"/>
         <source>I understand</source>
         <translation>Понятно</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="213"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="221"/>
         <source>Select empty directory for new DB</source>
         <translation>Выбор пустой директории для новой базы данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="228"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="236"/>
         <source>It is not possible to create a new database.
 The specified directory is not empty.</source>
         <translation>Невозможно создать новую базу данных.
@@ -1047,54 +1047,54 @@ First, please delete corresponding database from databases list</source>
 В первую очередь удалите соответствующую базу данных из списка и повторите попытку</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="78"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="79"/>
         <source>Can&apos;t switch database</source>
         <translation>Невозможно сменить базу данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="79"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="80"/>
         <source>It is not possible to switch to another database because synchronization is running.</source>
         <translation>Невозможно переключиться на другую БД, так как работает синхронизация.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="80"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="81"/>
         <source>Wait for the synchronization to complete and try again.</source>
         <translation>Дождитесь завершения синхронизации и попробуйте еще раз.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="254"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="262"/>
         <source>This database directory already using in databases list.
 First, please delete corresponding database from databases list, and try again</source>
         <translation>Эта директория базы данных уже используется в списке баз данных.
 В первую очередь удалите соответствующую базу данных из списка и повторите попытку</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="266"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="274"/>
         <source>&lt;b&gt;The following database directories will be created&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <translation>&lt;b&gt;Были созданы следующие директории для базы данных&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="267"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="275"/>
         <source>Database data directory:&lt;br&gt;</source>
         <translation>Директория данных:&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="269"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="277"/>
         <source>Trash directory:&lt;br&gt;</source>
         <translation>Директория корзины:&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="293"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="301"/>
         <source>Append exists database</source>
         <translation>Добавление существующей базы данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="298"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="306"/>
         <source>&lt;b&gt;First step:&lt;/b&gt; select database directiory</source>
         <translation>&lt;b&gt;Шаг первый:&lt;/b&gt; выбор директории базы данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="299"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="307"/>
         <source>To add an existing database,
 please select the directory
 where it is located.
@@ -1105,94 +1105,94 @@ This directory should contain the file mytetra.xml.</source>
 Эта директория должна содержать файл mytetra.xml.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="318"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="326"/>
         <source>Select directory with an existing database</source>
         <translation>Выбор директории существующей базы данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="332"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="340"/>
         <source>Can not find file mytetra.xml in this directory</source>
         <translation>Невозможно найти файл mytetra.xml в указанной директории</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="351"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="359"/>
         <source>This database directory already using in databses list</source>
         <translation>Эта директория базы данных уже используется в списке баз данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="360"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="368"/>
         <source>&lt;b&gt;Second step:&lt;/b&gt; select trash directiory</source>
         <translation>&lt;b&gt;Шаг второй:&lt;/b&gt; выбор директории корзины</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="361"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="369"/>
         <source>For database append please select trash directory.
 MyTetra will put changed notes file copies and changed item tree copies to this directory</source>
         <translation>Чтобы добавть базу данных, пожалуйста, выберите директорию корзины.
 MyTetra будет складывать копии файлов редактируемых записей и дерева записей в эту директорию</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="378"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="386"/>
         <source>Select trash directory</source>
         <translation>Выбор директории корзины</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="403"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="411"/>
         <source>You cannot add a trash directory in database directory.</source>
         <translation>Невозможно хранить директорию корзины в директории базы данных.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="420"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="428"/>
         <source>You can select only one database for description edit.</source>
         <translation>Для редактирования описания, необходимо выбрать только одну базу данных.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="441"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="449"/>
         <source>It is allowed to edit descriptions only for manually added databases.</source>
         <translation>Разрешено редактировать описания только для вручную добавленных баз данных.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="456"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="464"/>
         <source>Description edit</source>
         <translation>Редактирование описания</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="457"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="465"/>
         <source>Description:</source>
         <translation>Описание:</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="470"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="478"/>
         <source>Error when applying the changes.</source>
         <translation>Ошибка при применении изменений.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="487"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="495"/>
         <source>You can select only one database for deletion.</source>
         <translation>Вы можете выбрать только одну базу данных для удаления.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="502"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="510"/>
         <source>You cannot delete the current working database.</source>
         <translation>Невозможно удалить текущую базу данных, которая выбрана для работы.</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="510"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="518"/>
         <source>Deleting a database</source>
         <translation>Удаление базы данных</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="511"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="519"/>
         <source>&lt;b&gt;Select delete mode&lt;/b&gt;</source>
         <translation>&lt;b&gt;Выберите режим удаления&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="537"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="545"/>
         <source>Delete a database with all its contents</source>
         <translation>Удаление базы данных вместе со всем ее содержимым</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="546"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="554"/>
         <source>You did not write &quot;yes&quot;, the database deletion is canceled.</source>
         <translation>Вы не написали &quot;yes&quot;, удаление БД отменено.</translation>
     </message>
@@ -1201,22 +1201,22 @@ MyTetra будет складывать копии файлов редактир
         <translation type="vanished">&lt;b&gt;Выберите режим удаления&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="512"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="520"/>
         <source>Select the mode in which you want to delete</source>
         <translation>Выберите режим, в котором нужно призвести удаление</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="513"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="521"/>
         <source>Remove from list</source>
         <translation>Удалить из писка</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="514"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="522"/>
         <source>Delete with the data</source>
         <translation>Удалить вместе с данными</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="515"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="523"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -1225,7 +1225,7 @@ MyTetra будет складывать копии файлов редактир
         <translation type="vanished">Вы пытаетесь удалить базу данных вместе со всем ее содержимым</translation>
     </message>
     <message>
-        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="538"/>
+        <location filename="../../../src/controllers/databasesManagement/DatabasesManagementController.cpp" line="546"/>
         <source>Write &quot;yes&quot; to confirm:</source>
         <translation>Напишите &quot;yes&quot; для подтверждения действия:</translation>
     </message>
@@ -5236,7 +5236,7 @@ Please report about this problem to the developers.</source>
 <context>
     <name>TagsTableWidget</name>
     <message>
-        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="275"/>
+        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="281"/>
         <source>Rename tag</source>
         <translation>Переименование метки</translation>
     </message>
@@ -5246,7 +5246,17 @@ Please report about this problem to the developers.</source>
         <translation>Копировать ссылку на метку</translation>
     </message>
     <message>
+        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="291"/>
+        <source>Invalid characters</source>
+        <translation>Недопустимые символы</translation>
+    </message>
+    <message>
         <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="292"/>
+        <source>The tag name must not contain the tags separation characters &apos;,&apos; or &apos;;&apos;.</source>
+        <translation>Имя метки не должно содержать знаки разделения меток &apos;,&apos; или &apos;;&apos;.</translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="309"/>
         <source>Delete tag</source>
         <translation>Удаление метки</translation>
     </message>
@@ -5261,23 +5271,28 @@ Please report about this problem to the developers.</source>
         <translation>Переименовать</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="276"/>
+        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="282"/>
         <source>Tag name:</source>
         <translation>Имя метки:</translation>
     </message>
     <message>
         <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="293"/>
+        <source>OK</source>
+        <translation>ОК</translation>
+    </message>
+    <message>
+        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="310"/>
         <source>Are you sure to delete tag &quot;%1&quot; from records?</source>
         <translation>Удалить метку &quot;%1&quot; из записей?</translation>
     </message>
     <message>
-        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="294"/>
+        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="311"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="101"/>
-        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="295"/>
+        <location filename="../../../src/views/tags/TagsTableWidget.cpp" line="312"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
