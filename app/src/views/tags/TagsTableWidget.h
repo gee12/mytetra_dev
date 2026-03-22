@@ -35,6 +35,7 @@ protected slots:
   void onSectionResized(int logicalIndex, int oldSize, int newSize);
   void onCustomContextMenuRequested(const QPoint &mousePos);
   void onRenameTagContext();
+  void onRenameTagRecursively(QModelIndex proxyIndex, QString oldName);
   void onDeleteTagContext();
 
 private:

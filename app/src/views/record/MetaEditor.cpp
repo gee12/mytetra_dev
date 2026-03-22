@@ -319,9 +319,8 @@ void MetaEditor::setTags(QString tags)
  // Строка с метками запоминается в явном виде
  recordTagsText=tags;
 
-
  // Строка с метками разделяется на отдельные метки
- recordTagsTextList = recordTagsText.split(QRegExp(TAG_SEPARATORS), Qt::SkipEmptyParts);
+ recordTagsTextList = recordTagsText.split(QRegExp(TAGS_SEPARATORS_PATTERN), Qt::SkipEmptyParts);
 
  // В каждой метке убираются лишние пробелы по краям
  for(int i = 0; i < recordTagsTextList.size(); ++i)

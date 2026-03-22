@@ -270,6 +270,12 @@ void TagsTableWidget::onRenameTagContext() {
     QString oldName = proxyIndex.data(USER_ROLE_TAG_NAME).toString();
 
     // Создается окно ввода данных
+    onRenameTagRecursively(proxyIndex, oldName);
+  }
+}
+
+void TagsTableWidget::onRenameTagRecursively(QModelIndex proxyIndex, QString oldName) {
+    // Создается окно ввода данных
     bool result;
     QString newName = QInputDialog::getText(this,
                                             tr("Rename tag"),
@@ -278,9 +284,20 @@ void TagsTableWidget::onRenameTagContext() {
                                             oldName,
                                             &result);
     if (result && !newName.trimmed().isEmpty()) {
-      controller->renameTag(proxyIndex, newName);
+      if (newName.contains(QRegExp(TAGS_SEPARATORS_PATTERN))) {
+        // Уведомляем, что имя конкретной метки не должно содержать знаки разделения меток.
+        //TODO: Возможно, следует добавить к записям все введенные метки.
+        QMessageBox messageBox(tagsTableView);
+        messageBox.setWindowTitle(tr("Invalid characters"));
+        messageBox.setText(tr("The tag name must not contain the tags separation characters ',' or ';'."));
+        messageBox.addButton(tr("OK"),QMessageBox::AcceptRole);
+        messageBox.exec();
+
+        onRenameTagRecursively(proxyIndex, newName);
+      } else {
+        controller->renameTag(proxyIndex, newName);
+      }
     }
-  }
 }
 
 void TagsTableWidget::onDeleteTagContext() {

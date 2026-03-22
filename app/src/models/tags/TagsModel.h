@@ -11,7 +11,7 @@
 
 class TreeItem;
 
-const QString TAG_SEPARATORS = "[,;]+";
+const QString TAGS_SEPARATORS_PATTERN = "[,;]+";
 
 class TagsModel : public QStandardItemModel
 {

@@ -254,7 +254,16 @@ void TagsTableController::renameTag(const QModelIndex &proxyIndex, QString newNa
     QString oldName = proxyIndex.data(USER_ROLE_TAG_NAME).toString();
     newName = newName.trimmed();
 
+    if (oldName.trimmed() == newName)
+        return;
+
     qDebug() << "Rename tag [" << oldName << "] to [" << newName << "]";
+
+    // Для упрощения, берется только первая метка, если в новом имени метки фигурируют знаки разделения меток
+    QStringList newTags = newName.split(QRegExp(TAGS_SEPARATORS_PATTERN), Qt::SkipEmptyParts);
+    if (newTags.size() > 1) {
+        newName = newTags.at(0).trimmed();
+    }
 
     QModelIndex sourceIndex = proxyModel->mapToSource(proxyIndex);    auto mainWindow = find_object<MainWindow>("mainwindow");
     auto *treeScreen = find_object<TreeScreen>("treeScreen");

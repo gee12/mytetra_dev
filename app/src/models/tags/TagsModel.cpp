@@ -67,7 +67,7 @@ void TagsModel::readRecordTags(const RecordTableData *searchRecordTable, int ind
     QString tagsString = searchRecordTable->getField("tags", index);
 
     // Разделяем строку на отдельные метки
-    QStringList tagsList = tagsString.split(QRegExp(TAG_SEPARATORS), Qt::SkipEmptyParts);
+    QStringList tagsList = tagsString.split(QRegExp(TAGS_SEPARATORS_PATTERN), Qt::SkipEmptyParts);
 
     // Перебираем все метки
     foreach (const QString &tag, tagsList) {
@@ -186,7 +186,7 @@ QList<Record*> TagsModel::findRecordsByTagRecursively(const QString &tagName, co
             QString tagsString = recordTable->getField("tags", i);
 
             // Разделяем строку на отдельные метки
-            QStringList tagsList = tagsString.split(QRegExp(TAG_SEPARATORS), Qt::SkipEmptyParts);
+            QStringList tagsList = tagsString.split(QRegExp(TAGS_SEPARATORS_PATTERN), Qt::SkipEmptyParts);
 
             // Перебираем все метки
             foreach (const QString &tag, tagsList) {
@@ -227,7 +227,7 @@ QModelIndex TagsModel::renameTag(const QModelIndex &sourceIndex, const QString &
         for (int i = 0; i < tableData->size(); ++i) {
             QString oldTagsString = tableData->getField("tags", i);
             // Разделяем строку на отдельные метки
-            QStringList tagsList = oldTagsString.split(QRegExp(TAG_SEPARATORS), Qt::SkipEmptyParts);
+            QStringList tagsList = oldTagsString.split(QRegExp(TAGS_SEPARATORS_PATTERN), Qt::SkipEmptyParts);
             for (QString &tag : tagsList) {
                 // Заменяем все совпадающие метки, т.к. их может быть несколько одинаковых у записи
                 if (tag.trimmed().toLower() == oldName) {
@@ -303,7 +303,7 @@ void TagsModel::deleteTag(const QModelIndex &sourceIndex) {
         for (int i = 0; i < tableData->size(); ++i) {
             QString oldTagsString = tableData->getField("tags", i);
             // Разделяем строку на отдельные метки
-            QStringList tagsList = oldTagsString.split(QRegExp(TAG_SEPARATORS), Qt::SkipEmptyParts);
+            QStringList tagsList = oldTagsString.split(QRegExp(TAGS_SEPARATORS_PATTERN), Qt::SkipEmptyParts);
             for (QString &tag : tagsList) {
                 tag = tag.trimmed().toLower();
             }
