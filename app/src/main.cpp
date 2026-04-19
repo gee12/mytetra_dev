@@ -88,7 +88,7 @@ QObject *pMainWindow;
 void printHelp()
 {
     printf("\n");
-    printf("MyTetra v.%d.%d.%d\n", APPLICATION_RELEASE_VERSION, APPLICATION_RELEASE_SUBVERSION, APPLICATION_RELEASE_MICROVERSION);
+    printf("MyTetra v.%d.%d.%d\n (community edition)", APPLICATION_RELEASE_VERSION, APPLICATION_RELEASE_SUBVERSION, APPLICATION_RELEASE_MICROVERSION);
     printf("For use control mode, run by standard way MyTetra for show GUI interface, and next use command:\n");
     printf("./mytetra --control --show - Show and activate MyTetra window\n");
     printf("./mytetra --control --hide - Hide MyTetra window\n");
@@ -200,7 +200,7 @@ void parseConsoleOption(QtSingleApplication &app)
 
 int main(int argc, char ** argv)
 {
-    printf("\n\rStart MyTetra v.%d.%d.%d\n\r", APPLICATION_RELEASE_VERSION, APPLICATION_RELEASE_SUBVERSION, APPLICATION_RELEASE_MICROVERSION);
+    printf("\n\rStart MyTetra v.%d.%d.%d\n\r (community edition)", APPLICATION_RELEASE_VERSION, APPLICATION_RELEASE_SUBVERSION, APPLICATION_RELEASE_MICROVERSION);
 
     // Разрешение масштабирования в высоком DPI, вызывается перед подгрузкой ресурсов с графикой
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -303,7 +303,7 @@ int main(int argc, char ** argv)
     win.restoreAllWindowState();
 
     // Настройка объекта главного окна
-    win.setWindowTitle("MyTetra");
+    win.setWindowTitle("MyTetra (community edition)");
     if (globalParameters.getTargetOs()=="android")
         win.show(); // В Андроиде нет десктопа, на нем нельзя сворачивать окно
     else

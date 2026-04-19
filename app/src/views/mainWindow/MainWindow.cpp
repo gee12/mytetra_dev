@@ -983,7 +983,7 @@ void MainWindow::onClickHelpAboutMyTetra(void)
     QString infoLicense;
 
     infoProgramName="<b>MyTetra</b> - smart manager<br/>for information collecting<br/><br/>";
-    infoVersion="v."+version+"<br/><br/>";
+    infoVersion="v."+version+" (community edition)<br/><br/>";
     infoAuthor="Author: Sergey M. Stepanov<br/>";
     infoEmail="Author Email:<i>xintrea@gmail.com</i><br/><br/>";
     infoLicense="GNU General Public License v.3.0<br/><br/>";
