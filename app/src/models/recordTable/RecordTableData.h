@@ -76,8 +76,8 @@ public:
     void sortByFavorField();
     // Вставка/удаление записи в/из списка избранных записей
     void insertRecordToFavorites(Record *record);
-    void deleteRecordFromFavorites(QString recordId);
-    void deleteRecordFromFavorites(int pos);
+    void deleteRecordFromTableData(QString recordId);
+    void deleteRecordFromTableData(int pos);
 
     // Список записей по метке
     void setTagName(QString tagName);

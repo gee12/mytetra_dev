@@ -28,6 +28,7 @@
 #include "libraries/helpers/CssHelper.h"
 #include "controllers/recordTable/RecordTableController.h"
 #include "libraries/crypt/Password.h"
+#include "views/record/MetaEditor.h"
 
 
 extern GlobalParameters globalParameters;
@@ -286,6 +287,12 @@ void RecordTableView::onClickToRecord(const QModelIndex &index)
 // Действия при выборе строки таблицы конечных записей. Принимает индекс Proxy модели
 void RecordTableView::clickToRecord(const QModelIndex &index)
 {
+    if (!index.isValid())
+    {
+        qDebug() << "Index non valid";
+        return;
+    }
+
     // Устранение неправильного поведения Qt
     if(isDragHappeningNow)
     {
@@ -461,7 +468,16 @@ void RecordTableView::editFieldContext(void)
 
     // Нужно перерисовать окно редактирования чтобы обновились инфополя
     // делается это путем "повторного" выбора текущего пункта
-    clickToRecord(index); // Раньше было select()
+    QModelIndexList selectItems = selectionModel()->selectedIndexes();
+    if (selectItems.count() > 0) {
+        clickToRecord(selectItems.at(0));
+    } else {
+        // Очищаем поля области редактирования
+        find_object<MetaEditor>("editorScreen")->clearAll();
+        // Деактивируем панель инструментов
+        selectionModel()->clear();
+        qobject_cast<RecordTableScreen *>(parent())->toolsUpdate();
+    }
 }
 
 

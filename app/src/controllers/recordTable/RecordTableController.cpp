@@ -35,6 +35,7 @@
 #include "libraries/helpers/ObjectHelper.h"
 #include "libraries/wyedit/EditorShowTextDispatcher.h"
 #include "libraries/crypt/Password.h"
+#include "models/tags/TagsModel.h"
 
 
 extern GlobalParameters globalParameters;
@@ -892,7 +893,32 @@ void RecordTableController::editFieldContext(QModelIndex proxyIndex)
             editRecordWin.getField("tags"));
 
   if (oldTags != newTags) {
+    // Если список записей составлен по метке, и в метках записи теперь этой метки нет (изменили метки у записи),
+    // то нужно убрать данную запись из списка.
+    if (isTableByTag()) {
+      QString tableTag = table->getTagName().trimmed();
+      bool isTableTagExists = false;
+
+      // Разделяем обновленную строку меток на отдельные метки
+      QStringList newTagsList = newTags.split(QRegExp(TAGS_SEPARATORS_PATTERN), Qt::SkipEmptyParts);
+      foreach (const QString &tag, newTagsList) {
+        // Ищем совпадение с меткой, по которой построен список записей.
+        if (tag.trimmed().toLower() == tableTag) {
+          isTableTagExists = true;
+          break;
+        }
+      }
+
+      if (!isTableTagExists) {
+        // Убираем запись из списка
+        table->deleteRecordFromTableData(pos);
+        recordProxyModel->invalidate();
+      }
+    }
+
     // Перезагружаем список меток
+    //TODO: возможно оптимизировать, чтобы точечно обновлять только нужные метки,
+    // вместо перезагрузки всего списка
     find_object<TagsScreen>("tagsScreen")->reloadTags();
   }
 }

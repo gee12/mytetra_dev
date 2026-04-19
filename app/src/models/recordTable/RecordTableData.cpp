@@ -564,27 +564,27 @@ void RecordTableData::insertRecordToFavorites(Record *record)
 }
 
 
-// Удаление записи из ветки "Избранное" по id
-void RecordTableData::deleteRecordFromFavorites(QString recordId)
+// Удаление записи из таблицы по id
+void RecordTableData::deleteRecordFromTableData(QString recordId)
 {
     for (unsigned int i=0; i<size(); i++)
         if (getField("id", i) == recordId)
-            deleteRecordFromFavorites(i);
+            deleteRecordFromTableData(i);
 }
 
 
-// Удаление записи из ветки "Избранное" по позиции в списке
-void RecordTableData::deleteRecordFromFavorites(int pos)
+// Удаление записи из таблицы по позиции в списке
+void RecordTableData::deleteRecordFromTableData(int pos)
 {
-    qDebug() << "Try delete record from favorites with num " << pos << ", table count " << tableData.size();
+    qDebug() << "Try delete record from tableData with num " << pos << ", table count " << tableData.size();
 
     // Нельзя удалять с недопустимым индексом
-    if (pos >= tableData.size())
+    if (pos < 0 || pos >= tableData.size())
         return;
 
     // Удаляется элемент
     tableData.removeAt(pos);
-    qDebug() << "Delete record from favorites succesfull";
+    qDebug() << "Delete record from tableData succesfull";
 }
 
 

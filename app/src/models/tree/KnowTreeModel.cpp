@@ -919,7 +919,7 @@ void KnowTreeModel::addRecordToFavorites(Record *record)
 void KnowTreeModel::deleteRecordFromFavorites(QModelIndex &index)
 {
   if (mytetraConfig.get_showFavorites()) {
-    favoritesNode->recordtableGetTableData()->deleteRecordFromFavorites(index.row());
+    favoritesNode->recordtableGetTableData()->deleteRecordFromTableData(index.row());
   }
 }
 
@@ -928,7 +928,7 @@ void KnowTreeModel::deleteRecordFromFavorites(QModelIndex &index)
 void KnowTreeModel::deleteRecordFromFavorites(QString recordId)
 {
   if (mytetraConfig.get_showFavorites()) {
-    favoritesNode->recordtableGetTableData()->deleteRecordFromFavorites(recordId);
+    favoritesNode->recordtableGetTableData()->deleteRecordFromTableData(recordId);
   }
 }
 
