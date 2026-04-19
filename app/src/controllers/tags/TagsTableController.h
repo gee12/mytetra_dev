@@ -36,6 +36,7 @@ public slots:
 protected:
   void initModels();
   void setSortIndicator();
+  QModelIndex getProxyIndex(int row, const QString &tagName) const;
   bool checkRowMatching(const QString &text, int row);
 
   TagsTableWidget *view;

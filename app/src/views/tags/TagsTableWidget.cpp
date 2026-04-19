@@ -154,11 +154,13 @@ void TagsTableWidget::clearAll() {
 }
 
 
-void TagsTableWidget::onDataLoaded() {
+void TagsTableWidget::onDataLoaded(const QModelIndex &proxyIndexToSelect) {
     const auto *model = tagsTableView->model();
     if (model->rowCount()==0) {
         setOverdrawMessage(tr("Tags not found."));
     }
+
+    selectTableRowVisualOnly(proxyIndexToSelect);
 }
 
 
@@ -335,10 +337,23 @@ void TagsTableWidget::setOverdrawMessage(const QString message) {
 
 
 void TagsTableWidget::selectTableRow(const QModelIndex &proxyIndex) {
-  int pos = proxyIndex.row();
-  tagsTableView->selectRow(pos);
+  tagsTableView->selectRow(proxyIndex.row());
   tagsTableView->setFocus();
   tagsTableView->scrollTo(proxyIndex);
+}
+
+
+void TagsTableWidget::selectTableRowVisualOnly(const QModelIndex &proxyIndex) {
+    if (!proxyIndex.isValid())
+        return;
+
+    QItemSelectionModel *selectionModel = tagsTableView->selectionModel();
+
+    selectionModel->blockSignals(true);
+    tagsTableView->selectRow(proxyIndex.row());
+    selectionModel->blockSignals(false);
+
+    tagsTableView->scrollTo(proxyIndex);
 }
 
 

@@ -21,10 +21,11 @@ public:
   virtual ~TagsTableWidget();
 
   void setController(TagsTableController *controller);
-  void onDataLoaded();
+  void onDataLoaded(const QModelIndex &proxyIndexToSelect);
   void clearAll();
   void setOverdrawMessage(QString message);
   void selectTableRow(const QModelIndex &proxyIndex);
+  void selectTableRowVisualOnly(const QModelIndex &proxyIndex);
   QModelIndex getFirstSelectedIndex();
   void setSectionsSizes(QList<int> sizes);
   QList<int> getSectionsSizes();

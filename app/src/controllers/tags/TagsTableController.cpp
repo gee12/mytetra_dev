@@ -16,6 +16,7 @@
 #include "libraries/WalkHistory.h"
 #include "libraries/helpers/ObjectHelper.h"
 #include "models/tree/KnowTreeModel.h"
+#include "models/tags/TagsModel.h"
 #include "views/tags/TagsTableWidget.h"
 #include "views/tree/TreeScreen.h"
 
@@ -60,18 +61,53 @@ void TagsTableController::setView(TagsTableWidget *view) {
 
 
 void TagsTableController::loadData() {
+    // Сохраняем номер строки и имя выделенной метки
+    int selectedRow = -1;
+    QString selectedTagName;
+    const QModelIndex selectedIndex = view->getFirstSelectedIndex();
+    if (selectedIndex.isValid()) {
+        selectedRow = selectedIndex.row();
+        selectedTagName = selectedIndex.data(USER_ROLE_TAG_NAME).toString();
+    }
+
     clearData();
 
     auto *knowTreeModel = find_object<TreeScreen>("treeScreen")->knowTreeModel;
     const TreeItem *startNode = knowTreeModel->getRootItem();
     sourceModel->init(startNode);
 
-    view->onDataLoaded();
+    // Восстанавливаем выделение метки
+    const QModelIndex proxyIndex = getProxyIndex(selectedRow, selectedTagName);
+    view->onDataLoaded(proxyIndex);
 
     if (sourceModel->isUnsearchCryptBranchPresent) {
         auto *tagsScreen = find_object<TagsScreen>("tagsScreen");
         tagsScreen->setWarningMessage(tr("Storage has not been decrypted, and not all tags will be displayed."));
     }
+}
+
+
+QModelIndex TagsTableController::getProxyIndex(const int row, const QString &tagName) const {
+    if (tagName.isEmpty())
+        return QModelIndex();
+
+    const int rowCount = proxyModel->rowCount();
+
+    if (row >= 0 && row < rowCount) {
+        const QModelIndex atSavedRow = proxyModel->index(row, 0);
+        if (atSavedRow.data(USER_ROLE_TAG_NAME).toString() == tagName) {
+            return atSavedRow;
+        }
+    }
+
+    for (int row = 0; row < rowCount; ++row) {
+        const QModelIndex idx = proxyModel->index(row, 0);
+        if (idx.data(USER_ROLE_TAG_NAME).toString() == tagName) {
+            return idx;
+        }
+    }
+
+    return QModelIndex();
 }
 
 
